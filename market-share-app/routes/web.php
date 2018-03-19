@@ -1,5 +1,7 @@
 <?php
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +13,27 @@
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
-});
+	
+	
+	return view('welcome');
+	
+	
+}
+
+);
+
+
+
+Route::get('/documentation', function () {
+	
+	
+	return view('documentation');
+	
+	
+}
+
+);
+
