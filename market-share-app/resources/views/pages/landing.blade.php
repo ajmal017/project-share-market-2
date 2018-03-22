@@ -4,9 +4,13 @@
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
 
-    <h1>Landing page</h1>
-    <p>Wow, what a nice landing page</p>
-    <button onclick="test();">Test Button</button>
+    <h1>Welcome to <i>Stock Your Socks Off</i>!</h1>
+    <p>Stock Your Socks Off is an ASX stock market investment simulation.<br> 
+        Buy and sell shares to make your way up the leaderboard.<br>
+        Sign up now and be given $1,000,000 in game currency.</p>
+        
+    <a href="/signup">Sign Up</a>
+    <a href="/login">Login</a>
 
     <!-- END OF CONTENT -->
 
