@@ -4,10 +4,6 @@
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
 
-    <h1>Landing page</h1>
-    <p>Wow, what a nice landing page</p>
-    <button onclick="test();">Test Button</button>
-
     <!-- END OF CONTENT -->
 
 @endsection

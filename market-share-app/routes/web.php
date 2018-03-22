@@ -7,25 +7,61 @@ contains the "web" middleware group. Now create something great!*/
 
 
 
+
+
+
+Route::get('/', function () {
+  return view('welcome');
+});
+
+Route::get('/stockmarkettest', function () {
+  return view('stockmarkettest');
+});
+
 Route::get(
-    '/', function () {
-        return view('welcome');
+    '/about', function () {
+        return view('pages/about');
     }
 );
 
-<<<<<<< HEAD
+Route::get(
+    '/account', function () {
+        return view('pages/account');
+    }
+);
+
+Route::get(
+    '/admin', function () {
+        return view('pages/admin');
+    }
+);
+
+Route::get(
+    '/community', function () {
+        return view('pages/community');
+    }
+);
+
 Route::get(
     '/landing', function () {
         return view('pages/landing');
     }
 );
 
-?>
-=======
-Route::get('/', function () {
-  return view('welcome');
-});
-Route::get('/stockmarkettest', function () {
-  return view('stockmarkettest');
-});
->>>>>>> 1fedcde01774c0d4fc564f3e94f4bbeaea186ecf
+Route::get(
+    '/listing', function () {
+        return view('pages/listing');
+    }
+);
+
+Route::get(
+    '/login', function () {
+        return view('pages/login');
+    }
+);
+
+Route::get(
+    '/signup', function () {
+        return view('pages/signup');
+    }
+);
