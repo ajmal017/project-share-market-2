@@ -13,6 +13,7 @@ Route::get(
     }
 );
 
+<<<<<<< HEAD
 Route::get(
     '/landing', function () {
         return view('pages/landing');
@@ -20,3 +21,11 @@ Route::get(
 );
 
 ?>
+=======
+Route::get('/', function () {
+  return view('welcome');
+});
+Route::get('/stockmarkettest', function () {
+  return view('stockmarkettest');
+});
+>>>>>>> 1fedcde01774c0d4fc564f3e94f4bbeaea186ecf
