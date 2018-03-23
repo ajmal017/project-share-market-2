@@ -3,3 +3,27 @@
 html {
     color: rgb(41, 16, 184);
 }
+
+/*Start of CSS Grid specific styling*/
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+/*End of CSS Grid specific styling*/
+
+.main-container {
+    padding: 5%;
+}
+#myChart {
+    width: 20em !important;
+    height: 15em !important;
+}
