@@ -1,30 +1,57 @@
 /* Global Styling goes here */
 
 html {
-    margin-top: 200px;
-    color: rgb(41, 16, 184);
-}
+    color: rgb(41, 16, 184);i
+    }
 
 header {
-      background-color: rgb(0,0,0);
-      top: 0;
-      position: fixed;
-      width: 100%;
+    background-color: rgb(0,0,0);
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 15%;
     }
 
-    #sysoimg {
-        float: left;
-        width: 15%;
-        height: 10%;
-        margin-top: 0;
+#logo {
+    width: 100%;
+    height: 70%;
+    margin-top: 0;
+    background-color: white;
     }
 
-    #nav {
-        width: 100%;
-        background-color: #677474;
-        color: white;
-        font-size: medium;
-        font-family: 'Helvetica', sans-serif;
+#sysoimg {
+    float: left;
+    width: 25%;
+    margin-top: 0;
+    display: block;
+    }
+
+#nav {
+    width: 100%;
+    height: 30%;
+    margin-bottom: 0;
+    display: block;
+    position: absolute;
+    background-color: #677474;
+    color: white;
+    font-size: medium;
+    font-family: 'Helvetica', sans-serif;
+    }
+
+body {
+    height: 80%;
+    }
+
+footer {
+    width: 100%;
+    height: 5%;
+    margin-bottom: 0;
+    position: fixed;
+    background-color: #677474;
+    color: white;
+    font-size: medium;
+    font-family: 'Helvetica', sans-serif;
+    text-align: center;
     }
 
     /*      text-shadow: 1px 1px 2px #033;*/
