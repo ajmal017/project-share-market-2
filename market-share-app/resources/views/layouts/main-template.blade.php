@@ -10,7 +10,7 @@
     <body>
         <header>
             <div class="logo">
-                <a href='pages/landing'><img id="sysoimg" src="../images/SYSOlogo2.png" align="left"/></a>
+                <a href='landing'><img id="sysoimg" src="/images/SYSOlogo2.png" align="left"/></a>
             </div>
             <nav>
             </nav>
