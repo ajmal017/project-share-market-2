@@ -9,11 +9,11 @@
     </head>
     <body>
         <header>
-            <div class="logo">
+            <div>
                 <a href='landing'><img id="sysoimg" src="/images/SYSOlogo2.png" align="left"/></a>
             </div>
-            <nav>
-            </nav>
+            <div id="nav">
+            </div>
         </header>
         @yield('content')
     </body>
