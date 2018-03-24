@@ -14,7 +14,7 @@ class CreateTransactionTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->increments('postion_Id');
+            $table->increments('position_Id');
             $table->unsignedInteger('user_id');
             $table->boolean('is_short_selling');
             $table->string('asx_code',10);
