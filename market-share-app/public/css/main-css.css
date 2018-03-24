@@ -5,32 +5,32 @@ html {
     }
 
 header {
-    background-color: rgb(0,0,0);
+    background-color: white;
     top: 0;
+    left: 0;
     position: fixed;
     width: 100%;
-    height: 15%;
+    height: 100px;
     }
 
 #logo {
     width: 100%;
-    height: 70%;
-    margin-top: 0;
+    height: 70px;
+    top: 0;
+    left: 0;
     background-color: white;
     }
 
 #sysoimg {
     float: left;
     width: 25%;
-    margin-top: 0;
-    display: block;
+    top: 0;
+    left: 0;
     }
 
 #nav {
     width: 100%;
-    height: 30%;
-    margin-bottom: 0;
-    display: block;
+    height: 30px;
     position: absolute;
     background-color: #677474;
     color: white;
@@ -38,20 +38,24 @@ header {
     font-family: 'Helvetica', sans-serif;
     }
 
-body {
-    height: 80%;
-    }
 
 footer {
     width: 100%;
-    height: 5%;
-    margin-bottom: 0;
-    position: fixed;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
     background-color: #677474;
     color: white;
     font-size: medium;
     font-family: 'Helvetica', sans-serif;
     text-align: center;
     }
+
+#footer {
+ /*   line-height: 5%;*/
+}
 
     /*      text-shadow: 1px 1px 2px #033;*/
