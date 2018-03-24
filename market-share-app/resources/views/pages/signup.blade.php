@@ -10,7 +10,7 @@
             <input type="password" name="password" id="password" onblur="pwStrengthCheck()"><br>
             <span id="pw-strength"></span>
         </p>
-        <p><input type="submit" value="Submit"></p>
+        <p><input type="submit" value="Sign Up"></p>
     </form>
 
     <!-- END OF CONTENT -->
