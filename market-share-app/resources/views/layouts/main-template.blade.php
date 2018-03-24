@@ -13,6 +13,7 @@
                 <a href='landing'><img id="sysoimg" src="/images/SYSOlogo2.png" align="left"/></a>
             </div>
             <div id="nav">
+                <p>testing</p>
             </div>
         </header>
         @yield('content')
