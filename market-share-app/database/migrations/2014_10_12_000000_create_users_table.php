@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->decimal('account_balance',13,4);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -30,6 +31,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('transactions');
         Schema::dropIfExists('users');
     }
 }

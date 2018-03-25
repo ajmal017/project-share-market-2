@@ -1,21 +1,35 @@
 /* Global Styling goes here */
 
+/* Style reset - removes browser-based defaults*/
+html, body, div, span, header, img, h1{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
 html {
-    color: rgb(41, 16, 184);i
-    }
+    color: rgb(41, 16, 184);
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    width: inherit;
+    height: inherit;
+}
 
 header {
-    background-color: white;
+    background-color: purple;
     top: 0;
     left: 0;
     position: fixed;
     width: 100%;
-    height: 100px;
+    height: 15%;
     }
 
 #logo {
     width: 100%;
-    height: 70px;
+    height: 70%;
     top: 0;
     left: 0;
     background-color: white;
@@ -23,14 +37,14 @@ header {
 
 #sysoimg {
     float: left;
-    width: 25%;
+    height: 100%;
     top: 0;
     left: 0;
     }
 
 #nav {
     width: 100%;
-    height: 30px;
+    height: 30%;
     position: absolute;
     background-color: #677474;
     color: white;
@@ -38,17 +52,82 @@ header {
     font-family: 'Helvetica', sans-serif;
     }
 
+/* Landing page body START - desktop-only version*/
+
+#landingBox{
+    /* The header currently has a fixed height of 100px, hence the padding */
+    padding-top: 100px;
+    font-family: sans-serif;
+    text-align: center;
+    height: 80%;
+}
+
+#welcomeBox{
+    display: inline-block;
+    width: 45%;
+    height: 80%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    background-image: url(../images/stock.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: #ffffff;
+}
+
+#welcomeTitle{
+    position: relative;
+    top: 15px;
+}
+
+#actionBox{
+    display: inline-block;
+    width: 44%;
+    height: 80%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    color: #677474;
+}
+
+#actionContentBox{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+a.wpLink{
+    display: block;
+    width: 20%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    padding: 10px;
+    background-color: #f47588;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+a.wpLink:hover{
+    background-color: #ec596e;
+}
+
+/* Landing page body END - desktop-only version*/
+
 footer {
     width: 100%;
-    height: 20px;
+    height: 5%;
     position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 1rem;
     background-color: #677474;
     color: white;
-    font-size: medium;
+    font-size: small;
     font-family: 'Helvetica', sans-serif;
     text-align: center;
     }
+
+#footer {
+    margin: 10px;
+}
