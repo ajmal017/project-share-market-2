@@ -15,8 +15,7 @@
         <div id="logo">
             <a href="landing"><img id="sysoimg" src="/images/SYSOlogo2.png" align="left"/></a>
         </div>
-        <div id="nav">
-            <p>testing</p>
+        <div id="navBar">
         </div>
     </header>
     <body>
@@ -24,7 +23,7 @@
     </body>
     <footer>
             <div>
-                <p>2018 Wolf Pack Of Wall Street Limited ABN 12 345 678</p>
+                <p id="footer">2018 Wolf Pack Of Wall Street Limited ABN 12 345 678</p>
             </div>            
     </footer>
 </html>
