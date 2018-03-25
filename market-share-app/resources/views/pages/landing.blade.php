@@ -1,5 +1,10 @@
 @extends('layouts/main-template')
 
+@section('sidebar')
+    @parent
+    <a href='about'>About/FAQ</a>
+@stop
+
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
