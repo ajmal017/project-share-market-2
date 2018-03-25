@@ -42,15 +42,19 @@ header {
     left: 0;
     }
 
-#nav {
+#navBar {
     width: 100%;
     height: 30%;
     position: absolute;
     background-color: #677474;
-    color: white;
-    font-size: medium;
-    font-family: 'Helvetica', sans-serif;
     }
+
+#navBar a {
+    display: inline-block;
+    color: white;
+    font-size: small;
+    font-family: 'Helvetica', sans-serif;
+}
 
 /* Landing page body START - desktop-only version*/
 
