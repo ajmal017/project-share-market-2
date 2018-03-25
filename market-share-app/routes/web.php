@@ -6,8 +6,9 @@ contains the "web" middleware group. Now create something great!*/
 
 Route::get(
     '/', function () {
-        return view('welcome');
-});
+        return view('pages/landing');
+    }
+);
 
 Route::get(
     '/about', function () {
@@ -30,12 +31,6 @@ Route::get(
 Route::get(
     '/community', function () {
         return view('pages/community');
-    }
-);
-
-Route::get(
-    '/landing', function () {
-        return view('pages/landing');
     }
 );
 
