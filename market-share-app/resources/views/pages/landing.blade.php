@@ -1,6 +1,7 @@
 @extends('layouts/main-template')
 
 @section('link')
+<!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
     <a href='about'>About/FAQ</a>
 @endsection
 

@@ -47,17 +47,16 @@ header {
     height: 30%;
     position: absolute;
     background-color: #677474;
-    display: inline-block;
-    color: white;
-    font-size: small;
-    font-family: 'Helvetica', sans-serif;
     }
 
 #navBar a {
     display: inline-block;
     color: white;
-    font-size: small;
+    font-size: medium;
     font-family: 'Helvetica', sans-serif;
+    float: right;
+    text-decoration: none;
+    margin: 5px;
 }
 
 /* Landing page body START - desktop-only version*/
