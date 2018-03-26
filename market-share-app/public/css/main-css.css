@@ -47,6 +47,10 @@ header {
     height: 30%;
     position: absolute;
     background-color: #677474;
+    display: inline-block;
+    color: white;
+    font-size: small;
+    font-family: 'Helvetica', sans-serif;
     }
 
 #navBar a {
