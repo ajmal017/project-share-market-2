@@ -57,6 +57,8 @@ header {
     float: right;
     text-decoration: none;
     margin: 5px;
+    padding-right: 1%;
+    padding-left: 1%;
 }
 
 #navBar a:hover, a:active {
