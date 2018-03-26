@@ -1,9 +1,8 @@
 @extends('layouts/main-template')
 
-@section('sidebar')
-    @parent
+@section('link')
     <a href='about'>About/FAQ</a>
-@stop
+@endsection
 
 @section('content')
 
