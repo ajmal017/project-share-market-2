@@ -41,8 +41,8 @@ Route::get(
 );
 
 Route::get(
-    '/login', function () {
-        return view('pages/login');
+    '/signin', function () {
+        return view('pages/signin');
     }
 );
 
