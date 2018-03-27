@@ -11,6 +11,13 @@ Route::get(
 );
 
 Route::get(
+    '/landing', function () {
+        return view('pages/landing');
+    }
+);
+
+
+Route::get(
     '/about', function () {
         return view('pages/about');
     }
@@ -41,8 +48,8 @@ Route::get(
 );
 
 Route::get(
-    '/login', function () {
-        return view('pages/login');
+    '/signin', function () {
+        return view('pages/signin');
     }
 );
 
@@ -51,6 +58,9 @@ Route::get(
         return view('pages/signup');
     }
 );
-//Auth::routes();
+Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register');
+
