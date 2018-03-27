@@ -3,6 +3,7 @@
 @section('link')
 <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
     <a href='about'>About/FAQ</a>
+    <a href='landing'>Landing</a>
 @endsection
 
 @section('content')
@@ -16,7 +17,7 @@
         <div id = "actionBox">
             <div id = "actionContentBox">
                 <a class = "wpLink" href="/signup">Sign Up</a>
-                <a class = "wpLink" href="/login">Login</a>
+                <a class = "wpLink" href="/signin">Login</a>
                 <p>Buy and sell shares to make your way up the leaderboard.</p>
                 <p>Sign up now and be given $1,000,000 in game currency!</p>
             <div>
