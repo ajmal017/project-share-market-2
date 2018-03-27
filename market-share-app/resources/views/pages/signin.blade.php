@@ -12,7 +12,7 @@
         </p>
         <p><input type="submit" value="Log In"></p>
     </form> -->
-
+<div id = "temporaryBox">
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -66,7 +66,7 @@
             </div>
         </div>
     </form>
-
+</div>
     <!-- END OF CONTENT -->
 
 @endsection
