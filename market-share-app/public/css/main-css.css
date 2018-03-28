@@ -147,3 +147,7 @@ footer {
 #footer {
     margin: 10px;
 }
+
+#logoutLink {
+    color: rgb(11, 149, 241);
+}
