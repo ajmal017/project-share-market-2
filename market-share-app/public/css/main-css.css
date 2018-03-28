@@ -66,11 +66,16 @@ header {
 /* Landing page body START - desktop-only version*/
 
 #landingBox{
-    /* The header currently has a fixed height of 100px, hence the padding */
-    padding-top: 100px;
+    padding: 5%;
     font-family: sans-serif;
     text-align: center;
     height: 80%;
+}
+
+#temporaryBox{
+    padding: 15%;
+    font-family: sans-serif;
+    text-align: center;
 }
 
 #welcomeBox{

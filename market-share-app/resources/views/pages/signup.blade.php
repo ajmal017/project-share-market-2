@@ -3,6 +3,7 @@
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
+<div id = "temporaryBox">
     <h1>Create an account</h1>
     <form method="POST" action="{{ route('register') }}">
         @csrf
@@ -59,7 +60,7 @@
             </div>
         </div>
     </form>
-
+</div>
     <!-- END OF CONTENT -->
 
 @endsection
