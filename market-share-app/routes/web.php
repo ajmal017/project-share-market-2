@@ -11,6 +11,13 @@ Route::get(
 );
 
 Route::get(
+    '/landing', function () {
+        return view('pages/landing');
+    }
+);
+
+
+Route::get(
     '/about', function () {
         return view('pages/about');
     }
