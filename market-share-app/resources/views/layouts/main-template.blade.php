@@ -11,20 +11,25 @@
 			crossorigin="anonymous"></script>
         <title>Stock Your Socks Off</title>
     </head>
-    <header>
-        <div id="logo">
-            <a href="landing"><img id="sysoimg" src="/images/SYSOlogo2.png" align="left"/></a>
+    <header class = "sysoHeader">
+        <div class = "sysoLogo">
+            <a href="landing">
+                <img id="sysoimg" src="/images/SYSOlogo2.png" align="left"/>
+            </a>
         </div>
-        <div id="navBar">
-            @yield('link')
+        <div class = "sysoText">Stock Your Socks Off</div>
+        <div class = "sysoHamburger"  onclick = "menuClick()">
+            <div id="navBar">
+                @yield('link')
+            </div>
         </div>
     </header>
     <body>
         @yield('content')
     </body>
-    <footer>
-            <div>
-                <p id="footer">2018 Wolf Pack Of Wall Street Limited ABN 12 345 678</p>
-            </div>            
+    <footer class = "sysoFooter">
+        <div>
+            <p id="footer">2018 Wolf Pack Of Wall Street Limited ABN 12 345 678</p>
+        </div>            
     </footer>
 </html>
