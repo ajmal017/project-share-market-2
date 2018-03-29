@@ -25,7 +25,10 @@
         </div>
     </header>
     <body>
-        @yield('content')
+        <div id = "sysoContentMaster" class = "sysoContentMaster" style = "display: block;">
+            @yield('content')
+            <div class = "sysoPortrait"></div>
+        </div>
     </body>
     <footer class = "sysoFooter">
         <div>
