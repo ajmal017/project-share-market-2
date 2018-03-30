@@ -53,11 +53,7 @@ Route::get(
     }
 );
 
-Route::get(
-    '/signup', function () {
-        return view('pages/signup');
-    }
-);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -65,4 +61,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register');
 
 Route::get('/listing/{symbol}', 'ListingsController@listing');
+//Route::get('/testing/buy-shares/{balance}', 'ShareTransactionController@balance');
+Route::get('/testing/buy-shares/', 'ShareTransactionController@balance');
+
 
