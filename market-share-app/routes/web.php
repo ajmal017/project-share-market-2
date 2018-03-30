@@ -61,6 +61,7 @@ Route::get(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/listing/api', 'MarketDataController@save');
 
 //Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register');
 
