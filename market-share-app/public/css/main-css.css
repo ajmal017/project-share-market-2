@@ -1,114 +1,152 @@
 /* Global Styling goes here */
 
-/* Style reset - removes browser-based defaults*/
-html, body, div, span, header, img, h1{
+/* Style reset - removes browser-based defaults */
+
+html, body, div, span, header, footer, img, h1, p, ul, li{
     margin: 0;
     padding: 0;
     border: 0;
 }
 
-html {
-    color: rgb(41, 16, 184);
-    width: 100%;
-    height: 100%;
-}
+/* High-level containers */
 
+html {
+    color: #333333;
+    width: 100%;
+    height: 90%;
+    font-family: 'Helvetica', sans-serif;
+    /* Keeps the scrollbar present on hamburger click */
+    overflow-y: scroll;
+}
 body{
     width: inherit;
     height: inherit;
 }
-
-header {
-    background-color: purple;
-    top: 0;
-    left: 0;
+.sysoHeader{
+    width: 100%;
+    height: 10%;
     position: fixed;
+    top: 0px;
+    z-index: 1;
+    background-color: #f47588;
+}
+.sysoFooter{
     width: 100%;
-    height: 15%;
-    }
-
-#logo {
+    height: 10%;
+    position: fixed;
+    bottom: 0px;
+    z-index: 1;
+    background-color: #677474;
+    color: white;
+    font-size: small;
+    text-align: center;
+}
+.sysoContentMaster{
     width: 100%;
-    height: 70%;
-    top: 0;
-    left: 0;
-    background-color: white;
-    }
+    height: 90%;
+    margin-top: 10vh;
+}
+.sysoMenuMaster{
+    display: none;
+    width: 100%;
+    height: 90%;
+    padding-top: 10vh;
+}
 
-#sysoimg {
+/* Responsive containers */
+
+.sysoLogo{
+    width: 10vh;
+    height: 10vh;
+    float: left;
+    background-image: url("../images/sysoLogo.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.sysoTitle{
+    height: 10vh;
+    float: left;
+}
+.sysoHamburger{
+    width: 10vh;
+    height: 10vh;
+    float: right;
+    background-image: url("../images/sysoHamburger.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+}
+.sysoBox{
+    width: 100%;
+}
+.sysoBoxFlex{
+    height: 100%;
+}
+.sysoContent{
+    vertical-align: top;
+    overflow: hidden;
     float: left;
     height: 100%;
-    top: 0;
-    left: 0;
-    }
-
-#navBar {
+}
+.sysoContent100{
     width: 100%;
-    height: 30%;
-    position: absolute;
-    background-color: #677474;
+}
+.sysoContent50{
+    width: 50%;
+}
+.sysoContent33{
+    width: 33.3%;
+}
+.sysoPortrait{
+    display: block;
+    height: 10vh;
+}
+
+/* Portrait mode detection and styles */
+
+@media all and (orientation: portrait){
+    .sysoTitle{
+        display: none;
     }
-
-#navBar a:link, a:visited {
-    display: inline-block;
-    color: white;
-    font-size: medium;
-    font-family: 'Helvetica', sans-serif;
-    float: right;
-    text-decoration: none;
-    margin: 5px;
+    .sysoBoxFlex{
+        height: initial;
+    }
+    .sysoContent{
+        display: block;
+        vertical-align: initial;
+        overflow: initial;
+        float: initial;
+        height: initial;
+    }
+    .sysoContent33{
+        width: 100%;
+    }
+    .sysoContent50{
+        width: 100%;
+    }
+    .sysoContent100{
+        width: 100%;
+    }
 }
 
-#navBar a:hover, a:active {
-    color: #012e33;
+/* Miscellaneous content control */
+
+.sysoNoScroll{
+    overflow: hidden;
+}
+#sysoHomeLink{
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
-/* Landing page body START - desktop-only version*/
+/* Titlebar (logo, hamburger menu items) */
 
-#landingBox{
-    padding: 5%;
-    font-family: sans-serif;
-    text-align: center;
-    height: 80%;
+#sysoTitle{
+    height: 100%;
 }
 
-#temporaryBox{
-    padding: 15%;
-    font-family: sans-serif;
-    text-align: center;
-}
-
-#welcomeBox{
-    display: inline-block;
-    width: 45%;
-    height: 80%;
-    margin-right: 2.5%;
-    margin-left: 2.5%;
-    background-image: url(../images/stock.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    color: #ffffff;
-}
-
-#welcomeTitle{
-    position: relative;
-    top: 15px;
-}
-
-#actionBox{
-    display: inline-block;
-    width: 44%;
-    height: 80%;
-    margin-right: 2.5%;
-    margin-left: 2.5%;
-    color: #677474;
-}
-
-#actionContentBox{
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
+/* Landing page content */
 
 a.wpLink{
     display: block;
@@ -120,6 +158,7 @@ a.wpLink{
     padding: 10px;
     background-color: #f47588;
     text-decoration: none;
+    text-align: center;
     color: #ffffff;
     border-radius: 5px;
 }
@@ -128,26 +167,22 @@ a.wpLink:hover{
     background-color: #ec596e;
 }
 
-/* Landing page body END - desktop-only version*/
-
-footer {
-    width: 100%;
-    height: 5%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #677474;
-    color: white;
-    font-size: small;
-    font-family: 'Helvetica', sans-serif;
-    text-align: center;
-    }
-
-#footer {
-    margin: 10px;
+#welcomeBox{
+    display: inline-block;
+    width: 45%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    background-image: url(../images/stock.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: #ffffff;
 }
 
-#logoutLink {
-    color: rgb(11, 149, 241);
+/* Footer content */
+
+#sysoFooterText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
