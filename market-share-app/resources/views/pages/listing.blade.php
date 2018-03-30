@@ -21,6 +21,9 @@
             <div class="grid-item">9</div>
         </div> 
     </div>
+    <!-- we can now use the variable $symbol to reference the stock market
+    listing code. This can be used for api calls, etc -->
+    <h1>{{$symbol}}</h1>
     <!-- END OF CONTENT -->
 
 @endsection
