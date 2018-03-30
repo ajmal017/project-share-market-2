@@ -11,21 +11,43 @@
 			crossorigin="anonymous"></script>
         <title>Stock Your Socks Off</title>
     </head>
+<<<<<<< HEAD
     <header>
         <div id="logo">
             <a href="/"><img id="sysoimg" src="/images/SYSOlogo2.png" align="left"/></a>
+=======
+    <!-- Titlebar (logo, title, hamburger menu) -->
+    <header class = "sysoHeader">
+        <div class = "sysoLogo">
+            <a id = "sysoHomeLink" href = "/landing"></a>
+>>>>>>> master
         </div>
-        <div id="navBar">
-            @yield('link')
+        <div class = "sysoTitle">
+            <img id = "sysoTitle" src = "../images/sysoTitle.png" alt = "Stock Your Socks Off"/>
+        </div>
+        <div class = "sysoHamburger" onclick = "menuClick()">
         </div>
     </header>
+    <!-- Hamburger menu content -->
+    <div id = "sysoMenuMaster" class = "sysoMenuMaster blackBox" style = "display: none;">
+        <ul>
+            @yield('link')
+        </ul>
+    </div>
     <body>
-        @yield('content')
+        <!-- The sysoContentMaster controls the responsive layout space available for all 
+        content. -->
+        <div id = "sysoContentMaster" class = "sysoContentMaster" style = "display: block;">
+            @yield('content')
+            <!-- Footer padding hack - provides padding at the bottom of the content block to 
+            compensate for the absolute footer. Don't remove the DIV below! -->
+            <div class = "sysoPortrait"></div>
+        </div>
     </body>
-    <footer>
-            <div>
-                <p id="footer">2018 Wolf Pack Of Wall Street Limited ABN 12 345 678</p>
-            </div>            
+    <footer class = "sysoFooter">
+        <div>
+            <p id = "sysoFooterText">2018 Wolf Pack Of Wall Street Limited ABN 12 345 678</p>
+        </div>            
     </footer>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
