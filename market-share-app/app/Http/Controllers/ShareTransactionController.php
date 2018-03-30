@@ -34,7 +34,7 @@ class ShareTransactionController extends Controller
         }
         $user->account_balance -= $totalPrice;
         $user->save();
-        $openTransaction = 
+        //$openTransaction = 
 
         
 
