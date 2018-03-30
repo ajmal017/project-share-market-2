@@ -3,7 +3,7 @@
 @section('link')
 <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
     <a href='about'>About/FAQ</a>
-    <a href='landing'>Landing</a>
+    <a href='landing'>Test</a>
 @endsection
 
 @section('content')
