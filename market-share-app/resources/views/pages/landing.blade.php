@@ -10,11 +10,11 @@
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <div class = "sysoBox sysoBoxFlex">
-        <div class = "sysoContent sysoContent50 redBox">
+        <div id = "welcomeBox" class = "sysoContent sysoContent50">
             <h1 id = "welcomeTitle">Welcome to <i>Stock Your Socks Off</i>!</h1>
             <p>Stock Your Socks Off is an ASX stock market investment simulation.</p>
         </div>
-        <div class = "sysoContent sysoContent50 blueBox">
+        <div class = "sysoContent sysoContent50">
             <a class = "wpLink" href="/signup">Sign Up</a>
             <a class = "wpLink" href="/signin">Login</a>
             <p>Buy and sell shares to make your way up the leaderboard.</p>

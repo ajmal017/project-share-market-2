@@ -11,38 +11,41 @@ html, body, div, span, header, footer, img, h1, p, ul, li{
 /* High-level containers */
 
 html {
-    color: rgb(41, 16, 184);
+    color: #333333;
     width: 100%;
-    height: 100%;
+    height: 90%;
+    font-family: 'Helvetica', sans-serif;
+    /* Keeps the scrollbar present on hamburger click */
+    overflow-y: scroll;
 }
-
 body{
     width: inherit;
     height: inherit;
 }
-
 .sysoHeader{
     width: 100%;
     height: 10%;
     position: fixed;
     top: 0px;
-    z-index: 1
+    z-index: 1;
+    background-color: #f47588;
 }
-
 .sysoFooter{
     width: 100%;
     height: 10%;
     position: fixed;
     bottom: 0px;
     z-index: 1;
+    background-color: #677474;
+    color: white;
+    font-size: small;
+    text-align: center;
 }
-
 .sysoContentMaster{
     width: 100%;
     height: 90%;
     margin-top: 10vh;
 }
-
 .sysoMenuMaster{
     display: none;
     width: 100%;
@@ -56,55 +59,53 @@ body{
     width: 10vh;
     height: 10vh;
     float: left;
+    background-image: url("../images/sysoLogo.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
-
-.sysoText{
-    width: 30%;
+.sysoTitle{
     height: 10vh;
     float: left;
 }
-
 .sysoHamburger{
     width: 10vh;
     height: 10vh;
     float: right;
+    background-image: url("../images/sysoHamburger.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
 }
-
 .sysoBox{
     width: 100%;
 }
-
 .sysoBoxFlex{
     height: 100%;
 }
-
 .sysoContent{
     vertical-align: top;
     overflow: hidden;
     float: left;
     height: 100%;
 }
-
 .sysoContent100{
     width: 100%;
 }
-
 .sysoContent50{
     width: 50%;
 }
-
 .sysoContent33{
     width: 33.3%;
 }
-
 .sysoPortrait{
-    display: none;
+    display: block;
+    height: 10vh;
 }
 
 /* Portrait mode detection and styles */
 
 @media all and (orientation: portrait){
-    .sysoText{
+    .sysoTitle{
         display: none;
     }
     .sysoBoxFlex{
@@ -126,12 +127,60 @@ body{
     .sysoContent100{
         width: 100%;
     }
-    .sysoPortrait{
-        display: block;
-        height: 10vh;
-    }
 }
 
+/* Miscellaneous content control */
+
+.sysoNoScroll{
+    overflow: hidden;
+}
+
+/* Titlebar (logo, hamburger menu items) */
+
+#sysoTitle{
+    height: 100%;
+}
+
+/* Landing page content */
+
+a.wpLink{
+    display: block;
+    width: 20%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    padding: 10px;
+    background-color: #f47588;
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+a.wpLink:hover{
+    background-color: #ec596e;
+}
+
+#welcomeBox{
+    display: inline-block;
+    width: 45%;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    background-image: url(../images/stock.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: #ffffff;
+}
+
+/* Footer content */
+
+#sysoFooterText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 /*
 header {
@@ -177,20 +226,6 @@ header {
 
 #navBar a:hover, a:active {
     color: #012e33;
-}
-
-
-#landingBox{
-    padding: 5%;
-    font-family: sans-serif;
-    text-align: center;
-    height: 80%;
-}
-
-#temporaryBox{
-    padding: 15%;
-    font-family: sans-serif;
-    text-align: center;
 }
 
 #welcomeBox{
