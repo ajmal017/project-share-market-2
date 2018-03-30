@@ -169,9 +169,6 @@ a.wpLink:hover{
 
 #welcomeBox{
     display: inline-block;
-    width: 45%;
-    margin-right: 2.5%;
-    margin-left: 2.5%;
     background-image: url(../images/stock.jpg);
     background-repeat: no-repeat;
     background-size: 100%;
