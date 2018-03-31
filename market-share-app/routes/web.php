@@ -57,7 +57,9 @@ Route::get(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/listing/api', 'MarketDataController@save');
+Route::get('/listing/daily/{asx_code}', 'MarketDataController@dailyStats');
+Route::get('/listing/intraday/{asx_code}', 'MarketDataController@intraDayStats');
+Route::get('/listing/{asx_code}', 'MarketDataController@getCompanyDetails');
 
 //Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register');
 
