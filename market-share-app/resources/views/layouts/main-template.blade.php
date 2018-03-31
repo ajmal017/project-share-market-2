@@ -10,6 +10,7 @@
 			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 			crossorigin="anonymous"></script>
         <title>Stock Your Socks Off</title>
+        <link href='https://fonts.googleapis.com/css?family=Crete Round' rel='stylesheet'>
     </head>
     <!-- Titlebar (logo, title, hamburger menu) -->
     <header class = "sysoHeader">
