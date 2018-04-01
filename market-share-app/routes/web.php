@@ -57,9 +57,11 @@ Route::get(
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/listing/minutely/{asx_code}', 'MarketDataController@intraDayStats');
 Route::get('/listing/daily/{asx_code}', 'MarketDataController@dailyStats');
-Route::get('/listing/intraday/{asx_code}', 'MarketDataController@intraDayStats');
-Route::get('/listing/{asx_code}', 'MarketDataController@getCompanyDetails');
+Route::get('/listing/weekly/{asx_code}', 'MarketDataController@weeklyStats');
+Route::get('/listing/monthly/{asx_code}', 'MarketDataController@monthlyStats');
+Route::get('/listing/company/{asx_code}', 'MarketDataController@getCompanyDetails');
 
 //Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register');
 

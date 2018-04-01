@@ -7,7 +7,7 @@ $(document).ready(function () {
             $("#company_details").html("<b>Enter an ASX code before searching.</b>");
         } else {
             $.ajax({
-                url: "/listing/" + $('#asx_code').val(),
+                url: "/listing/company/" + $('#asx_code').val(),
                 success: function (results) {
                     asx_results = results;
                     if (results != '') {

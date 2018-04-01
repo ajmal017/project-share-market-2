@@ -6,47 +6,116 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
 use League\Csv\Statement;
+use Carbon\Carbon;
 
 class MarketDataController
 {
+    public function intraDayStats($asx_code)
+    {
+        date_default_timezone_set('UTC');
+        $insert_count = 0;
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . "&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        $resp = $this->curlStocksStats($url);
+        $resp = json_decode($resp);
+
+        $output['asx_code'] = strtolower($resp->{'Meta Data'}->{'2. Symbol'});
+        $output['last_refreshed'] = $resp->{'Meta Data'}->{'3. Last Refreshed'};
+
+        foreach ($resp->{'Time Series (1min)'} as $key => $record) {
+            $insert_count += DB::table('stocks_minutely')->insert([
+                'created_at_utc' => Carbon::now(),
+                'last_refreshed' => $output['last_refreshed'],
+                'asx_code' => $output['asx_code'],
+                'date' => $key,
+                'open' => $record->{'1. open'},
+                'high' => $record->{'2. high'},
+                'low' => $record->{'3. low'},
+                'close' => $record->{'4. close'},
+                'volume' => $record->{'5. volume'}
+            ]);
+        }
+        return $insert_count . ' records added';
+    }
+
     public function dailyStats($asx_code)
     {
+        date_default_timezone_set('UTC');
+        $insert_count = 0;
         $url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" . $asx_code . "&apikey=PEQIWLTYB0GPLMB8";
         $resp = $this->curlStocksStats($url);
         $resp = json_decode($resp);
 
-        foreach ($resp as $key => $record) {
-            var_dump($record);
-            // var_dump(preg_replace(['/\./', '/ /'], ['_', '_'], strtolower($key)));
-            // var_dump(preg_replace(['/\./', '/ /'], ['_', '_'], strtolower($key[$record])));
-            // DB::table('asx_company_details')->insert([
-            //         'created_at' => $record['Company name'],
-            //         'last_refreshed' => $record['ASX code'],
-            //         'last_refreshed' => $record['GICS industry group'],
-            //         'asx_code' => $record['GICS industry group'],
-            //         'date' => $record['GICS industry group'],
-            //         'o pen' => $record['GICS industry group'],
-            //         'high' => $record['GICS industry group'],
-            //         'low' => $record['GICS industry group'],
-            //         'close' => $record['GICS industry group'],
-            //         'volume' => $record['GICS industry group']
-            // ]);
+        $output['asx_code'] = strtolower($resp->{'Meta Data'}->{'2. Symbol'});
+        $output['last_refreshed'] = $resp->{'Meta Data'}->{'3. Last Refreshed'};
+
+        foreach ($resp->{'Time Series (Daily)'} as $key => $record) {
+            $insert_count += DB::table('stocks_daily')->insert([
+                            'created_at_utc' => Carbon::now(),
+                            'last_refreshed' => $output['last_refreshed'],
+                            'asx_code' => $output['asx_code'],
+                            'date' => $key,
+                            'open' => $record->{'1. open'},
+                            'high' => $record->{'2. high'},
+                            'low' => $record->{'3. low'},
+                            'close' => $record->{'4. close'},
+                            'volume' => $record->{'5. volume'}
+            ]);
         }
-        die();
-        return $resp;
+        return $insert_count . ' records added';
     }
 
-    public function intraDayStats($asx_code)
+    public function weeklyStats($asx_code)
     {
-        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . "&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        date_default_timezone_set('UTC');
+        $insert_count = 0;
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" . $asx_code . "&apikey=PEQIWLTYB0GPLMB8";
         $resp = $this->curlStocksStats($url);
-        var_dump($resp);
-        die();
-        foreach ($resp as $key => $value) {
-            var_dump($key);
-            var_dump($value);
+        $resp = json_decode($resp);
+
+        $output['asx_code'] = strtolower($resp->{'Meta Data'}->{'2. Symbol'});
+        $output['last_refreshed'] = $resp->{'Meta Data'}->{'3. Last Refreshed'};
+
+        foreach ($resp->{'Weekly Time Series'} as $key => $record) {
+            $insert_count += DB::table('stocks_weekly')->insert([
+                'created_at_utc' => Carbon::now(),
+                'last_refreshed' => $output['last_refreshed'],
+                'asx_code' => $output['asx_code'],
+                'date' => $key,
+                'open' => $record->{'1. open'},
+                'high' => $record->{'2. high'},
+                'low' => $record->{'3. low'},
+                'close' => $record->{'4. close'},
+                'volume' => $record->{'5. volume'}
+            ]);
         }
-        return $resp;
+        return $insert_count . ' records added';
+    }
+
+    public function monthlyStats($asx_code)
+    {
+        date_default_timezone_set('UTC');
+        $insert_count = 0;
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" . $asx_code . "&apikey=PEQIWLTYB0GPLMB8";
+        $resp = $this->curlStocksStats($url);
+        $resp = json_decode($resp);
+
+        $output['asx_code'] = strtolower($resp->{'Meta Data'}->{'2. Symbol'});
+        $output['last_refreshed'] = $resp->{'Meta Data'}->{'3. Last Refreshed'};
+
+        foreach ($resp->{'Monthly Time Series'} as $key => $record) {
+            $insert_count += DB::table('stocks_monthly')->insert([
+                'created_at_utc' => Carbon::now(),
+                'last_refreshed' => $output['last_refreshed'],
+                'asx_code' => $output['asx_code'],
+                'date' => $key,
+                'open' => $record->{'1. open'},
+                'high' => $record->{'2. high'},
+                'low' => $record->{'3. low'},
+                'close' => $record->{'4. close'},
+                'volume' => $record->{'5. volume'}
+            ]);
+        }
+        return $insert_count . ' records added';
     }
 
     public function getCompanyDetails($asx)
