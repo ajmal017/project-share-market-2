@@ -17,6 +17,14 @@
             <br>
             <input type="button" value="Search" id="search_companies" style="margin-top:0.5em;">
         </div>
+        <div class="grid-item">
+            <label for="company_name"><b>Start typing a Company Name:</b></label>
+            <br>
+            <input type="text" name="company_name" id="company_name" style="text-align:center;">
+            <select id="company_name_dropdown" name="company_name_dropdown">
+                <option disabled>Make a selection</option>
+            </select>
+        </div>
         <div class="grid-item" id="company_details"></div>
         <div class="grid-item" id="get_daily_data"></div>
     </div> 

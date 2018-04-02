@@ -188,9 +188,9 @@ a.wpLink:hover{
 .grid-container {
     display: grid;
     grid-template-areas:
-    'search'
-    'content'
-    'next_action';
+    'asx_search company_search'
+    'content content'
+    'next_action next_action';
     grid-template-columns: auto;
     padding: 5% 30% 30%;
 }

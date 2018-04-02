@@ -118,13 +118,6 @@ class MarketDataController
         return $insert_count . ' records added';
     }
 
-    public function getCompanyDetails($asx)
-    {
-        $asx = strtoupper($asx);
-        $users = DB::table('asx_company_details')->where('company_code', '=', $asx)->get();
-        return $users;
-    }
-
     public function curlStocksStats($url)
     {
         // Get cURL resource
@@ -149,5 +142,23 @@ class MarketDataController
 
         // Return the results
         return $resp;
+    }
+
+    public function getCompanyDetails($asx)
+    {
+        $asx = strtoupper($asx);
+        $company = DB::table('asx_company_details')->where('company_code', '=', $asx)
+            ->limit(10)
+            ->get();
+        return $company;
+    }
+
+    public function getCompanyName($string)
+    {
+        $string = '%'. $string . '%';
+        $company = DB::table('asx_company_details')->where('company_name', 'like', $string)
+            ->limit(10)
+            ->get();
+        return $company;
     }
 }

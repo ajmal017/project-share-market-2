@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->call('App\Http\Controllers\MarketDataController@dailyStats')->everyDay();
-        // $schedule->call('App\Http\Controllers\MarketDataController@intraDayStats')->everyHour();
+        $schedule->call('App\Http\Controllers\MarketDataController@dailyStats')->everyDay();
+        $schedule->call('App\Http\Controllers\MarketDataController@intraDayStats')->everyHour();
     }
 
     /**
