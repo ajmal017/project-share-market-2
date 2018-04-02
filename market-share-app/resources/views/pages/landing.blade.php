@@ -15,8 +15,10 @@
         <div id = "landing" class = "sysoContent sysoContent50">
             <a class = "wpLink" href="/signup">Sign Up</a>
             <a class = "wpLink" href="/signin">Login</a>
-            <p>Buy and sell shares to make your way up the leaderboard.</p>
-            <p>Sign up now and be given $1,000,000 in game currency!</p>
+            <div id = "intro">
+                <p>Buy and sell shares to make your way up the leaderboard.</p>
+                <p>Sign up now and be given $1,000,000 in game currency!</p>
+            </div>
         </div>
     </div>
     <!-- END OF CONTENT -->

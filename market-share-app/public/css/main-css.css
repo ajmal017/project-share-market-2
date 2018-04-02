@@ -220,12 +220,16 @@ a.wpLink:hover{
     
 }
 
-#landing p{
-    margin-top: 2.5%;
+#intro{
+    margin-top: 10vh;
     color: #012e33;
     font-family: 'Crete Round', serif;
     font-size: large;
     text-align: center;
+}
+
+#intro p{
+    margin-top: 2.5vh;
 }
 
 /* Signin page content */
@@ -240,19 +244,27 @@ a.wpLink:hover{
 
 #signin h1{
     font-size: x-large;
+    color: #677474;
+    margin-bottom: 5vh;
 }
 
 #email, #password{
     margin-top: 2.5vh;
 }
 
-#signin checkbox{
-    margin-top: 2.5vh;
-    font-size: smaller;
+input[name=remember]{
+    width: auto;
+    padding: 0;
+    margin-top: 1.5vh;
+}
+
+.checkbox label{
+    font-size: x-small;
 }
 
 #forgotten{
     color: #012e33;
+    font-size: small;
 }
 
 
