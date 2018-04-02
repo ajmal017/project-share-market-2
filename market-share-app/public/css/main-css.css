@@ -171,6 +171,19 @@ button:hover{
     background-color: #ec596e;
 }
 
+.sysoContent50 button{
+    width: 20%;
+}
+
+input{
+    width: 30%;
+    padding: 5px;
+}
+
+input:focus{
+    outline-color: #012e33;
+}
+
 /* Landing page content */
 
 a.wpLink{
@@ -219,10 +232,23 @@ a.wpLink:hover{
 
 #signin{
     position: relative;
-    margin-top: 50%;
+    margin-top: 20vh;
     text-align: center;
     font-family: 'Helvetica', sans-serif;
     color: #012e33;
+}
+
+#signin h1{
+    font-size: x-large;
+}
+
+#email, #password{
+    margin-top: 2.5vh;
+}
+
+#signin checkbox{
+    margin-top: 2.5vh;
+    font-size: smaller;
 }
 
 #forgotten{
