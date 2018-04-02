@@ -146,6 +146,31 @@ body{
     height: 100%;
 }
 
+/* Constant styling */
+
+button{
+    display: block;
+    width: 10%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    padding: 5px;
+    background-color: #f47588;
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 5px;
+    font-family: 'Helvetica', sans-serif;
+    font-size: medium;
+    border-color: #f47588;
+    border-style: solid;
+}
+
+button:hover{
+    background-color: #ec596e;
+}
+
 /* Landing page content */
 
 a.wpLink{
@@ -179,6 +204,7 @@ a.wpLink:hover{
 #landing{
     vertical-align: middle;
     padding-top: 15vh;
+    
 }
 
 #landing p{
@@ -188,6 +214,21 @@ a.wpLink:hover{
     font-size: large;
     text-align: center;
 }
+
+/* Signin page content */
+
+#signin{
+    position: relative;
+    margin-top: 50%;
+    text-align: center;
+    font-family: 'Helvetica', sans-serif;
+    color: #012e33;
+}
+
+#forgotten{
+    color: #012e33;
+}
+
 
 /* Footer content */
 

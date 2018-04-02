@@ -12,7 +12,7 @@
         <p><input type="submit" value="Log In"></p>
     </form> -->
     <div class = "sysoBox sysoBoxFlex">
-        <div class = "sysoContent sysoContent100">
+        <div id = "signin" class = "sysoContent sysoContent100">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div>
@@ -52,7 +52,7 @@
                         <button type="submit">
                             {{ __('Login') }}
                         </button>
-                        <a href="{{ route('password.request') }}">
+                        <a id = "forgotten" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
                     </div>
