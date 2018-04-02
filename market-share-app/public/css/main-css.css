@@ -44,7 +44,6 @@ body{
 .sysoContentMaster{
     width: 100%;
     height: 90%;
-    margin-top: 10vh;
 }
 .sysoMenuMaster{
     display: none;
@@ -145,6 +144,11 @@ body{
 #sysoTitle{
     height: 100%;
 }
+#sysoGreenBar{
+    width: 100%;
+    height: 15%;
+    background-color: #677474;
+}
 
 /* Constant styling */
 
@@ -207,7 +211,6 @@ a.wpLink:hover{
 
 #welcomeBox{
     display: inline-block;
-    padding-top: 2%;
     background-image: url(../images/stockText.jpg);
     background-repeat: no-repeat;
     background-size: 80%;
@@ -216,8 +219,7 @@ a.wpLink:hover{
 
 #landing{
     vertical-align: middle;
-    padding-top: 15vh;
-    
+    padding-top: 15vh;    
 }
 
 #intro{

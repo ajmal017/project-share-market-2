@@ -23,6 +23,7 @@
         <div class = "sysoHamburger" onclick = "menuClick()">
         </div>
     </header>
+    <div id = "sysoGreenBar"></div>
     <!-- Hamburger menu content -->
     <div id = "sysoMenuMaster" class = "sysoMenuMaster blackBox" style = "display: none;">
         <ul>
