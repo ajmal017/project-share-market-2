@@ -21,7 +21,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#company_name").on('input propertychange paste', function (e) {
+    $("#company_name").on('input propertychange', function (e) {
         e.preventDefault();
         if ($('#company_name').val() == '') {
             $("#company_name_dropdown").html("<option disabled value=''>Start typing a company name</option>");
