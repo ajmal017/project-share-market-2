@@ -276,3 +276,22 @@ input[name=remember]{
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* CSS Grid styling */
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    'asx_search company_search'
+    'content content'
+    'next_action next_action';
+    grid-template-columns: auto;
+    padding: 5% 30% 30%;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px;
+    padding: 20px;
+    font-size: 1em;
+    text-align: center;
+}
