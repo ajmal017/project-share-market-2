@@ -149,6 +149,12 @@ body{
     height: 15%;
     background-color: #677474;
 }
+#sysoMenuMaster a{
+    display: block;
+    color: #012e33;
+    text-align: center;
+    margin-right: auto;
+}
 
 /* Constant styling */
 
