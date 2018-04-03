@@ -234,18 +234,18 @@ a.wpLink:hover{
     margin-top: 2.5vh;
 }
 
-/* Signin page content */
+/* Signin Signup page content */
 
 h1{
     font-size: x-large;
     color: #012e33;
     margin: auto;
     text-align: center;
-    margin-top: 20vh;
-    margin-bottom: 5vh;
+    margin-top: 15vh;
+    margin-bottom: auto;
 }
 
-#signin{
+#signin, #signup{
     position: relative;
     width: 20%;
     margin: auto;
@@ -254,9 +254,21 @@ h1{
     color: #012e33;
 }
 
-#email, #password{
+#signup label{
+    float: left;
+    margin-bottom: 0;
+    margin-top: 2.5vh;
+    font-size: small;
+}
+
+
+#email, #password, #password-confirm, #name{
     margin-top: 2.5vh;
     width: 100%;
+}
+
+#signup input{
+    margin-top: 0;
 }
 
 .checkbox{
@@ -278,6 +290,10 @@ input[name=remember]{
 button{
     width: 50%;
     margin-top: 10vh;
+}
+
+#signup button{
+    margin-top: 5vh;
 }
 
 #forgotten{
