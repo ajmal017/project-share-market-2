@@ -59,6 +59,11 @@ Route::get(
     }
 );
 
+Route::get(
+    '/search', function () {
+        return view('pages/search');
+    }
+);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
