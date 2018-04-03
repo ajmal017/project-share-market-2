@@ -223,7 +223,7 @@ a.wpLink:hover{
 }
 
 #intro{
-    margin-top: 10vh;
+    padding-top: 5vh;
     color: #012e33;
     font-family: 'Crete Round', serif;
     font-size: large;
@@ -231,7 +231,13 @@ a.wpLink:hover{
 }
 
 #intro p{
-    margin-top: 2.5vh;
+    margin-bottom: 5vh;
+}
+
+#intro a{
+    color: #012e33;
+    font-size: small;
+    font-family: 'Helvetica', sans-serif;
 }
 
 /* Signin Signup page content */

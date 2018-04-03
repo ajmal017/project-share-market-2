@@ -18,6 +18,7 @@
             <div id = "intro">
                 <p>Buy and sell shares to make your way up the leaderboard.</p>
                 <p>Sign up now and be given $1,000,000 in game currency!</p>
+                <a href='about'>About/FAQ</a>
             </div>
         </div>
     </div>
