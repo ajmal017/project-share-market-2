@@ -6,28 +6,41 @@
     {{--  <script src="https://code.highcharts.com/highcharts.js"></script>  --}}
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
+   
 
-    {{--  <div id="container" style="width:100%; height:400px;"></div>  --}}
-
-    <div class="grid-container">
-        <div class="grid-item">
-            <label for="asx_code"><b>Enter an ASX Code:</b></label>
-            <br>
-            <input type="text" name="asx_code" id="asx_code" style="text-align:center;" maxlength="3">
-            <br>
-            <input type="button" value="Search" id="search_companies" style="margin-top:0.5em;">
-        </div>
-        <div class="grid-item">
-            <label for="company_name"><b>Start typing a Company Name:</b></label>
-            <br>
-            <input type="text" name="company_name" id="company_name" style="text-align:center;">
-            <select id="company_name_dropdown" name="company_name_dropdown">
-                <option disabled>Make a selection</option>
-            </select>
-        </div>
+    
+        
+    <div id = "temporaryBox">
+    <div id = "asx_code">{{$symbol}}</div>
         <div class="grid-item" id="company_details"></div>
-        <div class="grid-item" id="get_daily_data"></div>
-    </div> 
+
+    </div>
+    <script type="text/javascript">
+        function getCompanyName(symbol) {
+            var mysym = symbol;
+            var asx_results;
+        
+            
+            $.ajax({
+                
+                url: "/listing/companycode/" + symbol,
+                success: function (results) {
+                    asx_results = results;
+        
+                    if (results != '') {
+                        $("#company_details").html("<b>" + results[0]['company_name'] + "</b><br>" + results[0]['gics_industry']);
+                    } else{
+                        $("#company_details").html("<b>No companies found matching that ASX code</b>");
+                    }
+                }
+            });
+        }
+
+        getCompanyName(document.getElementById("asx_code").textContent);
+        
+
+    </script>
+    
     <!-- END OF CONTENT -->
 
 @endsection
