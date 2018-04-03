@@ -273,7 +273,6 @@ h1{
     font-size: small;
 }
 
-
 #email, #password, #password-confirm, #name{
     margin-top: 2.5vh;
     width: 100%;
@@ -281,6 +280,12 @@ h1{
 
 #signup input{
     margin-top: 0;
+}
+
+#loginError{
+    font-size: x-small;
+    color: #ec596e;
+    text-align: left;
 }
 
 .checkbox{

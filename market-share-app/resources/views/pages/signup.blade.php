@@ -1,5 +1,10 @@
 @extends('layouts/main-template')
 
+@section('link')
+<!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <a href='about'>About/FAQ</a>
+@endsection
+
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
@@ -14,7 +19,7 @@
                         <div>
                             <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Enter name" value="{{ old('name') }}" required autofocus>
                             @if ($errors->has('name'))
-                                <span class="invalid-feedback">
+                                <span id="loginError" class="invalid-feedback">
                                     <strong>{{ $errors->first('name') }}</strong>
                                 </span>
                             @endif

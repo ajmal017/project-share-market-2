@@ -1,5 +1,10 @@
 @extends('layouts/main-template')
 
+@section('link')
+<!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <a href='about'>About/FAQ</a>
+@endsection
+
 @section('content')
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <!-- old
@@ -22,7 +27,7 @@
                         <div>
                             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Enter email address" name="email" value="{{ old('email') }}" required autofocus>
                             @if ($errors->has('email'))
-                                <span class="invalid-feedback">
+                                <span id = "loginError" class="invalid-feedback">
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
                             @endif
