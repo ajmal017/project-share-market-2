@@ -53,6 +53,11 @@ Route::get(
     }
 );
 
+Route::get(
+    '/signup', function () {
+        return view('pages/signup');
+    }
+);
 
 Auth::routes();
 
