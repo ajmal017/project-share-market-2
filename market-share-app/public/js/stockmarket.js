@@ -31,11 +31,15 @@ $(document).ready(function () {
             $.ajax({
                 url: "/listing/companyname/" + $('#company_name').val(),
                 success: function (results) {
+                    $("#company_details").html("");
                     //$("#company_name_dropdown").html("<option value=''></option>");
                     if (results != '') {
+                        
                         for (const key in results) {
                             //$("#company_name_dropdown").append("<option value='" + results[key].company_code + "'>" + results[key].company_name + "</option>");
-                            $("#company_details").html("<div class = 'sysoListingResult'>" + results[key].company_name + "</div>");
+                            
+                            $("#company_details").append("<div class = 'sysoListingResult'><a href='/listing/" + results[key].company_code + "'>" + results[key].company_name + "</a></div>");
+                            //$("#company_details").append("<div class = 'sysoListingResult'>" + results[key].company_name + "</div>");
                         }                       
                     } else {
                         //$("#company_name_dropdown").html("<option disabled value=''>No companies found, try again</option>");
