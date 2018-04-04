@@ -21,6 +21,7 @@
                                 document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
+            <p><a href='/search'>Search Listings</a></p>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
