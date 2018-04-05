@@ -1,5 +1,14 @@
 @extends('layouts/main-template')
 
+@section('link')
+<!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <a href='about'>About/FAQ</a>
+    <a id="logoutLink" href="{{ route('logout') }}" 
+        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        {{ __('Logout') }}
+    </a>
+@endsection
+
 @section('content')
     <script type = "text/javascript" src = "{{ URL::to('/js/stockmarket.js') }}"></script>
     {{--  <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>  --}}
