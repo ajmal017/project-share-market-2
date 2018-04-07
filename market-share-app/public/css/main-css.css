@@ -100,10 +100,21 @@ body{
     display: block;
     height: 10vh;
 }
+#sysoWelcomeImage{
+    display: none;
+}
+.sysoFooter{
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
 
 /* Portrait mode detection and styles */
 
 @media all and (orientation: portrait){
+    #sysoWelcomeImage{
+        display: block;
+        height: 50vh;
+    }
     .sysoTitle{
         display: none;
     }
@@ -151,7 +162,6 @@ body{
 }
 #sysoMenuMaster a{
     display: block;
-    color: #012e33;
     text-align: center;
     margin-right: auto;
 }
@@ -196,9 +206,9 @@ input:focus{
 
 /* Landing page content */
 
-a.wpLink{
+a.sysoLink{
     display: block;
-    width: 20%;
+    width: 50%;
     margin-top: 20px;
     margin-right: auto;
     margin-bottom: 20px;
@@ -211,7 +221,7 @@ a.wpLink{
     border-radius: 5px;
 }
 
-a.wpLink:hover{
+a.sysoLink:hover{
     background-color: #ec596e;
 }
 
@@ -225,7 +235,7 @@ a.wpLink:hover{
 
 #landing{
     vertical-align: middle;
-    padding-top: 15vh;    
+    padding-top: 3vh;    
 }
 
 #intro{
