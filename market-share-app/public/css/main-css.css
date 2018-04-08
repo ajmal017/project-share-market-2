@@ -339,6 +339,12 @@ button{
     margin-bottom: 0.2vh;
     padding-top: 1vh;
     padding-bottom: 1vh;
+    border-radius: 5px;
+}
+
+.sysoListingResult a{
+    color: #ffffff;
+    text-decoration: none;
 }
 
 /* Generic page content */
