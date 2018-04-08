@@ -58,7 +58,7 @@
                         <td>800</td>
                         <td>+$0.46</td>
                         <td>+$368</td>
-                        <td><a href="_blank">Sell</a>
+                        <td><a href="javascript:void(0)">Sell</a>
                     </tr>
                     <tr>
                         <td>Kelly Industries</td>
@@ -67,7 +67,7 @@
                         <td>1050</td>
                         <td>-$45.01</td>
                         <td>-$47,292</td>
-                        <td><a href="_blank">Sell</a>
+                        <td><a href="javascript:void(0)">Sell</a>
                     </tr>
                     <tr></tr>
                     <tr>
@@ -77,6 +77,35 @@
                     </tr>
                     
                 </table>
+                <br><br>
+                <table class="friendList">
+                <tr>
+                    <th>Name</th>
+                    <th>Total Worth</th>
+                    <th>Profit/Loss</th>
+                </tr>
+                <tr>
+                    <td><a href="javascript:void(0)">John</td>
+                    <td>$1,000,500</td>
+                    <td>+$500</td>
+                </tr>
+                <tr>
+                    <td><a href="javascript:void(0)">Paul</td>
+                    <td>$900,000</td>
+                    <td>-$100,000</td>
+                </tr>
+                <tr>
+                    <td><a href="javascript:void(0)">Ringo</td>
+                    <td>$1,000,001</td>
+                    <td>+$1</td>
+                </tr>
+                <tr>
+                    <td><a href="javascript:void(0)">George</td>
+                    <td>$500,000</td>
+                    <td>-$500,000</td>
+                </tr>
+                </table>
+                <br><br>
             
             
             </div>
