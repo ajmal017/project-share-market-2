@@ -2,6 +2,8 @@
 
 @section('link')
 <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <a class = "sysoLink" href='landing'>Home</a>
+    <a class = "sysoLink" href='signin'>Login</a>
     <a class = "sysoLink" href='about'>About/FAQ</a>
 @endsection
 

@@ -2,8 +2,8 @@
 
 @section('link')
 <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
-    <a href='about'>About/FAQ</a>
-    <a id="logoutLink" href="{{ route('logout') }}" 
+    <a class = "sysoLink" href='about'>About/FAQ</a>
+    <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" 
         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         {{ __('Logout') }}
     </a>
