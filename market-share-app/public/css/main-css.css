@@ -35,7 +35,7 @@ body{
     height: 5%;
     position: fixed;
     bottom: 0px;
-    z-index: 1;
+    z-index: 2;
     background-color: #677474;
     color: white;
     font-size: small;
@@ -47,9 +47,14 @@ body{
 }
 .sysoMenuMaster{
     display: none;
-    width: 100%;
-    height: 90%;
-    padding-top: 10vh;
+    position: absolute;
+    z-index: 1;
+    top: 10vh;
+    right: 0;
+    width: 20%;
+    height: 50%;
+    /*padding-top: 10vh;*/
+    background-color: #e6e6e6;
 }
 
 /* Responsive containers */
@@ -111,6 +116,13 @@ body{
 /* Portrait mode detection and styles */
 
 @media all and (orientation: portrait){
+    .sysoMenuMaster{
+        display: none;
+        width: 100%;
+        height: 80%;
+        padding-top: 10vh;
+        background-color: #e6e6e6;
+    }
     #sysoWelcomeImage{
         display: block;
         height: 50vh;

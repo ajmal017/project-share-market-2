@@ -1,17 +1,30 @@
 // Global scripts go here
 
-/*Menu hide/show*/
+/* Menu hide/show */
 function menuClick() {
     var menu = document.getElementById("sysoMenuMaster");
     var content = document.getElementById("sysoContentMaster");
     if (menu.style.display == "none") {
         menu.style.display = "block";
-        content.style.display = "none";
+        if(getOrientation()){
+            content.style.display = "none";
+        }
     }
     else {
         menu.style.display = "none";
         content.style.display = "block";
     }
+}
+
+/* Determine page orientation and return: true = portrait; false = landscape */
+function getOrientation() {
+    var x = window.innerWidth;
+    var y = window.innerHeight;
+    var portrait = true;
+    if(x > y){
+        portrait = false;
+    }
+    return portrait;
 }
 
 // Function to quickly write document.GetElementById
