@@ -20,7 +20,7 @@
     </form> -->
     <div class = "sysoBox sysoBoxFlex">
         <div class = "sysoContent sysoContent100">
-            <h1>Login to Stock Your Socks Off</h1>
+            <h1 class = "sysoAuth">Login to Stock Your Socks Off</h1>
             <div id = "signin">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf

@@ -2,7 +2,7 @@
 
 /* Style reset - removes browser-based defaults */
 
-html, body, div, span, header, footer, img, h1, p, ul, li{
+html, body, div, span, header, footer, img, h1, h2, p, ul, li{
     margin: 0;
     padding: 0;
     border: 0;
@@ -123,7 +123,6 @@ body{
     }
     .sysoContent{
         display: block;
-        vertical-align: initial;
         overflow: initial;
         float: initial;
         height: initial;
@@ -258,7 +257,7 @@ a.sysoLink:hover{
 
 /* Signin Signup page content */
 
-h1{
+h1.sysoAuth{
     font-size: x-large;
     color: #012e33;
     margin: auto;
@@ -336,10 +335,10 @@ button{
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    padding-top: 3vh;
-    padding-bottom: 3vh;
+    margin-top: 0.2vh;
+    margin-bottom: 0.2vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }
 
 /* Generic page content */
@@ -364,6 +363,13 @@ button{
 
 .sysoPara{
     font-weight: normal;
+}
+
+/* About/FAQ */
+
+.sysoAboutBox{
+    padding: 4vw;
+    text-align: center;
 }
 
 /* Footer content */

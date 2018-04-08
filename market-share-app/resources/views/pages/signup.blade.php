@@ -12,7 +12,7 @@
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <div class = "sysoBox sysoBoxFlex">
         <div class = "sysoContent sysoContent100">
-            <h1 id = "rego">Stock Your Socks Off Registration</h1>
+            <h1 class = "sysoAuth" id = "rego">Stock Your Socks Off Registration</h1>
             <div id = "signup">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf

@@ -15,7 +15,7 @@
     <p>
         
         <div id = "temporaryBox">
-            <h1>Welcome {{ Auth::user()->name }}!</h1>
+            <h1 class = "sysoAuth">Welcome {{ Auth::user()->name }}!</h1>
             <a id="logoutLink" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
