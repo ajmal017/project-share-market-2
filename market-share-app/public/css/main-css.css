@@ -246,7 +246,12 @@ a.sysoLink:hover{
 
 #landing{
     vertical-align: middle;
-    padding-top: 3vh;    
+    margin-top: 5%;
+    margin-bottom: auto;
+}
+
+#landing a{
+    width: 20%;
 }
 
 #intro{
@@ -362,17 +367,21 @@ button{
 /* Account page */
 
 #sysoAccount{
-    width: 60%;
-    margin-left: 20%;
+    width: 80%;
+    margin-left: 10%;
     margin-right: auto;
 }
 
 #sysoAccount th{
     text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 #sysoAccount td{
     text-align: right;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 .userDetails{
