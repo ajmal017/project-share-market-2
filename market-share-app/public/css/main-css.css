@@ -370,6 +370,7 @@ button{
     text-align: left;
     padding-left: 1em;
     padding-right: 1em;
+    font-size: small;
 }
 
 #sysoAccount td{
@@ -377,6 +378,7 @@ button{
     padding-left: 1em;
     padding-right: 1em;
     background-color: #d6dfdf;
+    font-size: small;
 }
 
 #accHeader{
