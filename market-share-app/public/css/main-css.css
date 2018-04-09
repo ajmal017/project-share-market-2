@@ -246,7 +246,12 @@ a.sysoLink:hover{
 
 #landing{
     vertical-align: middle;
-    padding-top: 3vh;    
+    margin-top: 5%;
+    margin-bottom: auto;
+}
+
+#landing a{
+    width: 20%;
 }
 
 #intro{
@@ -358,6 +363,64 @@ button{
     color: #ffffff;
     text-decoration: none;
 }
+
+/* Account page */
+
+#sysoAccount{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: auto;
+}
+
+#sysoAccount th{
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#sysoAccount td{
+    text-align: right;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #d6dfdf;
+}
+
+#accHeader{
+    margin-top: 2%;
+}
+
+.shareDetails h1, .userDetails h1, .friends h1{
+    color: white;
+    background-color: #677474;
+    font-size: medium;
+    padding-left: 1em;
+}
+
+#tableHeader, #tableHeader td{
+    background-color: #b0bfbf;
+}
+
+#shareTable, #userTable, .friendList{
+    width: 100%;
+}
+
+.userDetails{
+    display: inline-block;
+    width: 35%;
+    margin-left: 7.5%;
+}
+
+.friends{
+    display: inline-block;
+    width: 35%;
+    float: right;
+    margin-right: 7.5%;
+}
+
+#sysoAccount a{
+    width: 20%;
+}
+
 
 /* Generic page content */
 

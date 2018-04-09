@@ -2,6 +2,7 @@
 
 @section('link')
 <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <a class = "sysoLink" href='/search'>Search Listings</a>
     <a class = "sysoLink" href='about'>About/FAQ</a>
     <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" 
         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -14,38 +15,15 @@
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <p>
         
-        <div id = "temporaryBox">
-            <h1 class = "sysoAuth">Welcome {{ Auth::user()->name }}!</h1>
-            <div class = "userDetails">
-                <table>
-                    <tr>
-                        <th>Account Balance</th>
-                        <td>{{ Auth::user()->account_balance }}</td>
-                    </tr>
-                    <tr>
-                        <th>Shares Held</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Share Value</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Total Profit/Loss</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Total Asset Value</th>
-                        <td>XXX</td>
-                </table>
-            </div>
-            <br><br>
+        <div id = "sysoAccount">
+            <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
+            <br></br>
             <div class="shareDetails">
-                <table>
-                    <tr>
+                <h1>Share Portfolio</h1>
+                <table id = "shareTable">
+                    <tr id = "tableHeader">
                         <th>Company Name</th>
                         <th>Company Code</th>
-                        
                         <th>Current Share Value</th>
                         <th>Shares Held</th>
                         <th>Change</th>
@@ -70,58 +48,84 @@
                         <td><a href="javascript:void(0)">Sell</a>
                     </tr>
                     <tr></tr>
-                    <tr>
+                    <tr id = "tableHeader">
                         <td colspan="3">Total<td>
                         <td>-$44.55</td>
                         <td>-$46,924</td>
-                    </tr>
-                    
+                    </tr>  
                 </table>
-                <br><br>
+            </div>
+            <br/>
+            <div class = "userDetails">
+                <h1>My Account</h1>
+                <table id = "userTable">
+                    <tr>
+                        <th id = "tableHeader">Account Balance</th>
+                        <td>{{ Auth::user()->account_balance }}</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Shares Held</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Share Value</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Total Profit/Loss</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Total Asset Value</th>
+                        <td>XXX</td>
+                </table>
+            </div>
+            <div class="friends">
+                <h1>Friends</h1>
                 <table class="friendList">
-                <tr>
+                <tr id = "tableHeader">
                     <th>Name</th>
                     <th>Total Worth</th>
                     <th>Profit/Loss</th>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">John</td>
+                    <td id="friendName"><a href="javascript:void(0)">John</td>
                     <td>$1,000,500</td>
                     <td>+$500</td>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">Paul</td>
+                    <td id="friendName"><a href="javascript:void(0)">Paul</td>
                     <td>$900,000</td>
                     <td>-$100,000</td>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">Ringo</td>
+                    <td id="friendName"><a href="javascript:void(0)">Ringo</td>
                     <td>$1,000,001</td>
                     <td>+$1</td>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">George</td>
+                    <td id="friendName"><a href="javascript:void(0)">George</td>
                     <td>$500,000</td>
                     <td>-$500,000</td>
                 </tr>
                 </table>
-                <br><br>
-            
-            
             </div>
+
+            <br></br>
+
+            <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
             
-            <a id="logoutLink" href="{{ route('logout') }}"
+            <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
-            <p><a href='/search'>Search Listings</a></p>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </div>
-</p>
+    </p>
     <!-- END OF CONTENT -->
 
 @endsection
