@@ -17,7 +17,7 @@
         
         <div id = "sysoAccount">
             <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
-            <br/>
+            <br></br>
             <div class="shareDetails">
                 <h1>Share Portfolio</h1>
                 <table id = "shareTable">
