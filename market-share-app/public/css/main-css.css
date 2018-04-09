@@ -359,6 +359,37 @@ button{
     text-decoration: none;
 }
 
+/* Account page */
+
+#sysoAccount{
+    width: 60%;
+    margin-left: 20%;
+    margin-right: auto;
+}
+
+#sysoAccount th{
+    text-align: left;
+}
+
+#sysoAccount td{
+    text-align: right;
+}
+
+.userDetails{
+    display: inline-block;
+    width: 45%;
+}
+
+.friends{
+    display: inline-block;
+    width: 45%;
+}
+
+#sysoAccount a{
+    width: 20%;
+}
+
+
 /* Generic page content */
 
 .sysoCenterText{

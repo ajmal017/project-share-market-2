@@ -2,6 +2,7 @@
 
 @section('link')
 <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <a class = "sysoLink" href='/search'>Search Listings</a>
     <a class = "sysoLink" href='about'>About/FAQ</a>
     <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" 
         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -14,33 +15,10 @@
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <p>
         
-        <div id = "temporaryBox">
-            <h1 class = "sysoAuth">Welcome {{ Auth::user()->name }}!</h1>
-            <div class = "userDetails">
-                <table>
-                    <tr>
-                        <th>Account Balance</th>
-                        <td>{{ Auth::user()->account_balance }}</td>
-                    </tr>
-                    <tr>
-                        <th>Shares Held</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Share Value</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Total Profit/Loss</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Total Asset Value</th>
-                        <td>XXX</td>
-                </table>
-            </div>
-            <br><br>
-            <div class="shareDetails">
+        <div id = "sysoAccount">
+            <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
+            <br></br>
+            <div class="shareDetails" id="accContainer">
                 <table>
                     <tr>
                         <th>Company Name</th>
@@ -77,7 +55,32 @@
                     </tr>
                     
                 </table>
-                <br><br>
+            </div>
+            <br></br>
+            <div class = "userDetails">
+                <table>
+                    <tr>
+                        <th>Account Balance</th>
+                        <td>{{ Auth::user()->account_balance }}</td>
+                    </tr>
+                    <tr>
+                        <th>Shares Held</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th>Share Value</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th>Total Profit/Loss</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th>Total Asset Value</th>
+                        <td>XXX</td>
+                </table>
+            </div>
+            <div class="friends">
                 <table class="friendList">
                 <tr>
                     <th>Name</th>
@@ -105,23 +108,21 @@
                     <td>-$500,000</td>
                 </tr>
                 </table>
-                <br><br>
-            
-            
             </div>
+
+            <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
             
-            <a id="logoutLink" href="{{ route('logout') }}"
+            <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
-            <p><a href='/search'>Search Listings</a></p>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </div>
-</p>
+    </p>
     <!-- END OF CONTENT -->
 
 @endsection
