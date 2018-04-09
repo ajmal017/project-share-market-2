@@ -382,16 +382,39 @@ button{
     text-align: right;
     padding-left: 1em;
     padding-right: 1em;
+    background-color: #d6dfdf;
+}
+
+#accHeader{
+    margin-top: 2%;
+}
+
+.shareDetails h1, .userDetails h1, .friends h1{
+    color: white;
+    background-color: #677474;
+    font-size: medium;
+    padding-left: 1em;
+}
+
+#tableHeader, #tableHeader td{
+    background-color: #b0bfbf;
+}
+
+#shareTable, #userTable, .friendList{
+    width: 100%;
 }
 
 .userDetails{
     display: inline-block;
-    width: 45%;
+    width: 35%;
+    margin-left: 7.5%;
 }
 
 .friends{
     display: inline-block;
-    width: 45%;
+    width: 35%;
+    float: right;
+    margin-right: 7.5%;
 }
 
 #sysoAccount a{

@@ -17,13 +17,13 @@
         
         <div id = "sysoAccount">
             <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
-            <br></br>
-            <div class="shareDetails" id="accContainer">
-                <table>
-                    <tr>
+            <br/>
+            <div class="shareDetails">
+                <h1>Share Portfolio</h1>
+                <table id = "shareTable">
+                    <tr id = "tableHeader">
                         <th>Company Name</th>
                         <th>Company Code</th>
-                        
                         <th>Current Share Value</th>
                         <th>Shares Held</th>
                         <th>Change</th>
@@ -48,67 +48,70 @@
                         <td><a href="javascript:void(0)">Sell</a>
                     </tr>
                     <tr></tr>
-                    <tr>
+                    <tr id = "tableHeader">
                         <td colspan="3">Total<td>
                         <td>-$44.55</td>
                         <td>-$46,924</td>
-                    </tr>
-                    
+                    </tr>  
                 </table>
             </div>
-            <br></br>
+            <br/>
             <div class = "userDetails">
-                <table>
+                <h1>My Account</h1>
+                <table id = "userTable">
                     <tr>
-                        <th>Account Balance</th>
+                        <th id = "tableHeader">Account Balance</th>
                         <td>{{ Auth::user()->account_balance }}</td>
                     </tr>
                     <tr>
-                        <th>Shares Held</th>
+                        <th id = "tableHeader">Shares Held</th>
                         <td>XXX</td>
                     </tr>
                     <tr>
-                        <th>Share Value</th>
+                        <th id = "tableHeader">Share Value</th>
                         <td>XXX</td>
                     </tr>
                     <tr>
-                        <th>Total Profit/Loss</th>
+                        <th id = "tableHeader">Total Profit/Loss</th>
                         <td>XXX</td>
                     </tr>
                     <tr>
-                        <th>Total Asset Value</th>
+                        <th id = "tableHeader">Total Asset Value</th>
                         <td>XXX</td>
                 </table>
             </div>
             <div class="friends">
+                <h1>Friends</h1>
                 <table class="friendList">
-                <tr>
+                <tr id = "tableHeader">
                     <th>Name</th>
                     <th>Total Worth</th>
                     <th>Profit/Loss</th>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">John</td>
+                    <td id="friendName"><a href="javascript:void(0)">John</td>
                     <td>$1,000,500</td>
                     <td>+$500</td>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">Paul</td>
+                    <td id="friendName"><a href="javascript:void(0)">Paul</td>
                     <td>$900,000</td>
                     <td>-$100,000</td>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">Ringo</td>
+                    <td id="friendName"><a href="javascript:void(0)">Ringo</td>
                     <td>$1,000,001</td>
                     <td>+$1</td>
                 </tr>
                 <tr>
-                    <td><a href="javascript:void(0)">George</td>
+                    <td id="friendName"><a href="javascript:void(0)">George</td>
                     <td>$500,000</td>
                     <td>-$500,000</td>
                 </tr>
                 </table>
             </div>
+
+            <br></br>
 
             <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
             
