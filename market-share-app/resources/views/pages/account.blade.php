@@ -13,10 +13,68 @@
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
-    <p>
         
-        <div id = "sysoAccount">
+        <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
+            <div class = "sysoContent sysoContent50">
             <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
+            <br></br>
+            <div class = "userDetails">
+                <h1>My Account</h1>
+                <table id = "userTable">
+                    <tr>
+                        <th id = "tableHeader">Account Balance</th>
+                        <td>{{ Auth::user()->account_balance }}</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Shares Held</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Share Value</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Total Profit/Loss</th>
+                        <td>XXX</td>
+                    </tr>
+                    <tr>
+                        <th id = "tableHeader">Total Asset Value</th>
+                        <td>XXX</td>
+                </table>
+            </div>
+            </br>
+            <div class="friends">
+                <h1>Friends</h1>
+                <table class="friendList">
+                <tr id = "tableHeader">
+                    <th>Name</th>
+                    <th>Total Worth</th>
+                    <th>Profit/Loss</th>
+                </tr>
+                <tr>
+                    <td id="friendName"><a href="javascript:void(0)">John</td>
+                    <td>$1,000,500</td>
+                    <td>+$500</td>
+                </tr>
+                <tr>
+                    <td id="friendName"><a href="javascript:void(0)">Paul</td>
+                    <td>$900,000</td>
+                    <td>-$100,000</td>
+                </tr>
+                <tr>
+                    <td id="friendName"><a href="javascript:void(0)">Ringo</td>
+                    <td>$1,000,001</td>
+                    <td>+$1</td>
+                </tr>
+                <tr>
+                    <td id="friendName"><a href="javascript:void(0)">George</td>
+                    <td>$500,000</td>
+                    <td>-$500,000</td>
+                </tr>
+                </table>
+            </div>
+        </div>
+        <div class = "sysoContent sysoContent50">
             <br></br>
             <div class="shareDetails">
                 <h1>Share Portfolio</h1>
@@ -55,61 +113,6 @@
                     </tr>  
                 </table>
             </div>
-            <br/>
-            <div class = "userDetails">
-                <h1>My Account</h1>
-                <table id = "userTable">
-                    <tr>
-                        <th id = "tableHeader">Account Balance</th>
-                        <td>{{ Auth::user()->account_balance }}</td>
-                    </tr>
-                    <tr>
-                        <th id = "tableHeader">Shares Held</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th id = "tableHeader">Share Value</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th id = "tableHeader">Total Profit/Loss</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th id = "tableHeader">Total Asset Value</th>
-                        <td>XXX</td>
-                </table>
-            </div>
-            <div class="friends">
-                <h1>Friends</h1>
-                <table class="friendList">
-                <tr id = "tableHeader">
-                    <th>Name</th>
-                    <th>Total Worth</th>
-                    <th>Profit/Loss</th>
-                </tr>
-                <tr>
-                    <td id="friendName"><a href="javascript:void(0)">John</td>
-                    <td>$1,000,500</td>
-                    <td>+$500</td>
-                </tr>
-                <tr>
-                    <td id="friendName"><a href="javascript:void(0)">Paul</td>
-                    <td>$900,000</td>
-                    <td>-$100,000</td>
-                </tr>
-                <tr>
-                    <td id="friendName"><a href="javascript:void(0)">Ringo</td>
-                    <td>$1,000,001</td>
-                    <td>+$1</td>
-                </tr>
-                <tr>
-                    <td id="friendName"><a href="javascript:void(0)">George</td>
-                    <td>$500,000</td>
-                    <td>-$500,000</td>
-                </tr>
-                </table>
-            </div>
 
             <br></br>
 
@@ -120,12 +123,13 @@
                                 document.getElementById('logout-form').submit();">
                 {{ __('Logout') }}
             </a>
+        </div>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </div>
-    </p>
+
     <!-- END OF CONTENT -->
 
 @endsection
