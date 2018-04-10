@@ -382,13 +382,13 @@ button{
 }
 
 #accHeader{
-    margin-top: 2%;
+    margin-top: 10%;
 }
 
 .shareDetails, .userDetails, .friends{
-    width: 80%;
-    margin-left: 10%;
-    margin-right: auto;
+    width: 90%;
+    margin-right: 10%;
+    margin-top: 2%;
 }
 
 .shareDetails h1, .userDetails h1, .friends h1{
