@@ -382,13 +382,16 @@ button{
 }
 
 #accHeader{
-    margin-top: 10%;
+    margin-top: 20%;
+}
+
+.shareDetails{
+    margin-top: 2%;
 }
 
 .shareDetails, .userDetails, .friends{
     width: 90%;
     margin-right: 10%;
-    margin-top: 2%;
 }
 
 .shareDetails h1, .userDetails h1, .friends h1{
@@ -396,6 +399,14 @@ button{
     background-color: #677474;
     font-size: medium;
     padding-left: 1em;
+}
+
+.userDetails th{
+    width: 30%;
+}
+
+#friendName a{
+    float: left;
 }
 
 #tableHeader, #tableHeader td{
