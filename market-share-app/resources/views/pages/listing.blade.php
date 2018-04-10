@@ -31,25 +31,25 @@
 
     
         
-    <div id = "temporaryBox">
+    <div class = "sysoContent sysoContent50" id = "listingContent">
         
         <div class="grid-item" id="company_details"><b>{{$data[0]->company_name}}</b><br>{{$data[0]->gics_industry}}</div>
         
         
-        <table>
-            <tr>
+        <table id = "listingTable">
+            <tr id = "listingRow">
                 <th>Company Name</th>
                 <td>{{$data[0]->company_name}}</td>
             <tr>
-            <tr>
+            <tr id = "listingRow">
                 <th>Industry</th>
                 <td>{{$data[0]->gics_industry}}</td>
             <tr>
-            <tr>
+            <tr id = "listingRow">
                 <th>ASX Company Code</th>
                 <td>{{$data[0]->company_code}}</td>
             <tr>
-            <tr>
+            <tr id = "listingRow">
                 <th>Current Stock Price</th>
                 <td>...</td>
             <tr>
