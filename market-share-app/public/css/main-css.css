@@ -421,6 +421,28 @@ button{
     width: 20%;
 }
 
+/* Listing page*/
+
+#listingContent{
+    margin-left: 25%;
+    margin-right: auto;
+}
+
+#listingTable{
+    width: 100%;
+}
+
+#listingRow th{
+    background-color: #b0bfbf;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#listingRow td{
+    background-color: #d6dfdf;
+    padding-left: 1em;
+    padding-right: 1em;
+}
 
 /* Generic page content */
 
@@ -479,4 +501,5 @@ button{
     padding: 20px;
     font-size: 1em;
     text-align: center;
+    color: #012e33;
 }
