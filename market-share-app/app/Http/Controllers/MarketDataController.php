@@ -118,7 +118,7 @@ class MarketDataController
         return $insert_count . ' records added';
     }
 
-    public function curlStocksStats($url)
+    public static function curlStocksStats($url)
     {
         // Get cURL resource
         $curl = curl_init();

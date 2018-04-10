@@ -39,24 +39,41 @@
                             <th>Total Profit/Loss</th>
                             <th/>
                         </tr>
-                        <tr>
-                            <td>XYZ Incorporated</td>
-                            <td>XYZ</td>
-                            <td>$6.01</td>
-                            <td>800</td>
-                            <td>+$0.46</td>
-                            <td>+$368</td>
-                            <td><a href="javascript:void(0)">Sell</a>
-                        </tr>
-                        <tr>
-                            <td>Kelly Industries</td>
-                            <td>JRK</td>
-                            <td>$5.01</td>
-                            <td>1050</td>
-                            <td>-$45.01</td>
-                            <td>-$47,292</td>
-                            <td><a href="javascript:void(0)">Sell</a>
-                        </tr>
+                        <?php 
+                            use App\Http\Controllers\MarketDataController;
+                            // query userid in open transactions table
+                            $json = DB::table('open_transactions')->where('user_id', '=', Auth::user()->id)
+                                ->get();
+                            $data = json_decode($json);
+
+                            // echo out each transaction
+                            foreach ($data as $line) {
+                                $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+                                $call = MarketDataController::curlStocksStats($url);
+                                $asxdata = json_decode($call, true);
+                                //$test = json_decode($asxdata->{'Time Series (1min)'});
+                                //print_r($asxdata['Time Series (1min)']);
+                                $name = 'Time Series (1min)';
+                                $name2 = '4. close';
+                                $array = $asxdata[$name];
+                                $keys = array_keys($array);
+                                //print_r($array[$keys[0]]);
+                                $newarr = $array[$keys[0]];
+                                $currentprice = $newarr[$name2];
+                                echo "<tr>";
+                                echo "<td>"."UNKNOWN"."</td>";
+                                echo "<td>".strtoupper($line->asx_code)."</td>";
+                                echo "<td>".$currentprice."</td>";
+                                // might need to change this later to aggregate quantities
+                                echo "<td>".$line->quantity."</td>";
+                                echo "<td>"."na"."</td>";
+                                echo "<td>"."na" ."</td>";
+                                echo "</tr>";
+                                
+
+                            }
+                        
+                        ?>
                         <tr></tr>
                         <tr id = "tableHeader">
                             <td colspan="4">Total</td>
