@@ -33,8 +33,9 @@
                         <tr id = "tableHeader">
                             <th>Company Name</th>
                             <th>Company Code</th>
-                            <th>Current Share Value</th>
                             <th>Shares Held</th>
+                            <th>Current Share Value</th>
+                          
                             <th>Change</th>
                             <th>Total Profit/Loss</th>
                             <th/>
@@ -46,6 +47,9 @@
                                 ->get();
                             $data = json_decode($json);
 
+                            $overallcost = 0.00;
+                            $overallvalue = 0.00;
+                            $totalshares = 0;
                             // echo out each transaction
                             foreach ($data as $line) {
                                 $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
@@ -59,28 +63,33 @@
                                 $keys = array_keys($array);
                                 //print_r($array[$keys[0]]);
                                 $newarr = $array[$keys[0]];
-                                $currentprice = $newarr[$name2];
+                                $currentprice = floatval($newarr[$name2]);
+                                $origprice = floatval($line->purchase_price);
+                                $origtotalcost = $origprice*($line->quantity)+($line->buying_commission);
+                                $overallcost += $origtotalcost;
+                                $newtotalprice = $currentprice*$line->quantity;
+                                $overallvalue += $newtotalprice;
+                                $totalshares += $line->quantity;
+
+                                $diff = $currentprice-$origprice;
                                 echo "<tr>";
                                 echo "<td>"."UNKNOWN"."</td>";
                                 echo "<td>".strtoupper($line->asx_code)."</td>";
-                                echo "<td>".$currentprice."</td>";
                                 // might need to change this later to aggregate quantities
                                 echo "<td>".$line->quantity."</td>";
-                                echo "<td>"."na"."</td>";
-                                echo "<td>"."na" ."</td>";
+                                echo "<td>".$currentprice."</td>";
+                                echo "<td>".round($diff,3)."</td>";
+                                echo "<td>".round($newtotalprice-$origtotalcost,2) ."</td>";
+                                echo "<td><a href=''>Sell</a></td>";
                                 echo "</tr>";
                                 
 
                             }
                         
+                        echo "<tr></tr><tr id = 'tableHeader'><td colspan='5'>Total</td>";
+                        echo "<td>".round($overallvalue-$overallcost,2)."</td></tr>";
+                            
                         ?>
-                        <tr></tr>
-                        <tr id = "tableHeader">
-                            <td colspan="4">Total</td>
-                            <td>-$44.55</td>
-                            <td>-$46,924</td>
-                            <td/>
-                        </tr>  
                     </table>
                 </div>
                 <br/>
@@ -93,19 +102,19 @@
                         </tr>
                         <tr>
                             <th id = "tableHeader">Shares Held</th>
-                            <td>XXX</td>
+                            <td><?php echo $totalshares?></td>
                         </tr>
                         <tr>
                             <th id = "tableHeader">Share Value</th>
-                            <td>XXX</td>
+                            <td><?php echo $overallvalue ?></td>
                         </tr>
                         <tr>
                             <th id = "tableHeader">Total Profit/Loss</th>
-                            <td>XXX</td>
+                            <td><?php echo round($overallvalue-$overallcost,2) ?></td>
                         </tr>
                         <tr>
                             <th id = "tableHeader">Total Asset Value</th>
-                            <td>XXX</td>
+                            <td>{{ Auth::user()->account_balance+$overallvalue }}</td>
                     </table>
                 </div>
                 <br/>
