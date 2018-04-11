@@ -2,6 +2,7 @@
 
 @section('link')
 <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <a class = "sysoLink" href='/search'>Search Listings</a>
     <a class = "sysoLink" href='about'>About/FAQ</a>
     <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" 
         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -12,116 +13,153 @@
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
-    <p>
         
-        <div id = "temporaryBox">
-            <h1 class = "sysoAuth">Welcome {{ Auth::user()->name }}!</h1>
-            <div class = "userDetails">
-                <table>
-                    <tr>
-                        <th>Account Balance</th>
-                        <td>{{ Auth::user()->account_balance }}</td>
-                    </tr>
-                    <tr>
-                        <th>Shares Held</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Share Value</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Total Profit/Loss</th>
-                        <td>XXX</td>
-                    </tr>
-                    <tr>
-                        <th>Total Asset Value</th>
-                        <td>XXX</td>
-                </table>
+        <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
+            <div class = "sysoContent sysoContent50">
+                <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
+                <br></br>
+                <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
+                
+                <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
             </div>
-            <br><br>
-            <div class="shareDetails">
-                <table>
-                    <tr>
-                        <th>Company Name</th>
-                        <th>Company Code</th>
+            <div class = "sysoContent sysoContent50">
+                <div class="shareDetails">
+                    <h1>Share Portfolio</h1>
+                    <table id = "shareTable">
+                        <tr id = "tableHeader">
+                            <th>Company Name</th>
+                            <th>Company Code</th>
+                            <th>Shares Held</th>
+                            <th>Current Share Value</th>
+                          
+                            <th>Change</th>
+                            <th>Total Profit/Loss</th>
+                            <th/>
+                        </tr>
+                        <?php 
+                            use App\Http\Controllers\MarketDataController;
+                            // query userid in open transactions table
+                            $json = DB::table('open_transactions')->where('user_id', '=', Auth::user()->id)
+                                ->get();
+                            $data = json_decode($json);
+                            
+
+                            $overallcost = 0.00;
+                            $overallvalue = 0.00;
+                            $totalshares = 0;
+                            // echo out each transaction
+                            foreach ($data as $line) {
+                                $companyjson = DB::table('asx_company_details')->where('company_code', '=',$line->asx_code)
+                                    ->get();
+                                $companydata = json_decode($companyjson);
+                                $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+                                $call = MarketDataController::curlStocksStats($url);
+                                $asxdata = json_decode($call, true);
+                                //$test = json_decode($asxdata->{'Time Series (1min)'});
+                                //print_r($asxdata['Time Series (1min)']);
+                                $name = 'Time Series (1min)';
+                                $name2 = '4. close';
+                                $array = $asxdata[$name];
+                                $keys = array_keys($array);
+                                //print_r($array[$keys[0]]);
+                                $newarr = $array[$keys[0]];
+                                $currentprice = floatval($newarr[$name2]);
+                                $origprice = floatval($line->purchase_price);
+                                $origtotalcost = $origprice*($line->quantity)+($line->buying_commission);
+                                $overallcost += $origtotalcost;
+                                $newtotalprice = $currentprice*$line->quantity;
+                                $overallvalue += $newtotalprice;
+                                $totalshares += $line->quantity;
+
+                                $diff = $currentprice-$origprice;
+                                echo "<tr>";
+                                echo "<td>".$companydata[0]->company_name."</td>";
+                                echo "<td>".strtoupper($line->asx_code)."</td>";
+                                // might need to change this later to aggregate quantities
+                                echo "<td>".$line->quantity."</td>";
+                                echo "<td>".$currentprice."</td>";
+                                echo "<td>".round($diff,3)."</td>";
+                                echo "<td>".round($newtotalprice-$origtotalcost,2) ."</td>";
+                                echo "<td><a href=''>Sell</a></td>";
+                                echo "</tr>";
+                                
+
+                            }
                         
-                        <th>Current Share Value</th>
-                        <th>Shares Held</th>
-                        <th>Change</th>
-                        <th>Total Profit/Loss</th>
+                        echo "<tr></tr><tr id = 'tableHeader'><td colspan='5'>Total</td>";
+                        echo "<td>".round($overallvalue-$overallcost,2)."</td></tr>";
+                            
+                        ?>
+                    </table>
+                </div>
+                <br/>
+                <div class = "userDetails">
+                    <h1>My Account</h1>
+                    <table id = "userTable">
+                        <tr>
+                            <th id = "tableHeader">Account Balance</th>
+                            <td>{{ Auth::user()->account_balance }}</td>
+                        </tr>
+                        <tr>
+                            <th id = "tableHeader">Shares Held</th>
+                            <td><?php echo $totalshares?></td>
+                        </tr>
+                        <tr>
+                            <th id = "tableHeader">Share Value</th>
+                            <td><?php echo $overallvalue ?></td>
+                        </tr>
+                        <tr>
+                            <th id = "tableHeader">Total Profit/Loss</th>
+                            <td><?php echo round($overallvalue-$overallcost,2) ?></td>
+                        </tr>
+                        <tr>
+                            <th id = "tableHeader">Total Asset Value</th>
+                            <td>{{ Auth::user()->account_balance+$overallvalue }}</td>
+                    </table>
+                </div>
+                <br/>
+                <div class="friends">
+                    <h1>Friends</h1>
+                    <table class="friendList">
+                    <tr id = "tableHeader">
+                        <th>Name</th>
+                        <th>Total Worth</th>
+                        <th>Profit/Loss</th>
                     </tr>
                     <tr>
-                        <td>XYZ Incorporated</td>
-                        <td>XYZ</td>
-                        <td>$6.01</td>
-                        <td>800</td>
-                        <td>+$0.46</td>
-                        <td>+$368</td>
-                        <td><a href="javascript:void(0)">Sell</a>
+                        <td id="friendName"><a href="javascript:void(0)">John</td>
+                        <td>$1,000,500</td>
+                        <td>+$500</td>
                     </tr>
                     <tr>
-                        <td>Kelly Industries</td>
-                        <td>JRK</td>
-                        <td>$5.01</td>
-                        <td>1050</td>
-                        <td>-$45.01</td>
-                        <td>-$47,292</td>
-                        <td><a href="javascript:void(0)">Sell</a>
+                        <td id="friendName"><a href="javascript:void(0)">Paul</td>
+                        <td>$900,000</td>
+                        <td>-$100,000</td>
                     </tr>
-                    <tr></tr>
                     <tr>
-                        <td colspan="3">Total<td>
-                        <td>-$44.55</td>
-                        <td>-$46,924</td>
+                        <td id="friendName"><a href="javascript:void(0)">Ringo</td>
+                        <td>$1,000,001</td>
+                        <td>+$1</td>
                     </tr>
-                    
-                </table>
-                <br><br>
-                <table class="friendList">
-                <tr>
-                    <th>Name</th>
-                    <th>Total Worth</th>
-                    <th>Profit/Loss</th>
-                </tr>
-                <tr>
-                    <td><a href="javascript:void(0)">John</td>
-                    <td>$1,000,500</td>
-                    <td>+$500</td>
-                </tr>
-                <tr>
-                    <td><a href="javascript:void(0)">Paul</td>
-                    <td>$900,000</td>
-                    <td>-$100,000</td>
-                </tr>
-                <tr>
-                    <td><a href="javascript:void(0)">Ringo</td>
-                    <td>$1,000,001</td>
-                    <td>+$1</td>
-                </tr>
-                <tr>
-                    <td><a href="javascript:void(0)">George</td>
-                    <td>$500,000</td>
-                    <td>-$500,000</td>
-                </tr>
-                </table>
-                <br><br>
-            
-            
+                    <tr>
+                        <td id="friendName"><a href="javascript:void(0)">George</td>
+                        <td>$500,000</td>
+                        <td>-$500,000</td>
+                    </tr>
+                    </table>
+                </div>
             </div>
-            
-            <a id="logoutLink" href="{{ route('logout') }}"
-                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-            <p><a href='/search'>Search Listings</a></p>
+        </div>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </div>
-</p>
+
     <!-- END OF CONTENT -->
 
 @endsection

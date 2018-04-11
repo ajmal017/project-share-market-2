@@ -246,7 +246,12 @@ a.sysoLink:hover{
 
 #landing{
     vertical-align: middle;
-    padding-top: 3vh;    
+    margin-top: 5%;
+    margin-bottom: auto;
+}
+
+#landing a{
+    width: 20%;
 }
 
 #intro{
@@ -359,6 +364,86 @@ button{
     text-decoration: none;
 }
 
+/* Account page */
+
+#sysoAccount th{
+    text-align: left;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: small;
+}
+
+#sysoAccount td{
+    text-align: right;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #d6dfdf;
+    font-size: small;
+}
+
+#accHeader{
+    margin-top: 20%;
+}
+
+.shareDetails{
+    margin-top: 2%;
+}
+
+.shareDetails, .userDetails, .friends{
+    width: 90%;
+    margin-right: 10%;
+}
+
+.shareDetails h1, .userDetails h1, .friends h1{
+    color: white;
+    background-color: #677474;
+    font-size: medium;
+    padding-left: 1em;
+}
+
+.userDetails th{
+    width: 30%;
+}
+
+#friendName a{
+    float: left;
+}
+
+#tableHeader, #tableHeader td{
+    background-color: #b0bfbf;
+}
+
+#shareTable, #userTable, .friendList{
+    width: 100%;
+}
+
+#sysoAccount a{
+    width: 20%;
+}
+
+/* Listing page*/
+
+#listingContent{
+    margin-left: 25%;
+    margin-right: auto;
+}
+
+#listingTable{
+    width: 100%;
+}
+
+#listingRow th{
+    background-color: #b0bfbf;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+#listingRow td{
+    background-color: #d6dfdf;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
 /* Generic page content */
 
 .sysoCenterText{
@@ -416,4 +501,5 @@ button{
     padding: 20px;
     font-size: 1em;
     text-align: center;
+    color: #012e33;
 }
