@@ -14,7 +14,7 @@ class MarketDataController
     {
         date_default_timezone_set('UTC');
         $insert_count = 0;
-        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . "&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . ".AX&interval=1min&apikey=PEQIWLTYB0GPLMB8";
         $resp = $this->curlStocksStats($url);
         $resp = json_decode($resp);
 
@@ -41,7 +41,7 @@ class MarketDataController
     {
         date_default_timezone_set('UTC');
         $insert_count = 0;
-        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" . $asx_code . "&apikey=PEQIWLTYB0GPLMB8";
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" . $asx_code . ".AX&apikey=PEQIWLTYB0GPLMB8";
         $resp = $this->curlStocksStats($url);
         $resp = json_decode($resp);
 
@@ -68,7 +68,7 @@ class MarketDataController
     {
         date_default_timezone_set('UTC');
         $insert_count = 0;
-        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" . $asx_code . "&apikey=PEQIWLTYB0GPLMB8";
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" . $asx_code . ".AX&apikey=PEQIWLTYB0GPLMB8";
         $resp = $this->curlStocksStats($url);
         $resp = json_decode($resp);
 
@@ -95,7 +95,7 @@ class MarketDataController
     {
         date_default_timezone_set('UTC');
         $insert_count = 0;
-        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" . $asx_code . "&apikey=PEQIWLTYB0GPLMB8";
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" . $asx_code . ".AX&apikey=PEQIWLTYB0GPLMB8";
         $resp = $this->curlStocksStats($url);
         $resp = json_decode($resp);
 
