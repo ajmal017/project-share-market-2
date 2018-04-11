@@ -46,12 +46,16 @@
                             $json = DB::table('open_transactions')->where('user_id', '=', Auth::user()->id)
                                 ->get();
                             $data = json_decode($json);
+                            
 
                             $overallcost = 0.00;
                             $overallvalue = 0.00;
                             $totalshares = 0;
                             // echo out each transaction
                             foreach ($data as $line) {
+                                $companyjson = DB::table('asx_company_details')->where('company_code', '=',$line->asx_code)
+                                    ->get();
+                                $companydata = json_decode($companyjson);
                                 $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
                                 $call = MarketDataController::curlStocksStats($url);
                                 $asxdata = json_decode($call, true);
@@ -73,7 +77,7 @@
 
                                 $diff = $currentprice-$origprice;
                                 echo "<tr>";
-                                echo "<td>"."UNKNOWN"."</td>";
+                                echo "<td>".$companydata[0]->company_name."</td>";
                                 echo "<td>".strtoupper($line->asx_code)."</td>";
                                 // might need to change this later to aggregate quantities
                                 echo "<td>".$line->quantity."</td>";
