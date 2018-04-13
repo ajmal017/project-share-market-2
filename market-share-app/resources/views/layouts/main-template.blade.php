@@ -41,6 +41,11 @@
             <div class = "sysoPortrait"></div>
         </div>
     </body>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+    
     <footer class = "sysoFooter">
         <div>
             <p id = "sysoFooterText">2018 Wolf Pack Of Wall Street Limited ABN 12 345 678</p>
