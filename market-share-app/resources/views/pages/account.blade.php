@@ -22,27 +22,19 @@
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
             <div class = "sysoContent sysoContent50">
                 <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
-                <br></br>
                 <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
-                
-                <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-            </div>
-            <div class = "sysoContent sysoContent50">
+
                 <div class="shareDetails">
                     <h1>Share Portfolio</h1>
                     <table id = "shareTable">
                         <tr id = "tableHeader">
-                            <th>Company Name</th>
-                            <th>Company Code</th>
-                            <th>Shares Held</th>
-                            <th>Current Share Value</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Shares</th>
+                            <th>Value</th>
                           
                             <th>Change</th>
-                            <th>Total Profit/Loss</th>
+                            <th>Total</th>
                             <th/>
                         </tr>
                         <?php 
@@ -158,8 +150,14 @@
                     </table>
                 </div>
             </div>
+
+            <div class = "sysoContent sysoContent50">
+
+            <!-- EMBEDDED GRAPH GOES HERE -->
+
+            </div>
+
         </div>
-    </div>
 
     <!-- END OF CONTENT -->
 

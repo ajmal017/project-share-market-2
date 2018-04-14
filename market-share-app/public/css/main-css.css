@@ -388,8 +388,6 @@ input[name=remember]{
 
 #sysoAccount th{
     text-align: left;
-    padding-left: 1em;
-    padding-right: 1em;
     font-size: small;
 }
 
@@ -402,7 +400,7 @@ input[name=remember]{
 }
 
 #accHeader{
-    margin-top: 20%;
+    margin-top: 2%;
 }
 
 .shareDetails{
@@ -411,7 +409,8 @@ input[name=remember]{
 
 .shareDetails, .userDetails, .friends{
     width: 90%;
-    margin-right: 10%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .shareDetails h1, .userDetails h1, .friends h1{
@@ -433,7 +432,12 @@ input[name=remember]{
     background-color: #b0bfbf;
 }
 
-#shareTable, #userTable, .friendList{
+#userTable, .friendList{
+    width: 100%;
+}
+
+#shareTable{
+    table-layout:fixed;
     width: 100%;
 }
 
