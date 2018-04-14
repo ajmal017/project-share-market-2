@@ -32,10 +32,8 @@
 
     
         
-    <div class = "sysoContent sysoContent50" id="listingContent">
-        
-        <div class="grid-item" id="company_details"><b>{{$data[0]->company_name}}</b><br>{{$data[0]->gics_industry}}</div>
-        
+    <div class = "sysoContent sysoContent50" id="listingContent">        
+        <div class="grid-item" id="company_details"><b>{{$data[0]->company_name}}</b><br>{{$data[0]->gics_industry}}</div>        
             <table id = "listingTable">
                 <tr id = "listingRow">
                     <th>Company Name</th>
@@ -57,12 +55,15 @@
 
             <form>
                 <button id="buyButton" type='button' onclick="addPurchaseForm()">Buy Shares</button>
-
-        </div>
-        <div class = "sysoContent sysoContent50">
-                <h3 id="listingTitle">Stock Order</h3>
+                                <h3 id="listingTitle">Stock Order</h3>
                 <div id="buyForm" class="grid-item"></div>
             </form>
+        </div>
+
+        <div class = "sysoContent sysoContent50">
+
+        <!-- EMBEDDED GRAPH GOES HERE -->
+
         </div>
     </div>
     
