@@ -26,12 +26,12 @@
     </header>
     <div id = "sysoGreenBar"></div>
     <!-- Hamburger menu content -->
-    <div id = "sysoMenuMaster" class = "sysoMenuMaster blackBox" style = "display: none;">
+    <div id = "sysoMenuMaster" class = "sysoMenuMaster" style = "display: none;">
         <ul>
             @yield('link')
         </ul>
     </div>
-    <body>
+    <body onload = "monitorPageDimensions()">
         <!-- The sysoContentMaster controls the responsive layout space available for all 
         content. -->
         <div id = "sysoContentMaster" class = "sysoContentMaster" style = "display: block;">

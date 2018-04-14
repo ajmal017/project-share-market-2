@@ -24,7 +24,7 @@ body{
 }
 .sysoHeader{
     width: 100%;
-    height: 10%;
+    height: 10vh;
     position: fixed;
     top: 0px;
     z-index: 1;

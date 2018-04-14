@@ -1,5 +1,24 @@
 // Global scripts go here
 
+/* Listen to page dimensions to determine menu/content display */
+function monitorPageDimensions(){
+    window.addEventListener("resize", setDisplayMode);
+}
+
+function setDisplayMode(){
+    var orientation = getOrientation();
+    var content = document.getElementById("sysoContentMaster");
+    var menu = document.getElementById("sysoMenuMaster");
+    /* Page is in portrait mode */
+    if (orientation && menu.style.display == "block"){
+        content.style.display = "none";
+    }
+    /* Page is in landscape mode */
+    else{
+        content.style.display = "block";
+    }
+}
+
 /* Menu hide/show */
 function menuClick() {
     var menu = document.getElementById("sysoMenuMaster");
