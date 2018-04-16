@@ -14,12 +14,11 @@
                     </tr>
                      
                      <?php 
+                            //Top 10 Leaderboard
                             use App\User;
-                            // query userid in open transactions table
-                            //SELECT * FROM articles ORDER BY rating DESC LIMIT 10
                             $users = DB::table('users')->get();
-                            $json = $users->sortByDesc('account_balance')->take('10');
-                            $data = json_decode($json);
+                            //SELECT * FROM articles ORDER BY rating DESC LIMIT 10
+                            $data = $users->sortByDesc('account_balance')->take('10');
                             $name=null;
                             $balance=0.00;
                             foreach ($data as $line) {
