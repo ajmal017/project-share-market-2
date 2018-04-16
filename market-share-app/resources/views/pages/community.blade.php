@@ -16,7 +16,9 @@
                      <?php 
                             use App\User;
                             // query userid in open transactions table
-                            $json = DB::table('users')->get();
+                            //SELECT * FROM articles ORDER BY rating DESC LIMIT 10
+                            $users = DB::table('users')->get();
+                            $json = $users->sortByDesc('account_balance')->take('10');
                             $data = json_decode($json);
                             $name=null;
                             $balance=0.00;
