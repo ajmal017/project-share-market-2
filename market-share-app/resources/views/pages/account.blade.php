@@ -31,8 +31,7 @@
                             <th>Name</th>
                             <th>Code</th>
                             <th>Shares</th>
-                            <th>Value</th>
-                          
+                            <th>Value</th> 
                             <th>Change</th>
                             <th>Total</th>
                             <th/>
