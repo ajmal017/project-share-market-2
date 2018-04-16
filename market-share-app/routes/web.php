@@ -64,6 +64,15 @@ Route::get(
         return view('pages/search');
     }
 );
+
+Route::get(
+    '/confirmation', function () {
+        return view('pages/confirmation');
+    }
+);
+
+//Route::get('/buy', 'ShareTransactionController@getPurchaseinfo');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

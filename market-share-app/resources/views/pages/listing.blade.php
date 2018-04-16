@@ -24,12 +24,25 @@
    
     <!-- Extra scripts specific to this page -->
     <script type="text/javascript">
-        function addPurchaseForm() {
-            $form = "<input type='text' placeholder='Enter Qty'></input>";
-            $confirm = "<button id='buyButton' type='button'>Confirm Purchase</button>";
-            $total = "<p id='totPrice'>Total Price: $XXXX </p>";
+        function addPurchaseForm(price) {
+            
+            var form = " <h3 id='listingTitle'>Stock Order</h3><br><br><input type='text' name='qty' id='shareQty' placeholder='Enter Qty' onchange='getTotal("+price+")'></input>";
+            var confirm = "<br><button id='buyButton' type='submit'>Confirm Purchase</button>";
+            var total = "<p id='totPrice'>Total Price: $0.00</p>";
         
-            GEBI("buyForm").innerHTML = $form + $total + $confirm ;
+            GEBI("buyForm").innerHTML = form + total + confirm ;
+        }
+
+        function getTotal(price) {
+            var qty = GEBI("shareQty").value;
+            if (isNaN(qty) || qty < 1) {
+                var returnVal = "Please enter valid number greater than 0";
+            } else {
+                var returnVal = "Total Price: $" + (price*qty).toFixed(2);
+            }
+
+            GEBI("totPrice").innerHTML = returnVal;
+            
         }
     </script>
     
@@ -53,13 +66,13 @@
                 <tr>
                 <tr id = "listingRow">
                     <th>Current Stock Price</th>
-                    <td>...</td>
+                    <td>{{$price}}</td>
                 <tr>
             </table>
 
-            <form>
-                <button id="buyButton" type='button' onclick="addPurchaseForm()">Buy Shares</button>
-                                <h3 id="listingTitle">Stock Order</h3>
+            <form action='/confirmation' method='get'>
+                <button id="buyButton" type='button' onclick="addPurchaseForm({{$price}})">Buy Shares</button>
+                <input type='hidden' name='code' value='{{$data[0]->company_code}}'>
                 <div id="buyForm" class="grid-item"></div>
             </form>
         </div>

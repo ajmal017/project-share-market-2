@@ -50,19 +50,19 @@
                             $totalshares = 0;
                             // echo out each transaction
                             foreach ($data as $line) {
+                                // calls the minutely API and gets most recent result
+                                // very messy sorry
+                                // might clean it up later
                                 $companyjson = DB::table('asx_company_details')->where('company_code', '=',$line->asx_code)
                                     ->get();
                                 $companydata = json_decode($companyjson);
                                 $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
                                 $call = MarketDataController::curlStocksStats($url);
                                 $asxdata = json_decode($call, true);
-                                //$test = json_decode($asxdata->{'Time Series (1min)'});
-                                //print_r($asxdata['Time Series (1min)']);
                                 $name = 'Time Series (1min)';
                                 $name2 = '4. close';
                                 $array = $asxdata[$name];
                                 $keys = array_keys($array);
-                                //print_r($array[$keys[0]]);
                                 $newarr = $array[$keys[0]];
                                 $currentprice = floatval($newarr[$name2]);
                                 $origprice = floatval($line->purchase_price);

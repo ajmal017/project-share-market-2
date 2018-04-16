@@ -20,10 +20,24 @@ class ListingsController extends Controller
             ->get();
         $data = json_decode($json);
         
+        $currentprice = $this->getCurrentPrice($asx);
+
+
         return view('/pages/listing')
             ->with('symbol', $asx)
-            ->with('data', $data);   
+            ->with('data', $data)
+            ->with('price',$currentprice);   
+    }
 
-        
+    public static function getCurrentPrice($code) {
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        $call = MarketDataController::curlStocksStats($url);
+        $asxdata = json_decode($call, true);
+        $name = 'Time Series (1min)';
+        $name2 = '4. close';
+        $array = $asxdata[$name];
+        $keys = array_keys($array);
+        $newarr = $array[$keys[0]];
+        return $newarr[$name2];
     }
 }
