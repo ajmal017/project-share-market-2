@@ -12,7 +12,7 @@ $(document).ready(function () {
                     asx_results = results;
                     if (results != '') {
                         //$("#company_details").html("<b>" + results[0]['company_name'] + "</b><br>" + results[0]['gics_industry']);
-                        $("#company_details").html("<div class = 'sysoListingResult'>" + results[0]['company_name'] + " " + results[0]['gics_industry'] + "</div>");
+                        $("#company_details").html("<div class = 'sysoListingResult'><a href='/listing/" + results[0].company_code + "'>" + results[0]['company_name'] + " " + results[0]['gics_industry'] + "</div>");
                         //$("#get_daily_data").html('<input type="button" value="Get Daily Data" id="query_daily_data">');
                     } else{
                         $("#company_details").html("<div class = 'sysoListingResult'>No companies found matching that ASX code</div>");
