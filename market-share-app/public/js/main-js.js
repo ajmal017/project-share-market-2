@@ -68,3 +68,7 @@ function pwStrengthCheck() {
         GEBI('pw-strength').innerHTML = "";
     }
 }
+
+function goBack() {
+    window.history.back();
+}

@@ -39,56 +39,57 @@
                         <?php 
                             use App\Http\Controllers\MarketDataController;
                             // query userid in open transactions table
-                            $json = DB::table('open_transactions')->where('user_id', '=', Auth::user()->id)
-                                ->get();
-                            $data = json_decode($json);
-                            
-
                             $overallcost = 0.00;
                             $overallvalue = 0.00;
                             $totalshares = 0;
-                            // echo out each transaction
-                            foreach ($data as $line) {
-                                // calls the minutely API and gets most recent result
-                                // very messy sorry
-                                // might clean it up later
-                                $companyjson = DB::table('asx_company_details')->where('company_code', '=',$line->asx_code)
-                                    ->get();
-                                $companydata = json_decode($companyjson);
-                                $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
-                                $call = MarketDataController::curlStocksStats($url);
-                                $asxdata = json_decode($call, true);
-                                $name = 'Time Series (1min)';
-                                $name2 = '4. close';
-                                $array = $asxdata[$name];
-                                $keys = array_keys($array);
-                                $newarr = $array[$keys[0]];
-                                $currentprice = floatval($newarr[$name2]);
-                                $origprice = floatval($line->purchase_price);
-                                $origtotalcost = $origprice*($line->quantity)+($line->buying_commission);
-                                $overallcost += $origtotalcost;
-                                $newtotalprice = $currentprice*$line->quantity;
-                                $overallvalue += $newtotalprice;
-                                $totalshares += $line->quantity;
+                            $json = DB::table('open_transactions')->where('user_id', '=', Auth::user()->id)
+                                ->get();
+                            $data = json_decode($json);
+                            if(empty($data)) {
+                                echo "<tr><td colspan='7'>No shares currently held. Bought shares will appear here.</td></tr>";
+                            } else {
+                                // echo out each transaction
+                                foreach ($data as $line) {
+                                    // calls the minutely API and gets most recent result
+                                    // very messy sorry
+                                    // might clean it up later
+                                    $companyjson = DB::table('asx_company_details')->where('company_code', '=',$line->asx_code)
+                                        ->get();
+                                    $companydata = json_decode($companyjson);
+                                    $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+                                    $call = MarketDataController::curlStocksStats($url);
+                                    $asxdata = json_decode($call, true);
+                                    $name = 'Time Series (1min)';
+                                    $name2 = '4. close';
+                                    $array = $asxdata[$name];
+                                    $keys = array_keys($array);
+                                    $newarr = $array[$keys[0]];
+                                    $currentprice = floatval($newarr[$name2]);
+                                    $origprice = floatval($line->purchase_price);
+                                    $origtotalcost = $origprice*($line->quantity)+($line->buying_commission);
+                                    $overallcost += $origtotalcost;
+                                    $newtotalprice = $currentprice*$line->quantity;
+                                    $overallvalue += $newtotalprice;
+                                    $totalshares += $line->quantity;
 
-                                $diff = $currentprice-$origprice;
-                                echo "<tr>";
-                                echo "<td>".$companydata[0]->company_name."</td>";
-                                echo "<td>".strtoupper($line->asx_code)."</td>";
-                                // might need to change this later to aggregate quantities
-                                echo "<td>".$line->quantity."</td>";
-                                echo "<td>".$currentprice."</td>";
-                                echo "<td>".round($diff,3)."</td>";
-                                echo "<td>".round($newtotalprice-$origtotalcost,2) ."</td>";
-                                echo "<td><a href=''>Sell</a></td>";
-                                echo "</tr>";
-                                
+                                    $diff = $currentprice-$origprice;
+                                    echo "<tr>";
+                                    echo "<td>".$companydata[0]->company_name."</td>";
+                                    echo "<td>".strtoupper($line->asx_code)."</td>";
+                                    // might need to change this later to aggregate quantities
+                                    echo "<td>".$line->quantity."</td>";
+                                    echo "<td>".$currentprice."</td>";
+                                    echo "<td>".round($diff,3)."</td>";
+                                    echo "<td>".round($newtotalprice-$origtotalcost,2) ."</td>";
+                                    echo "<td><a href=''>Sell</a></td>";
+                                    echo "</tr>";
+                                    
 
-                            }
-                        
-                        echo "<tr></tr><tr id = 'tableHeader'><td colspan='5'>Total</td>";
-                        echo "<td>".round($overallvalue-$overallcost,2)."</td></tr>";
+                                }
                             
+                                echo "<tr></tr><tr id = 'tableHeader'><td colspan='5'>Total</td>";
+                                echo "<td>".round($overallvalue-$overallcost,2)."</td></tr>";
+                            }        
                         ?>
                     </table>
                 </div>
