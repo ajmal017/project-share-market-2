@@ -291,7 +291,7 @@ h1.sysoAuth{
     font-size: small;
 }
 
-#emails, #password, #password-confirm, #name{
+#email, #password, #password-confirm, #name{
     margin-top: 2.5vh;
     width: 100%;
 }
