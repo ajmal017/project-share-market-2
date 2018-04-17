@@ -18,6 +18,15 @@
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
+        <?php
+            use App\Http\Controllers\MarketDataController;
+            use App\Http\Controllers\ShareTransactionController;
+
+            if (isset($_GET['sell'])) {
+                ShareTransactionController::sellShares($_GET['sell']);
+            }
+        ?>
+
         
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
             <div class = "sysoContent sysoContent50">
@@ -37,7 +46,8 @@
                             <th/>
                         </tr>
                         <?php 
-                            use App\Http\Controllers\MarketDataController;
+                        
+                            
                             // query userid in open transactions table
                             $overallcost = 0.00;
                             $overallvalue = 0.00;
@@ -56,10 +66,10 @@
                                     $companyjson = DB::table('asx_company_details')->where('company_code', '=',$line->asx_code)
                                         ->get();
                                     $companydata = json_decode($companyjson);
-                                    $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+                                    $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=60min&apikey=PEQIWLTYB0GPLMB8";
                                     $call = MarketDataController::curlStocksStats($url);
                                     $asxdata = json_decode($call, true);
-                                    $name = 'Time Series (1min)';
+                                    $name = 'Time Series (60min)';
                                     $name2 = '4. close';
                                     $array = $asxdata[$name];
                                     $keys = array_keys($array);
@@ -81,7 +91,7 @@
                                     echo "<td>".$currentprice."</td>";
                                     echo "<td>".round($diff,3)."</td>";
                                     echo "<td>".round($newtotalprice-$origtotalcost,2) ."</td>";
-                                    echo "<td><a href=''>Sell</a></td>";
+                                    echo "<td><form action='/account' method='get'><button type='submit' name='sell' id='sell' value='".strtoupper($line->asx_code)."'>Sell</button></form></td>";
                                     echo "</tr>";
                                     
 

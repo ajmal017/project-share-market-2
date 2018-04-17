@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ListingsController;
 
 class ShareTransactionController extends Controller
 {
@@ -56,12 +57,51 @@ class ShareTransactionController extends Controller
 
     }
 
+    public static function sellShares($asxcode) {
+        $price = ListingsController::getCurrentPrice($asxcode);
+        $user = Users::find(\Auth::user()->id);
+        # calculate sell price
+        
+        $json = DB::table('open_transactions')
+            ->where('user_id', '=', $user->id)
+            ->where('asx_code', '=', $asxcode)
+            ->sum('quantity');
+            
+        $data = json_decode($json);
+        $quantity = $data['quantity'];
+        $commission = ShareTransactionController::sellingCommission($price, $quantity);
+        $sellprice = ($price*$quantity)+$commission;
+        
+        # delete from open transactions
+        $json = DB::table('open_transactions')
+            ->where('user_id', '=', $user->id)
+            ->where('asx_code', '=', $asxcode)
+            ->delete();
+        
+        // TO-DO insert into closed_transactions
+        
+        # update account balance
+        ShareTransactionController::adjustBalance($user->id, $sellprice);
+
+    }
+
     public static function buyingCommission($price, $quantity)
     {
         $fixed = 50;
-        $percentage = 0.0025; //0.25% commission on sales
+        $percentage = 0.01; //1% commission on buying
         return ($fixed + ($percentage*$price*$quantity));
     }
+
+    public static function sellingCommission($price, $quantity) {
+        $fixed = 50;
+        $percentage = 0.0025; //0.25% commission on selling
+        return ($fixed + ($percentage*$price*$quantity));
+    }
+
+
+
+
+
 
     public static function adjustBalance($userid, $amount) {
         // must pass through a negative amount for a deduction (buying)
@@ -72,4 +112,5 @@ class ShareTransactionController extends Controller
             ->where('id',$userid)
             ->update(['account_balance' => $newbalance]);
     }
+
 }

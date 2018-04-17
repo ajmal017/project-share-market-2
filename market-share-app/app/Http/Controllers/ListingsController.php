@@ -30,10 +30,10 @@ class ListingsController extends Controller
     }
 
     public static function getCurrentPrice($code) {
-        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $code . ".ax&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $code . ".ax&interval=60min&apikey=PEQIWLTYB0GPLMB8";
         $call = MarketDataController::curlStocksStats($url);
         $asxdata = json_decode($call, true);
-        $name = 'Time Series (1min)';
+        $name = 'Time Series (60min)';
         $name2 = '4. close';
         $array = $asxdata[$name];
         $keys = array_keys($array);
