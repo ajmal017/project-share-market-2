@@ -16,7 +16,11 @@
     <!-- Titlebar (logo, title, hamburger menu) -->
     <header class = "sysoHeader">
         <div class = "sysoLogo">
-            <a id = "sysoHomeLink" href = "/landing"></a>
+            @if(Auth::check())
+                <a id = "sysoHomeLink" href = "/account"></a>
+            @else
+                <a id = "sysoHomeLink" href = "/landing"></a>
+            @endif
         </div>
         <div class = "sysoTitle">
             <img id = "sysoTitle" src = "../images/sysoTitle.png" alt = "Stock Your Socks Off"/>
