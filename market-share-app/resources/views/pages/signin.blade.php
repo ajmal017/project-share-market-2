@@ -39,7 +39,7 @@
                     <div>
                         <label for="email"><!-- {{ __('E-Mail Address') }} --></label>
                         <div>
-                            <input id="emails" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Enter email address" name="email" value="{{ old('email') }}" required autofocus>
+                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Enter email address" name="email" value="{{ old('email') }}" required autofocus>
                             @if ($errors->has('email'))
                                 <span id = "loginError" class="invalid-feedback">
                                     <strong>{{ $errors->first('email') }}</strong>
