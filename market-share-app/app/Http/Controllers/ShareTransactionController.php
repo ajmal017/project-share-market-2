@@ -35,10 +35,10 @@ class ShareTransactionController extends Controller
         }
         $commission = ShareTransactionController::buyingCommission($price, $quantity);
         $totalPrice = ($price * $quantity) + $commission;
-        //$this->buyingCommission();
+        
         if($totalPrice > \Auth::user()->account_balance)
         {
-            //TODO: user cannot afford to buy these shares
+            return false;
         }
         ShareTransactionController::adjustBalance($user->id,$totalPrice*-1);
         $user->save();
