@@ -13,7 +13,7 @@ class AsxCompanySeeder extends Seeder
      */
     public function run()
     {
-        /*$csv = Reader::createFromPath("/var/app/ondeck/database/seeds/ASXListedCompanies.csv", 'r');*/
+        // $csv = Reader::createFromPath("/var/app/ondeck/database/seeds/ASXListedCompanies.csv", 'r');
         $csv = Reader::createFromPath("database/seeds/ASXListedCompanies.csv", 'r');
         $csv->setHeaderOffset(1);
 
@@ -25,7 +25,8 @@ class AsxCompanySeeder extends Seeder
             DB::table('asx_company_details')->insert([
                 'company_name' => $record['Company name'],
                 'company_code' => $record['ASX code'],
-                'gics_industry' => $record['GICS industry group']
+                'gics_industry' => $record['GICS industry group'],
+                'status' => 'active'
             ]);
         }
     }
