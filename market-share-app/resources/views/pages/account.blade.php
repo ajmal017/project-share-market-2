@@ -107,6 +107,10 @@
                         ?>
                     </table>
                 </div>
+
+            </div>
+
+            <div class = "sysoContent sysoContent50">
                 <br/>
                 <div class = "userDetails">
                     <h1>My Account</h1>
@@ -163,11 +167,6 @@
                     </tr>
                     </table>
                 </div>
-            </div>
-
-            <div class = "sysoContent sysoContent50">
-
-            <!-- EMBEDDED GRAPH GOES HERE -->
 
             </div>
 

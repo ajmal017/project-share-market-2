@@ -409,6 +409,14 @@ td[value^="-"]{
 
 .shareDetails{
     margin-top: 2%;
+    font-size: small;
+}
+
+.shareDetails button{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    width: 90%;
 }
 
 .shareDetails, .userDetails, .friends{
@@ -443,6 +451,18 @@ td[value^="-"]{
 #shareTable{
     table-layout:fixed;
     width: 100%;
+}
+
+/* Community page */
+
+#commBox{
+    font-size: small;
+}
+
+.friendList button{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
 }
 
 /* Generic page content */

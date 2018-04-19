@@ -4,10 +4,11 @@
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
 
-    <div class = "sysoBox sysoBoxFlex">
+    <div class = "sysoBox sysoBoxFlex" id="commBox">
         <div class = "sysoContent sysoContent50">
             
             <div class="friends">
+                <br/>
                 <h1>Top 10</h1>
                 <table class="friendList">
                 <tr id = "tableHeader">
@@ -29,12 +30,13 @@
                     echo "<tr>";
                     echo "<td>".$name."</td>";
                     echo "<td>".$balance."</td>";
-                    echo "<td><input type='checkbox' name='friend'></td>";
+                    echo "<td><button name='friend'>Friend</button></td>";
                     echo "</tr>";
                     }
                 ?>
 
                 </table>
+                <br/>
             </div>
             
             <div class="friends">
@@ -66,7 +68,7 @@
                             echo "<tr>";
                             echo "<td>".$uname."</td>";
                             echo "<td>".$ubalance."</td>";
-                            echo "<td><input type='checkbox' name='friend'></td>";
+                            echo "<td><button name='friend'>Friend</button></td>";
                             echo "</tr>";
                             }
                     }
@@ -80,6 +82,7 @@
         <div class = "sysoContent sysoContent50">
             
             <div class="friends">
+                <br/>
                 <h1>Friends</h1>
                 <table class="friendList">
                 <tr id = "tableHeader">
@@ -87,6 +90,13 @@
                     <th>Total Worth</th>
                     <th>Unfriend</th>
                 </tr>
+                
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><button name='friend'>Unfriend</button></td>
+                </tr>
+
                 </table>
             </div>
         
