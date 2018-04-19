@@ -53,14 +53,23 @@
                 <?php
                     //Search User
                     $username = Request::get('user_name');
-                    $userdata = DB::table('users')->where('name', 'like', '%'.$username.'%')->first();
-                    $uname=($userdata->name);
-                    $ubalance=($userdata->account_balance);
-                    echo "<tr>";
-                    echo "<td>".$uname."</td>";
-                    echo "<td>".$ubalance."</td>";
-                    echo "<td><input type='checkbox' name='friend'></td>";
-                    echo "</tr>";
+                    if ($username == null){
+                        echo "<tr></tr>";
+                    }
+                    else {
+                        $userdata = DB::table('users')->where('name', 'like', '%'.$username.'%')->get();
+                        $uname=null;
+                        $ubalance=0.00;
+                            foreach ($userdata as $uline) {
+                            $uname=($uline->name);
+                            $ubalance=($uline->account_balance);
+                            echo "<tr>";
+                            echo "<td>".$uname."</td>";
+                            echo "<td>".$ubalance."</td>";
+                            echo "<td><input type='checkbox' name='friend'></td>";
+                            echo "</tr>";
+                            }
+                    }
                 ?>
 
                 </table>
