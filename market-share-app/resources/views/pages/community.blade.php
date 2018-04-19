@@ -85,7 +85,7 @@
                 <tr id = "tableHeader">
                     <th>Name</th>
                     <th>Total Worth</th>
-                    <th>Friend</th>
+                    <th>Unfriend</th>
                 </tr>
                 </table>
             </div>
