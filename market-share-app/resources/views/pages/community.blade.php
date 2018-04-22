@@ -2,6 +2,14 @@
 
 @section('content')
 
+    <?php
+    function insertFriend($friend_id){
+                $user_id=Auth::id();
+                $data = array('user_id'=>$user_id,'friend_id'=>$friend_id);
+                DB::table('friends')->insert($data);
+                }
+    ?>
+
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
 
     <div class = "sysoBox sysoBoxFlex" id="commBox">
@@ -60,16 +68,18 @@
                     }
                     else {
                         $userdata = DB::table('users')->where('name', 'like', '%'.$username.'%')->get();
+                        $uid=null;
                         $uname=null;
                         $ubalance=0.00;
                             foreach ($userdata as $uline) {
-                            $uname=($uline->name);
-                            $ubalance=($uline->account_balance);
-                            echo "<tr>";
-                            echo "<td>".$uname."</td>";
-                            echo "<td>".$ubalance."</td>";
-                            echo "<td><button name='friend'>Friend</button></td>";
-                            echo "</tr>";
+                                $uid=($uline->id);
+                                $uname=($uline->name);
+                                $ubalance=($uline->account_balance);
+                                echo "<tr>";
+                                echo "<td>".$uname."</td>";
+                                echo "<td>".$ubalance."</td>";
+                                echo "<td><button name='friend' onclick='".insertFriend($uid)."'>Friend</button></td>";
+                                echo "</tr>";
                             }
                     }
                 ?>
@@ -90,12 +100,27 @@
                     <th>Total Worth</th>
                     <th>Unfriend</th>
                 </tr>
-                
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td><button name='friend'>Unfriend</button></td>
-                </tr>
+
+                <?php 
+                    //List of Friends
+                    $user_id=Auth::id();
+                    $friends=DB::table('friends')->where('user_id', $user_id)->get();
+                    $name=null;
+                    $balance=0.00;
+                    foreach ($friends as $f) {
+                        $fid=($f->friend_id);
+                        $data=DB::table('users')->where('id', $fid)->get();
+                        foreach ($data as $line) {
+                            $name=($line->name);
+                            $balance=($line->account_balance);
+                            echo "<tr>";
+                            echo "<td>".$name."</td>";
+                            echo "<td>".$balance."</td>";
+                            echo "<td><button name='friend'>Unfriend</button></td>";
+                            echo "</tr>";
+                        }
+                    }
+                ?>
 
                 </table>
             </div>
