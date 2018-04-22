@@ -79,6 +79,7 @@
                 <input type='hidden' name='code' value='{{$data[0]->company_code}}'>
                 <div id="buyForm" class="grid-item"></div>
             </form>
+            <a href="#" onClick="history.go(-1);return true;">Back</a>
         </div>
 
         <div class = "sysoContent sysoContent50">
