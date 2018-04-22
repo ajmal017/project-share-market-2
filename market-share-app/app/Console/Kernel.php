@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         // $schedule->call('App\Http\Controllers\MarketDataController@weeklyStats')->weekly();
         // $schedule->call('App\Http\Controllers\MarketDataController@dailyStats')->daily();
         // $schedule->call('App\Http\Controllers\MarketDataController@intraDayStats')->hourly();
+        $schedule->call('App\Http\Controllers\MarketDataController@populateMonthlyStocks')->everyMinute();
     }
 
     /**

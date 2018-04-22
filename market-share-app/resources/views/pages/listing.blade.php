@@ -25,7 +25,7 @@
     {{--  <script src="https://code.highcharts.com/highcharts.js"></script>  --}}
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
-   
+
     <!-- Extra scripts specific to this page -->
     <script type="text/javascript">
         function addPurchaseForm(price) {
@@ -49,10 +49,7 @@
             
         }
     </script>
-    
 
-    
-        
     <div class = "sysoContent sysoContent50" id="listingContent">        
         <div class="grid-item" id="company_details"><b>{{$data[0]->company_name}}</b><br>{{$data[0]->gics_industry}}</div>        
             <table id = "listingTable">
@@ -83,13 +80,15 @@
         </div>
 
         <div class = "sysoContent sysoContent50">
+            <!-- EMBEDDED GRAPH GOES HERE -->
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://code.highcharts.com/stock/highstock.js"></script>
+            <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+            <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
-        <!-- EMBEDDED GRAPH GOES HERE -->
-
+            <div id="container" style="height: 400px; min-width: 310px" class='{{$data[0]->company_code}}'></div>
         </div>
     </div>
-    
-  
     
 
     <!-- END OF CONTENT -->
