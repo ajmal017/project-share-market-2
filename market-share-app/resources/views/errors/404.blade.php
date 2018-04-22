@@ -18,8 +18,13 @@
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
-    <div class = "sysoBox">
-        <p class = "sysoPara">404</p>
+    <div class = "sysoBox sysoBoxFlex">
+        <div class = "sysoErrorBox">
+            <h1 class = "sysoHeader1">404 stocked-off socks</h1>
+            <img class = "sysoErrorImage" src = "images/sock.png" alt = "404 error"/>
+            <p class = "sysoPara">Something went wrong... Click the link below to return to the home page.</p>
+            <a class = "sysoLink" href='landing'>Home</a>
+        </div>
     </div>
 
     <!-- END OF CONTENT -->

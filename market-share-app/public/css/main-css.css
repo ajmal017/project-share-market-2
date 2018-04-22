@@ -523,3 +523,15 @@ td[value^="-"]{
     text-align: center;
     color: #012e33;
 }
+
+/* Error pages */
+
+.sysoErrorBox{
+    width: 100%;
+    text-align: center;
+}
+
+.sysoErrorImage{
+    width: 30%;
+    height: 30%;
+}
