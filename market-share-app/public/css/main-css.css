@@ -259,7 +259,6 @@ a.sysoLink:hover{
 }
 
 #intro a{
-    color: #012e33;
     font-size: small;
     font-family: 'Helvetica', sans-serif;
 }
@@ -523,4 +522,16 @@ td[value^="-"]{
     font-size: 1em;
     text-align: center;
     color: #012e33;
+}
+
+/* Error pages */
+
+.sysoErrorBox{
+    width: 100%;
+    text-align: center;
+}
+
+.sysoErrorImage{
+    width: 30%;
+    height: 30%;
 }
