@@ -1,10 +1,29 @@
 @extends('layouts/main-template')
 
+@section('link')
+    <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <!-- Active session links -->
+    @if(Auth::check())
+        <a class = "sysoLink" href='account'>Home</a>
+        <a class = "sysoLink" href='search'>Search</a>
+        <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+    <!-- No session links -->
+    @else
+        <a class = "sysoLink" href='landing'>Home</a>
+        <a class = "sysoLink" href='signin'>Login</a>
+        <a class = "sysoLink" href='signup'>Sign up</a>
+    @endif
+    <!-- Generic links -->
+    <a class = "sysoLink" href='about'>About/FAQ</a>
+@endsection
+
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
 
-    <div class = "sysoContent sysoContent50" id="listingContent">
+    <div class = "sysoContent sysoContent100 sysoCenterText" id="listingContent">
         <?php
             use App\Http\Controllers\ShareTransactionController;
             use App\Http\Controllers\ListingsController;
@@ -22,7 +41,8 @@
             
         ?>
         <button onclick="goBack()">Back to Listing</button>
-
+        <a class = "sysoLink" href='search'>Search for another Listing</a>
+        <a class = "sysoLink" href='account'>Return to Account</a>
     </div>
     <!-- END OF CONTENT -->
 
