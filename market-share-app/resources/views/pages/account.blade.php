@@ -23,6 +23,7 @@
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
         <?php
+            // sells shares once form has been submitted
             use App\Http\Controllers\MarketDataController;
             use App\Http\Controllers\ShareTransactionController;
 
@@ -30,6 +31,29 @@
                 ShareTransactionController::sellShares($_GET['sell']);
             }
         ?>
+
+        <script type='text/javascript'>
+            function unhideButtons(number) {
+                
+                var confirm = GEBI("confirm" + number);
+                var cancel = GEBI("cancel" + number);
+                var sell = GEBI("sell" + number);
+                confirm.style.display = "block";
+                cancel.style.display = "block";
+                sell.style.display = "none";
+            }
+
+            function hideButtons(number) {
+                
+                var confirm = GEBI("confirm" + number);
+                var cancel = GEBI("cancel" + number);
+                var sell = GEBI("sell" + number);
+                confirm.style.display = "none";
+                cancel.style.display = "none";
+                sell.style.display = "block";
+            }
+
+        </script>
 
         
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
@@ -62,6 +86,7 @@
                             if(empty($data)) {
                                 echo "<tr><td colspan='7'>No shares currently held. Bought shares will appear here.</td></tr>";
                             } else {
+                                $count = 0;
                                 // echo out each transaction
                                 foreach ($data as $line) {
                                     // calls the minutely API and gets most recent result
@@ -95,9 +120,11 @@
                                     echo "<td>".$currentprice."</td>";
                                     echo "<td>".round($diff,3)."</td>";
                                     echo "<td>".round($newtotalprice-$origtotalcost,2) ."</td>";
-                                    echo "<td><form action='/account' method='get'><button type='submit' name='sell' id='sell' value='".strtoupper($line->asx_code)."'>Sell</button></form></td>";
+                                    echo "<td><div id='sell".$count."'><form action='/account' method='get'><button type='button' onclick='unhideButtons(".$count.")'>Sell</button></div>";
+                                    echo "<div id='confirm".$count."' style='display: none;'><button type='submit' name='sell' value='".strtoupper($line->asx_code)."'>Confirm</button></form></div>";
+                                    echo "<div id='cancel".$count."' style='display: none;'><button type='button' onclick='hideButtons(".$count.")'>Cancel</button></div></td>";
                                     echo "</tr>";
-                                    
+                                    $count++;
 
                                 }
                             

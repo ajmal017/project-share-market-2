@@ -69,8 +69,9 @@ class ShareTransactionController extends Controller
             
         $data = json_decode($json);
         $quantity = $data['quantity'];
+        
         $commission = ShareTransactionController::sellingCommission($price, $quantity);
-        $sellprice = ($price*$quantity)+$commission;
+        $sellprice = ($price*$quantity)-$commission;
         
         # delete from open transactions
         $json = DB::table('open_transactions')
