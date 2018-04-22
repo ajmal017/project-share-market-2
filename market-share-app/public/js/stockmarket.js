@@ -66,85 +66,94 @@ $(document).ready(function () {
     });
 
 
-    /**
-     * Load new data depending on the selected min and max
-     */
-    function afterSetExtremes(e) {
 
-        var chart = Highcharts.charts[0];
+    // $.getJSON('https://www.highcharts.com/samples/data/aapl-ohlcv.json', function (data) {
+    $.getJSON('/listing/getmonthly/acr', function (data) {  
+        console.log(data);
 
-        chart.showLoading('Loading data from server...');
-        $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?start=' + Math.round(e.min) +
-            '&end=' + Math.round(e.max) + '&callback=?', function (data) {
-                chart.series[0].setData(data);
-                chart.hideLoading();
-            });
-    }
+        // split the data set into ohlc and volume
+        var ohlc = [],
+            volume = [],
+            dataLength = data.length,
+            // set the allowed units for data grouping
+            groupingUnits = [[
+                'month',
+                [1, 2, 3, 4, 6]
+            ]],
 
-    // See source code from the JSONP handler at https://github.com/highcharts/highcharts/blob/master/samples/data/from-sql.php
-    $.getJSON('https://www.highcharts.com/samples/data/from-sql.php?callback=?', function (data) {
+            i = 0;
 
-        // Add a null value for the end date
-        data = [].concat(data, [[Date.now(), null, null, null, null]]);
+        for (i; i < dataLength; i += 1) {
+            ohlc.push([
+                data[i][0], // the date
+                data[i][1], // open
+                data[i][2], // high
+                data[i][3], // low
+                data[i][4]  // close
+            ]);
 
-        // create the chart
+            volume.push([
+                data[i][0], // the date
+                data[i][5] // the volume
+            ]);
+        }
+
+        // // create the chart
         Highcharts.stockChart('container', {
-            chart: {
-                type: 'candlestick',
-                zoomType: 'x'
-            },
 
-            navigator: {
-                adaptToUpdatedData: false,
-                series: {
-                    data: data
-                }
-            },
-
-            scrollbar: {
-                liveRedraw: false
+            rangeSelector: {
+                selected: 4 // all
             },
 
             title: {
-                text: 'Monthly Stock Market Data'
+                text: 'Historical Stocks'
             },
 
-            subtitle: {
-                text: 'Displaying 1.7 million data points in Highcharts Stock by async server loading'
-            },
-
-            rangeSelector: {
-                buttons: [{
-                    type: 'month',
-                    count: 1,
-                    text: '1m'
-                }, {
-                    type: 'year',
-                    count: 1,
-                    text: '1y'
-                }, {
-                    type: 'all',
-                    text: 'All'
-                }],
-                inputEnabled: false, // it supports only days
-                selected: 2 // all
-            },
-
-            xAxis: {
-                events: {
-                    afterSetExtremes: afterSetExtremes
+            yAxis: [{
+                labels: {
+                    align: 'right',
+                    x: -3
                 },
-                minRange: 3600 * 1000 // one hour
-            },
+                title: {
+                    text: 'Stock Prices'
+                },
+                height: '60%',
+                lineWidth: 2,
+                resize: {
+                    enabled: true
+                }
+            }, {
+                labels: {
+                    align: 'right',
+                    x: -3
+                },
+                title: {
+                    text: 'Volume'
+                },
+                top: '65%',
+                height: '35%',
+                offset: 0,
+                lineWidth: 2
+            }],
 
-            yAxis: {
-                floor: 0
+            tooltip: {
+                split: true
             },
 
             series: [{
-                data: data,
+                type: 'candlestick',
+                name: 'ACR',
+                data: ohlc,
                 dataGrouping: {
-                    enabled: false
+                    units: groupingUnits
+                }
+            }, {
+                type: 'column',
+                name: 'Volume',
+                data: volume,
+                yAxis: 1,
+                dataGrouping: {
+                    units: groupingUnits
                 }
             }]
         });
