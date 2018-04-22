@@ -79,17 +79,13 @@
         </div>
 
         <div class = "sysoContent sysoContent50">
+            <!-- EMBEDDED GRAPH GOES HERE -->
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://code.highcharts.com/stock/highstock.js"></script>
+            <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
+            <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
 
-        <!-- EMBEDDED GRAPH GOES HERE -->
-
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="https://code.highcharts.com/stock/highstock.js"></script>
-        <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
-        <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
-
-
-        <div id="container" style="height: 400px; min-width: 310px"></div>
-
+            <div id="container" style="height: 400px; min-width: 310px" class='{{$data[0]->company_code}}'></div>
         </div>
     </div>
     

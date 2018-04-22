@@ -65,12 +65,7 @@ $(document).ready(function () {
         });
     });
 
-
-
-    // $.getJSON('https://www.highcharts.com/samples/data/aapl-ohlcv.json', function (data) {
-    $.getJSON('/listing/getmonthly/acr', function (data) {  
-        console.log(data);
-
+    $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {  
         // split the data set into ohlc and volume
         var ohlc = [],
             volume = [],
@@ -106,7 +101,7 @@ $(document).ready(function () {
             },
 
             title: {
-                text: 'Historical Stocks'
+                text: $('#container').attr('class') + ' Stock Data'
             },
 
             yAxis: [{
@@ -142,7 +137,7 @@ $(document).ready(function () {
 
             series: [{
                 type: 'candlestick',
-                name: 'ACR',
+                name: $('#container').attr('class'),
                 data: ohlc,
                 dataGrouping: {
                     units: groupingUnits

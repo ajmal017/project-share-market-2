@@ -168,7 +168,7 @@ class MarketDataController
             ->get();
         return $company;
     }
-// UNIX_TIMESTAMP(STR_TO_DATE(date, "%Y-%m-%d")) 
+
     public function getmonthly($asx_code){
         $output = array();
         $existingAddition = DB::select('SELECT ROUND(UNIX_TIMESTAMP(STR_TO_DATE(date, "%Y-%m-%d")) * 1000) as unix_date, open, high, low, close, volume FROM stocks.stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) GROUP BY unix_date ORDER BY unix_date ASC');
@@ -182,7 +182,6 @@ class MarketDataController
         }
 
         return $output;
-
     }
 
     public function populateMonthlyStocks(){
