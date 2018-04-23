@@ -83,7 +83,7 @@ Route::get('/listing/monthly/{asx_code}', 'MarketDataController@monthlyStats');
 Route::get('/listing/getmonthly/{asx_code}', 'MarketDataController@getmonthly');
 Route::get('/listing/companycode/{asx_code}', 'MarketDataController@getCompanyDetails');
 Route::get('/listing/companyname/{asx_code}', 'MarketDataController@getCompanyName');
-Route::get('/listing/allcompanies', 'MarketDataController@populateMonthlyStocks');
+Route::get('/listing/allcompanies/{limit}', 'MarketDataController@populateMonthlyStocks');
 
 //Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register');
 

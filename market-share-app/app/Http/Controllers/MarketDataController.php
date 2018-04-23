@@ -184,7 +184,9 @@ class MarketDataController
         return $output;
     }
 
-    public function populateMonthlyStocks(){
+    public function populateMonthlyStocks($limit){
+        $output = array();
+        $current = 0;
 
         $allCompanyDetails = DB::table('asx_company_details')->get();
 
@@ -192,13 +194,18 @@ class MarketDataController
             $asx_code = strtolower($value->company_code) . '.ax';
             $existingAddition = DB::select('SELECT asx_code FROM stocks.stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'" GROUP BY asx_code');
             
-            if (!isset($existingAddition[0]) && $value->status == 'active') {
+            var_dump($existingAddition[0]);
+            var_dump($value->status == 'active');
+            var_dump($current != $limit);
+
+            if (!isset($existingAddition[0]) && $value->status == 'active' && $current != $limit) {
                 $output = $this->monthlyStats($value->company_code);
-                return $output;
-            } 
+                $current++;
+            } else {
+                break;
+            }
         }
 
-        return false;
-
+        return $output;
     }
 }
