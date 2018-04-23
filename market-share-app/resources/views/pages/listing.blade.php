@@ -49,7 +49,25 @@
             
         }
     </script>
-
+    <div class='successMessage'>
+    <?php
+        use App\Http\Controllers\ShareTransactionController;
+        use App\Http\Controllers\ListingsController;
+        if (isset($_GET['qty']) && isset($_GET['code'])) {
+            
+            $quantity = $_GET['qty'];
+            $companycode = $_GET['code'];
+            
+            //add try and catch block
+            $price = ListingsController::getCurrentPrice($companycode);
+            if (!ShareTransactionController::buyShares($companycode,$price, $quantity)) {
+                echo "<h1>Error! Transaction failed. Please try again.</h1>";
+            } else {
+                echo "<h1>Success!</h1>";
+                echo "<p>You have purchased ".$quantity." shares in ".$companycode;
+            }
+        }
+    ?>
     <div class = "sysoContent sysoContent50" id="listingContent">        
         <div class="grid-item" id="company_details"><b>{{$data[0]->company_name}}</b><br>{{$data[0]->gics_industry}}</div>        
             <table id = "listingTable">
@@ -71,7 +89,7 @@
                 <tr>
             </table>
 
-            <form action='/confirmation' method='get'>
+            <form method='get'>
                 <button id="buyButton" type='button' onclick="addPurchaseForm({{$price}})">Buy Shares</button>
                 <input type='hidden' name='code' value='{{$data[0]->company_code}}'>
                 <div id="buyForm" class="grid-item"></div>
