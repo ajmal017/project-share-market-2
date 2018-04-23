@@ -13,8 +13,8 @@ class AsxCompanySeeder extends Seeder
      */
     public function run()
     {
-        // $csv = Reader::createFromPath("/var/app/ondeck/database/seeds/ASXListedCompanies.csv", 'r');
-        $csv = Reader::createFromPath("database/seeds/ASXListedCompanies.csv", 'r');
+        $csv = Reader::createFromPath("/var/app/ondeck/database/seeds/ASXListedCompanies.csv", 'r');
+        // $csv = Reader::createFromPath("database/seeds/ASXListedCompanies.csv", 'r');
         $csv->setHeaderOffset(1);
 
         $stmt = (new Statement())
