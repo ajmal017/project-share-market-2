@@ -22,19 +22,10 @@
 @section('content')
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
-        <?php
-            // sells shares once form has been submitted
-            use App\Http\Controllers\MarketDataController;
-            use App\Http\Controllers\ShareTransactionController;
-
-            if (isset($_GET['sell'])) {
-                ShareTransactionController::sellShares($_GET['sell']);
-            }
-        ?>
+        
 
         <script type='text/javascript'>
             function unhideButtons(number) {
-                
                 var confirm = GEBI("confirm" + number);
                 var cancel = GEBI("cancel" + number);
                 var sell = GEBI("sell" + number);
@@ -44,7 +35,6 @@
             }
 
             function hideButtons(number) {
-                
                 var confirm = GEBI("confirm" + number);
                 var cancel = GEBI("cancel" + number);
                 var sell = GEBI("sell" + number);
@@ -52,9 +42,7 @@
                 cancel.style.display = "none";
                 sell.style.display = "block";
             }
-
         </script>
-
         
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
             <div class = "sysoContent sysoContent50">
@@ -62,6 +50,18 @@
                 <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
 
                 <div class="shareDetails">
+                <?php
+                    // sells shares once form has been submitted
+                    use App\Http\Controllers\MarketDataController;
+                    use App\Http\Controllers\ShareTransactionController;
+
+                    if (isset($_GET['sell'])) {
+                        if (!ShareTransactionController::sellShares($_GET['sell'])) {
+                            echo "Error! Cannot sell shares in that listing. Please try again";
+                        }
+                    }
+
+                ?>
                     <h1>Share Portfolio</h1>
                     <table id = "shareTable">
                         <tr id = "tableHeader">
@@ -89,7 +89,7 @@
                                 $count = 0;
                                 // echo out each transaction
                                 foreach ($data as $line) {
-                                    // calls the minutely API and gets most recent result
+                                    // calls the hourly API and gets most recent result
                                     // very messy sorry
                                     // might clean it up later
                                     $companyjson = DB::table('asx_company_details')->where('company_code', '=',$line->asx_code)
