@@ -115,6 +115,9 @@ class MarketDataController
                     'close' => $record->{'4. close'},
                     'volume' => $record->{'5. volume'}
                 ]);
+                $output = DB::table('asx_company_details')
+                        ->where('company_code', $output['asx_code'])
+                        ->update(['status' => 'active']);
             }
             return $insert_count . ' records added';
         } else {
@@ -188,16 +191,13 @@ class MarketDataController
         $output = array();
         $current = 0;
 
-        $allCompanyDetails = DB::table('asx_company_details')->get();
-        while ($current <= $limit) {
-            foreach ($allCompanyDetails as $key => $value) {
-                $asx_code = strtolower($value->company_code) . '.ax';
-                $existingAddition = DB::select('SELECT asx_code FROM stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'" GROUP BY asx_code');
+        $allCompanyDetails = DB::table('asx_company_details')->get()->take($limit);
+        foreach ($allCompanyDetails as $key => $value) {
+            $asx_code = strtolower($value->company_code) . '.ax';
+            $existingAddition = DB::select('SELECT asx_code FROM stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'" GROUP BY asx_code');
 
-                if (!isset($existingAddition[0]) && $value->status == 'active') {
-                    $output = $this->monthlyStats($value->company_code);
-                    $current++;
-                }
+            if (!isset($existingAddition[0])) {
+                $output[$asx_code] = $this->monthlyStats($value->company_code);
             }
         }
 
