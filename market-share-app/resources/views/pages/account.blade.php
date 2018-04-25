@@ -113,7 +113,7 @@
 
                                     $diff = $currentprice-$origprice;
                                     echo "<tr>";
-                                    echo "<td>".$companydata[0]->company_name."</td>";
+                                    echo "<td><a href='/listing/".strtoupper($line->asx_code)."'>".$companydata[0]->company_name."</a></td>";
                                     echo "<td>".strtoupper($line->asx_code)."</td>";
                                     // might need to change this later to aggregate quantities
                                     echo "<td>".$line->quantity."</td>";

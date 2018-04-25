@@ -32,20 +32,29 @@
             
             var form = " <h3 id='listingTitle'>Stock Order</h3><br><br><input type='text' name='qty' id='shareQty' placeholder='Enter Qty' onchange='getTotal("+price+")'></input>";
             var confirm = "<br><button id='buyButton' type='submit'>Confirm Purchase</button>";
+            var shareprice = "<br><br><p id='sharePrice'>Share Price: $0.00</p>";
+            var commprice = "<p id='commPrice'>Commission Price: $0.00</p>";
             var total = "<p id='totPrice'>Total Price: $0.00</p>";
         
-            GEBI("buyForm").innerHTML = form + total + confirm ;
+            GEBI("buyForm").innerHTML = form + shareprice + commprice + total + confirm;
         }
 
         function getTotal(price) {
+            var fixed = 50;
+            var percentage = 0.01;
             var qty = GEBI("shareQty").value;
             if (isNaN(qty) || qty < 1) {
                 var returnVal = "Please enter valid number greater than 0";
             } else {
-                var returnVal = "Total Price: $" + (price*qty).toFixed(2);
+                var returnVal = "Share Price: $" + (price*qty).toFixed(2);
+                var comm = (price*qty)*percentage+fixed
+                GEBI("commPrice").innerHTML = "Commission Price: $" + comm.toFixed(2);
+                GEBI("totPrice").innerHTML = "Total Price: $" + (comm+(price*qty)).toFixed(2);
             }
-
-            GEBI("totPrice").innerHTML = returnVal;
+            
+            GEBI("sharePrice").innerHTML = returnVal;
+            
+            
             
         }
     </script>
