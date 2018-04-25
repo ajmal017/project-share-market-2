@@ -18,6 +18,7 @@ class CreateAsxCompanyDetailListings extends Migration
             $table->string('company_name');
             $table->string('company_code')->unique();
             $table->string('gics_industry');
+            $table->string('status');
         });
     }
 

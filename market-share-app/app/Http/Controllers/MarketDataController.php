@@ -99,23 +99,30 @@ class MarketDataController
         $resp = $this->curlStocksStats($url);
         $resp = json_decode($resp);
 
-        $output['asx_code'] = strtolower($resp->{'Meta Data'}->{'2. Symbol'});
-        $output['last_refreshed'] = $resp->{'Meta Data'}->{'3. Last Refreshed'};
+        if (isset($resp->{'Meta Data'})) {
+            $output['asx_code'] = strtolower($resp->{'Meta Data'}->{'2. Symbol'});
+            $output['last_refreshed'] = $resp->{'Meta Data'}->{'3. Last Refreshed'};
 
-        foreach ($resp->{'Monthly Time Series'} as $key => $record) {
-            $insert_count += DB::table('stocks_monthly')->insert([
-                'created_at_utc' => Carbon::now(),
-                'last_refreshed' => $output['last_refreshed'],
-                'asx_code' => $output['asx_code'],
-                'date' => $key,
-                'open' => $record->{'1. open'},
-                'high' => $record->{'2. high'},
-                'low' => $record->{'3. low'},
-                'close' => $record->{'4. close'},
-                'volume' => $record->{'5. volume'}
-            ]);
+            foreach ($resp->{'Monthly Time Series'} as $key => $record) {
+                $insert_count += DB::table('stocks_monthly')->insert([
+                    'created_at_utc' => Carbon::now(),
+                    'last_refreshed' => $output['last_refreshed'],
+                    'asx_code' => $output['asx_code'],
+                    'date' => $key,
+                    'open' => $record->{'1. open'},
+                    'high' => $record->{'2. high'},
+                    'low' => $record->{'3. low'},
+                    'close' => $record->{'4. close'},
+                    'volume' => $record->{'5. volume'}
+                ]);
+            }
+            return $insert_count . ' records added';
+        } else {
+            $output = DB::table('asx_company_details')
+                        ->where('company_code', $asx_code)
+                        ->update(['status' => 'inactive']);
+            return $output;
         }
-        return $insert_count . ' records added';
     }
 
     public static function curlStocksStats($url)
@@ -160,5 +167,45 @@ class MarketDataController
             ->limit(10)
             ->get();
         return $company;
+    }
+
+    public function getmonthly($asx_code){
+        $output = array();
+        $existingAddition = DB::select('SELECT ROUND(UNIX_TIMESTAMP(STR_TO_DATE(date, "%Y-%m-%d")) * 1000) as unix_date, open, high, low, close, volume FROM stocks.stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) GROUP BY unix_date ORDER BY unix_date ASC');
+
+        foreach ($existingAddition as $value) {
+            $current_array = array();
+            foreach ($value as $value2) {
+                array_push($current_array,$value2);
+            }
+            array_push($output, $current_array);
+        }
+
+        return $output;
+    }
+
+    public function populateMonthlyStocks($limit){
+        $output = array();
+        $current = 0;
+
+        $allCompanyDetails = DB::table('asx_company_details')->get();
+
+        foreach ($allCompanyDetails as $key => $value) {
+            $asx_code = strtolower($value->company_code) . '.ax';
+            $existingAddition = DB::select('SELECT asx_code FROM stocks.stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'" GROUP BY asx_code');
+            
+            var_dump($existingAddition[0]);
+            var_dump($value->status == 'active');
+            var_dump($current != $limit);
+
+            if (!isset($existingAddition[0]) && $value->status == 'active' && $current != $limit) {
+                $output = $this->monthlyStats($value->company_code);
+                $current++;
+            } else {
+                break;
+            }
+        }
+
+        return $output;
     }
 }

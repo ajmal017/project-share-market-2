@@ -68,8 +68,11 @@ class ShareTransactionController extends Controller
             ->sum('quantity');
             
         $data = json_decode($json);
+        if (empty($data)) {
+            return false;
+        }
+
         $quantity = $data['quantity'];
-        
         $commission = ShareTransactionController::sellingCommission($price, $quantity);
         $sellprice = ($price*$quantity)-$commission;
         
@@ -83,6 +86,7 @@ class ShareTransactionController extends Controller
         
         # update account balance
         ShareTransactionController::adjustBalance($user->id, $sellprice);
+        return true;
 
     }
 
