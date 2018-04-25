@@ -33,7 +33,7 @@
                         echo "<tr>";
                         echo "<td>".$name."</td>";
                         echo "<td>".$balance."</td>";
-                        echo "<td><button name='friend' onclick='callAjax(".$uid.")'>Friend</button></td>";
+                        echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
                         echo "</tr>";
                         }
                 ?>
@@ -73,7 +73,7 @@
                                 echo "<tr>";
                                 echo "<td>".$uname."</td>";
                                 echo "<td>".$ubalance."</td>";
-                                echo "<td><button name='friend' onclick='callAjax(".$uid.")'>Friend</button></td>";
+                                echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
                                 echo "</tr>";
                             }
                     }
@@ -111,7 +111,7 @@
                             echo "<tr>";
                             echo "<td>".$name."</td>";
                             echo "<td>".$balance."</td>";
-                            echo "<td><button name='friend'>Unfriend</button></td>";
+                            echo "<td><button name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
                             echo "</tr>";
                         }
                     }

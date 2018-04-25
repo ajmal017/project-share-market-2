@@ -91,4 +91,6 @@ Route::get('/listing/{symbol}', 'ListingsController@listing');
 //Route::get('/testing/buy-shares/{balance}', 'ShareTransactionController@balance');
 Route::get('/testing/buy-shares/', 'ShareTransactionController@balance');
 
-Route::get('/community/{fid}', 'FriendController@insertFriend');
+//Friend Controller
+Route::get('/community/add/{fid}', 'FriendController@insertFriend');
+Route::get('/community/delete/{fid}', 'FriendController@deleteFriend');
