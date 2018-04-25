@@ -13,7 +13,6 @@ class FriendController extends Controller
   
   public function insertFriend($fid){
         $user_id=Auth::user()->id;
-        //$fid=Input::get('fid');
         $data = array('user_id'=>$user_id,'friend_id'=>$fid);
         DB::table('friends')->insert($data);
   }

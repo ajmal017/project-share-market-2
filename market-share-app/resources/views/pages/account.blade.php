@@ -137,7 +137,7 @@
 
             </div>
 
-            /*<div class = "sysoContent sysoContent50">
+            <div class = "sysoContent sysoContent50">
                 <br/>
                 <div class = "userDetails">
                     <h1>My Account</h1>
@@ -163,44 +163,41 @@
                             <td>{{ Auth::user()->account_balance+$overallvalue }}</td>
                     </table>
                 </div>
-                <br/>
                 
-                <!-- OLD CODE FOR FRIEND LINK -->
-                <!-- <td id="friendName"><a href="javascript:void(0)">George</td> -->
+                <p><a class = "sysoLink" href='/community'>Community</a></p>
 
                 <div class="friends">
-                <br/>
-                <h1>Friends</h1>
-                <table class="friendList">
-                <tr id = "tableHeader">
-                    <th>Name</th>
-                    <th>Total Worth</th>
-                    <th>Unfriend</th>
-                </tr>
+                    <h1>Friends</h1>
+                    <table class="friendList">
+                        <tr id = "tableHeader">
+                            <th>Name</th>
+                            <th>Total Worth</th>
+                            <th>Unfriend</th>
+                        </tr>
 
-                <?php 
-                    //List of Friends
-                    $user_id=Auth::id();
-                    $friends=DB::table('friends')->where('user_id', $user_id)->get();
-                    $name=null;
-                    $balance=0.00;
-                    foreach ($friends as $f) {
-                        $fid=($f->friend_id);
-                        $data=DB::table('users')->where('id', $fid)->get();
-                        foreach ($data as $line) {
-                            $name=($line->name);
-                            $balance=($line->account_balance);
-                            echo "<tr>";
-                            echo "<td>".$name."</td>";
-                            echo "<td>".$balance."</td>";
-                            echo "<td><button name='friend'>Unfriend</button></td>";
-                            echo "</tr>";
-                        }
-                    }
-                ?>
+                        <?php 
+                            //List of Friends
+                            $user_id=Auth::id();
+                            $friends=DB::table('friends')->where('user_id', $user_id)->get();
+                            $name=null;
+                            $balance=0.00;
+                            foreach ($friends as $f) {
+                                $fid=($f->friend_id);
+                                $data=DB::table('users')->where('id', $fid)->get();
+                                foreach ($data as $line) {
+                                    $name=($line->name);
+                                    $balance=($line->account_balance);
+                                    echo "<tr>";
+                                    echo "<td>".$name."</td>";
+                                    echo "<td>".$balance."</td>";
+                                    echo "<td><button name='friend'>Unfriend</button></td>";
+                                    echo "</tr>";
+                                }
+                            }
+                        ?>
 
-                </table>
-            </div>
+                    </table>
+                </div>
 
             </div>
 
