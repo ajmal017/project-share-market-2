@@ -87,7 +87,7 @@ Route::get('/listing/allcompanies/{limit}', 'MarketDataController@populateMonthl
 Route::get('/run_migrations', function () {
 try {
     dump('Starting migrations...');
-    dump(Artisan::call( 'migrate:fresh' ));
+    dump(Artisan::call( 'migrate' ));
     dump('Seeding the database...');
     dump(Artisan::call( 'db:seed' ));
     dump('Completed');
