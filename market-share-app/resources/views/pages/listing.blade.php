@@ -6,6 +6,7 @@
     @if(Auth::check())
         <a class = "sysoLink" href='../account'>Home</a>
         <a class = "sysoLink" href='../search'>Search</a>
+        <a class = "sysoLink" href="#" onClick="history.go(-1);return true;">Back</a>
         <a class = "sysoLink" id="../logoutLink" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
         </a>
