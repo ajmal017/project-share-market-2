@@ -3,12 +3,35 @@
 @section('content')
 
     <?php
-    function insertFriend($friend_id){
-                $user_id=Auth::id();
-                $data = array('user_id'=>$user_id,'friend_id'=>$friend_id);
-                DB::table('friends')->insert($data);
-                }
+    /*    function insertFriend($friend_id){
+            $user_id=Auth::id();
+            $data = array('user_id'=>$user_id,'friend_id'=>$friend_id);
+            DB::table('friends')->insert($data);
+        }*/
     ?>
+
+   <!-- <script type = "text/javascript">
+        function insertFriend(friendid){
+            var fid=friendid;
+            var uid={{Auth::id()}};
+            var sql = "INSERT INTO friends (user_id, friend_id) VALUES (uid, fid)";
+        }
+    </script>-->
+
+    <script type = "text/javascript">
+    
+        function callAjax(fid){
+            alert("testing123");
+            $.ajax({
+                //url: '/community',
+                url: "/community/" + $(fid),
+                type: 'get',
+                success: function() {
+                    console.log("Valueadded");
+                }
+            });
+        }
+    </script>
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
 
@@ -25,7 +48,7 @@
                     <th>Friend</th>
                 </tr>
 
-                <?php 
+                <?php
                     //Top 10 Leaderboard
                     $users = DB::table('users')->get();
                     //SELECT * FROM articles ORDER BY rating DESC LIMIT 10
@@ -33,14 +56,21 @@
                     $name=null;
                     $balance=0.00;
                     foreach ($data as $line) {
-                    $name=($line->name);
-                    $balance=($line->account_balance);
-                    echo "<tr>";
-                    echo "<td>".$name."</td>";
-                    echo "<td>".$balance."</td>";
-                    echo "<td><button name='friend'>Friend</button></td>";
-                    echo "</tr>";
-                    }
+                        $uid=($line->id);
+                        $name=($line->name);
+                        $balance=($line->account_balance);
+                        echo "<tr>";
+                        echo "<td>".$name."</td>";
+                        echo "<td>".$balance."</td>";
+                        //echo "<td><button name='friend' onclick='".route('comm.friend', $uid)."'>Friend</button></td>";
+                        echo "<td><button name='friend' onclick='callAjax()'>Friend</button></td>";
+                        //echo "<form method='get'><td><input type='submit' name='insFriend[$uid]' value='Friend'/></td></form>";
+                        /*<form name="myForm">
+                            <input type="hidden" id="bla" name="bla" value="<?php echo $value['bla']; ?>">
+                            <input type="button" onclick="ajaxFunction(<?php echo $value['id']; ?>)" value="Speichern">
+                            </form>*/
+                        echo "</tr>";
+                        }
                 ?>
 
                 </table>

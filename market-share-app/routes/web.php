@@ -88,3 +88,5 @@ Route::get('/listing/companyname/{asx_code}', 'MarketDataController@getCompanyNa
 Route::get('/listing/{symbol}', 'ListingsController@listing');
 //Route::get('/testing/buy-shares/{balance}', 'ShareTransactionController@balance');
 Route::get('/testing/buy-shares/', 'ShareTransactionController@balance');
+
+Route::get('/community/{fid}', 'FriendController@insertFriend');
