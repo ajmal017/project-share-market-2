@@ -84,6 +84,18 @@ Route::get('/listing/getmonthly/{asx_code}', 'MarketDataController@getmonthly');
 Route::get('/listing/companycode/{asx_code}', 'MarketDataController@getCompanyDetails');
 Route::get('/listing/companyname/{asx_code}', 'MarketDataController@getCompanyName');
 Route::get('/listing/allcompanies/{limit}', 'MarketDataController@populateMonthlyStocks');
+Route::get('/run_migrations', function () {
+try {
+    dump('Starting migrations...');
+    dump(Artisan::call( 'migrate' ));
+    dump('Seeding the database...');
+    dump(Artisan::call( 'db:seed' ));
+    dump('Completed');
+} catch (Exception $e) {
+    print_r($e->getMessage());
+    Response::make($e->getMessage(), 500);
+}
+});
 
 //Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@register');
 

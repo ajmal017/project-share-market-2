@@ -20,8 +20,11 @@ class ListingsController extends Controller
             ->get();
         $data = json_decode($json);
         
-        $currentprice = $this->getCurrentPrice($asx);
-
+        try {
+            $currentprice = $this->getCurrentPrice($asx);
+        } catch (Exception $e) {
+            $currentprice = 'Unable to retrieve current price';
+        }
 
         return view('/pages/listing')
             ->with('symbol', $asx)

@@ -65,7 +65,13 @@ $(document).ready(function () {
         });
     });
 
-    $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {  
+    $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
+        var title_text = '';
+        if (data.length != 0) {
+            title_text = $('#container').attr('class') + ' Stock Data';
+        } else {
+            title_text = 'No stock data available for ' + $('#container').attr('class');
+        }
         // split the data set into ohlc and volume
         var ohlc = [],
             volume = [],
@@ -101,7 +107,7 @@ $(document).ready(function () {
             },
 
             title: {
-                text: $('#container').attr('class') + ' Stock Data'
+                text: title_text
             },
 
             yAxis: [{
