@@ -171,7 +171,7 @@ class MarketDataController
 
     public function getmonthly($asx_code){
         $output = array();
-        $existingAddition = DB::select('SELECT ROUND(UNIX_TIMESTAMP(STR_TO_DATE(date, "%Y-%m-%d")) * 1000) as unix_date, open, high, low, close, volume FROM stocks.stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'.ax" GROUP BY unix_date ORDER BY unix_date ASC');
+        $existingAddition = DB::select('SELECT ROUND(UNIX_TIMESTAMP(STR_TO_DATE(date, "%Y-%m-%d")) * 1000) as unix_date, open, high, low, close, volume FROM stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'.ax" GROUP BY unix_date ORDER BY unix_date ASC');
 
         foreach ($existingAddition as $value) {
             $current_array = array();
@@ -192,7 +192,7 @@ class MarketDataController
         while ($current <= $limit) {
             foreach ($allCompanyDetails as $key => $value) {
                 $asx_code = strtolower($value->company_code) . '.ax';
-                $existingAddition = DB::select('SELECT asx_code FROM stocks.stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'" GROUP BY asx_code');
+                $existingAddition = DB::select('SELECT asx_code FROM stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'" GROUP BY asx_code');
 
                 if (!isset($existingAddition[0]) && $value->status == 'active') {
                     $output = $this->monthlyStats($value->company_code);
