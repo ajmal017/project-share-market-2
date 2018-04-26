@@ -172,7 +172,6 @@
                         <tr id = "tableHeader">
                             <th>Name</th>
                             <th>Total Worth</th>
-                            <th>Unfriend</th>
                         </tr>
 
                         <?php 
@@ -190,7 +189,6 @@
                                     echo "<tr>";
                                     echo "<td>".$name."</td>";
                                     echo "<td>".$balance."</td>";
-                                    echo "<td><button name='friend'>Unfriend</button></td>";
                                     echo "</tr>";
                                 }
                             }
