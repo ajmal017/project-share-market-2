@@ -2,8 +2,13 @@
     $.ajax({
       url: "/community/add/" + fid,
       type: 'get',
-      success: function() {
-        console.log("Value Added");
+      success: function(data) {
+        if (!data) {
+          console.log("Value Added");
+        } 
+        else {
+          alert("Friend already exists");
+        }
       }
     });
   }

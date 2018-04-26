@@ -19,7 +19,7 @@ class FriendController extends Controller
             DB::table('friends')->insert($data);
         }
         else{
-            echo "alert Friend already exists";
+            return $data;
         }
   }
 
