@@ -74,7 +74,6 @@ $(document).ready(function () {
         }
         // split the data set into ohlc and volume
         var ohlc = [],
-            volume = [],
             dataLength = data.length,
             // set the allowed units for data grouping
             groupingUnits = [[
@@ -90,12 +89,7 @@ $(document).ready(function () {
                 data[i][1], // open
                 data[i][2], // high
                 data[i][3], // low
-                data[i][4]  // close
-            ]);
-
-            volume.push([
-                data[i][0], // the date
-                data[i][5] // the volume
+                data[i][4] // close
             ]);
         }
 
@@ -123,36 +117,12 @@ $(document).ready(function () {
                 resize: {
                     enabled: true
                 }
-            }, {
-                labels: {
-                    align: 'right',
-                    x: -3
-                },
-                title: {
-                    text: 'Volume'
-                },
-                top: '65%',
-                height: '35%',
-                offset: 0,
-                lineWidth: 2
             }],
-
-            tooltip: {
-                split: true
-            },
 
             series: [{
                 type: 'candlestick',
                 name: $('#container').attr('class'),
                 data: ohlc,
-                dataGrouping: {
-                    units: groupingUnits
-                }
-            }, {
-                type: 'column',
-                name: 'Volume',
-                data: volume,
-                yAxis: 1,
                 dataGrouping: {
                     units: groupingUnits
                 }
