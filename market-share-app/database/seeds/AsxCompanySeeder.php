@@ -14,6 +14,7 @@ class AsxCompanySeeder extends Seeder
     public function run()
     {
         $csv = Reader::createFromPath(getcwd()."/ASXListedCompanies.csv", 'r');
+        // $csv = Reader::createFromPath(getcwd()."\public\ASXListedCompanies.csv", 'r');
         $csv->setHeaderOffset(1);
 
         $stmt = (new Statement())
@@ -25,7 +26,7 @@ class AsxCompanySeeder extends Seeder
                 'company_name' => $record['Company name'],
                 'company_code' => $record['ASX code'],
                 'gics_industry' => $record['GICS industry group'],
-                'status' => 'active'
+                'status' => 'pending'
             ]);
         }
     }

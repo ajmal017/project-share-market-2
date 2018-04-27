@@ -19,17 +19,12 @@ class ListingsController extends Controller
             ->limit(10)
             ->get();
         $data = json_decode($json);
-        
-        try {
-            $currentprice = $this->getCurrentPrice($asx);
-        } catch (Exception $e) {
-            $currentprice = 'Unable to retrieve current price';
-        }
+        $currentprice = $this->getCurrentPrice($asx);
 
         return view('/pages/listing')
             ->with('symbol', $asx)
             ->with('data', $data)
-            ->with('price',$currentprice);   
+            ->with('price', $currentprice);   
     }
 
     public static function getCurrentPrice($code) {
@@ -39,8 +34,14 @@ class ListingsController extends Controller
         $name = 'Time Series (60min)';
         $name2 = '4. close';
         $array = $asxdata[$name];
-        $keys = array_keys($array);
-        $newarr = $array[$keys[0]];
+
+        try {
+            $keys = array_keys($array);
+            $newarr = $array[$keys[0]];
+        } catch (Exception $e) {
+            $newarr[$name2] = 'Unable to retrieve current price';
+        }
+        
         return $newarr[$name2];
     }
 }

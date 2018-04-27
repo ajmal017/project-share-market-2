@@ -100,14 +100,11 @@ class MarketDataController
         $resp = json_decode($resp);
 
         if (isset($resp->{'Meta Data'})) {
-            $output['asx_code'] = strtolower($resp->{'Meta Data'}->{'2. Symbol'});
-            $output['last_refreshed'] = $resp->{'Meta Data'}->{'3. Last Refreshed'};
-
             foreach ($resp->{'Monthly Time Series'} as $key => $record) {
                 $insert_count += DB::table('stocks_monthly')->insert([
                     'created_at_utc' => Carbon::now(),
-                    'last_refreshed' => $output['last_refreshed'],
-                    'asx_code' => $output['asx_code'],
+                    'last_refreshed' => $resp->{'Meta Data'}->{'3. Last Refreshed'},
+                    'asx_code' => strtolower($resp->{'Meta Data'}->{'2. Symbol'}),
                     'date' => $key,
                     'open' => $record->{'1. open'},
                     'high' => $record->{'2. high'},
@@ -115,16 +112,16 @@ class MarketDataController
                     'close' => $record->{'4. close'},
                     'volume' => $record->{'5. volume'}
                 ]);
-                $output = DB::table('asx_company_details')
-                        ->where('company_code', $output['asx_code'])
+                $success = DB::table('asx_company_details')
+                        ->where('company_code', $asx_code)
                         ->update(['status' => 'active']);
             }
-            return $insert_count . ' records added';
+            return $success . ', ' . $insert_count . ' records added';
         } else {
-            $output = DB::table('asx_company_details')
+            $failed = DB::table('asx_company_details')
                         ->where('company_code', $asx_code)
-                        ->update(['status' => 'inactive']);
-            return $output;
+                        ->update(['status' => 'failed']);
+            return $failed;
         }
     }
 
@@ -176,6 +173,24 @@ class MarketDataController
         $output = array();
         $existingAddition = DB::select('SELECT ROUND(UNIX_TIMESTAMP(STR_TO_DATE(date, "%Y-%m-%d")) * 1000) as unix_date, open, high, low, close, volume FROM stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'.ax" GROUP BY unix_date ORDER BY unix_date ASC');
 
+        date_default_timezone_set('UTC');
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" . $asx_code . ".AX&apikey=PEQIWLTYB0GPLMB8";
+        $resp = $this->curlStocksStats($url);
+        $resp = json_decode($resp);
+
+        if (isset($resp->{'Meta Data'})) {
+            foreach ($resp->{'Monthly Time Series'} as $key => $record) {
+                $data[] = array(
+                    'unix_date' => Carbon::createFromFormat('Y-m-d', $key)->timestamp * 1000,
+                    'open' => (float)$record->{'1. open'},
+                    'high' => (float)$record->{'2. high'},
+                    'low' => (float)$record->{'3. low'},
+                    'close' => (float)$record->{'4. close'},
+                    'volume' => (int)$record->{'5. volume'}
+                );
+            }
+        }
+
         foreach ($existingAddition as $value) {
             $current_array = array();
             foreach ($value as $value2) {
@@ -191,13 +206,17 @@ class MarketDataController
         $output = array();
         $current = 0;
 
-        $allCompanyDetails = DB::table('asx_company_details')->get()->take($limit);
+        $allCompanyDetails = DB::select('SELECT * FROM asx_company_details WHERE status = "pending" LIMIT ' . $limit);
         foreach ($allCompanyDetails as $key => $value) {
             $asx_code = strtolower($value->company_code) . '.ax';
             $existingAddition = DB::select('SELECT asx_code FROM stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'" GROUP BY asx_code');
 
             if (!isset($existingAddition[0])) {
                 $output[$asx_code] = $this->monthlyStats($value->company_code);
+            } else {
+                $success = DB::table('asx_company_details')
+                        ->where('company_code', $value->company_code)
+                        ->update(['status' => 'active']);
             }
         }
 
