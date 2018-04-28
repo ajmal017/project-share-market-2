@@ -40,7 +40,7 @@
             }
             
         ?>
-        <button onclick="goBack()">Back to Listing</button>
+        <a class = "sysoLink" href='#' onclick="goBack()">Back to Listing</a>
         <a class = "sysoLink" href='search'>Search for another Listing</a>
         <a class = "sysoLink" href='account'>Return to Account</a>
     </div>
