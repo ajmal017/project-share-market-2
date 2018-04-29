@@ -40,7 +40,7 @@
                 <?php
                     //Top 10 Leaderboard
                     $users = DB::table('users')->get();
-                    //SELECT * FROM articles ORDER BY rating DESC LIMIT 10
+                    //SELECT * FROM users ORDER BY rating DESC LIMIT 10
                     $data = $users->sortByDesc('account_balance')->take('10');
                     $name=null;
                     $balance=0.00;
@@ -108,7 +108,7 @@
             
             <div class="friends">
                 <br/>
-                <h1>Friends</h1>
+                <h1>Friends Top 15</h1>
                 <table class="friendList">
                 <tr id = "tableHeader">
                     <th>Name</th>
@@ -120,9 +120,12 @@
                     //List of Friends
                     $user_id=Auth::id();
                     $friends=DB::table('friends')->where('user_id', $user_id)->get();
+                    //SELECT * FROM friends ORDER BY rating DESC LIMIT 10
+                    //$fdata = $friends->sortByDesc('account_balance')->take('15');
+                    $fdata = $friends->take('15');
                     $name=null;
                     $balance=0.00;
-                    foreach ($friends as $f) {
+                    foreach ($fdata as $f) {
                         $fid=($f->friend_id);
                         $data=DB::table('users')->where('id', $fid)->get();
                         foreach ($data as $line) {
