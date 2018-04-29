@@ -65,42 +65,43 @@
                 <form> 
                     <input type='text' name='user_name' placeholder='Enter User Name'>
                     <input type='submit' value='Search'>
-                </form>
-                <table class="friendList">
-                <tr id = "tableHeader">
-                    <th>Name</th>
-                    <th>Total Worth</th>
-                    <th>Friend</th>
-                </tr>
                 
                 <?php
                     //Search User
                     $username = Request::get('user_name');
-                    if ($username == null){
-                        echo "<tr></tr>";
+                    $userdata = DB::table('users')->where('name', 'like', '%'.$username.'%')->get();
+                    if (empty($username)){
+                        echo "</form>";
+                    }
+                    elseif (count($userdata) == 0){
+                        echo "<span>User name does not exist</span>";
+                        echo "</form>";
                     }
                     else {
-                        $userdata = DB::table('users')->where('name', 'like', '%'.$username.'%')->get();
+                        echo "</form>";
                         $uid=null;
                         $uname=null;
                         $ubalance=0.00;
-                            foreach ($userdata as $uline) {
-                                $uid=($uline->id);
-                                $uname=($uline->name);
-                                $ubalance=($uline->account_balance);
-                                echo "<tr>";
-                                echo "<td>".$uname."</td>";
-                                echo "<td>".$ubalance."</td>";
-                                echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
-                                echo "</tr>";
-                            }
+                        foreach ($userdata as $uline) {
+                            $uid=($uline->id);
+                            $uname=($uline->name);
+                            $ubalance=($uline->account_balance);
+                            echo "<table class='friendList'>";
+                            echo "<tr id = 'tableHeader'>";
+                            echo "<th>Name</th>";
+                            echo "<th>Total Worth</th>";
+                            echo "<th>Friend</th>";
+                            echo "</tr>";
+                            echo "<tr>";
+                            echo "<td>".$uname."</td>";
+                            echo "<td>".$ubalance."</td>";
+                            echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
+                            echo "</tr>";
+                            echo "</table>";
+                        }
                     }
                 ?>
-
-                </table>
             </div>
-
-
         </div>
 
         <div class = "sysoContent sysoContent50">

@@ -18,9 +18,6 @@ class FriendController extends Controller
         if ($check->count() == 0) {
             DB::table('friends')->insert($data);
             return $data;
-            //return redirect()->to('/community'); 
-            //return back();
-            //return view('community');
         }
         else{
             return null;
