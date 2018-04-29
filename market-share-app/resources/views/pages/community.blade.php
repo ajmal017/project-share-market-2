@@ -20,9 +20,9 @@
 
 @section('content')
 
-    <!-- PAGE SPECIFIC CONTENT GOES HERE -->
+    <!-- PAGE SPECIFIC CONTENT GOES HERE -->  
 
-<script type = "text/javascript" src = "{{ URL::to('/js/friend.js') }}"></script>
+    <script type = "text/javascript" src = "{{ URL::to('/js/friend.js') }}"></script>  
 
     <div class = "sysoBox sysoBoxFlex" id="commBox">
         <div class = "sysoContent sysoContent50">
@@ -99,6 +99,7 @@
 
                 </table>
             </div>
+
 
         </div>
 

@@ -17,9 +17,13 @@ class FriendController extends Controller
         $check=DB::table('friends')->where('user_id', '=', $user_id)->where('friend_id', '=', $fid);
         if ($check->count() == 0) {
             DB::table('friends')->insert($data);
+            return $data;
+            //return redirect()->to('/community'); 
+            //return back();
+            //return view('community');
         }
         else{
-            return $data;
+            return null;
         }
   }
 

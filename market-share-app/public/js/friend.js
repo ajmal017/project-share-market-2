@@ -3,9 +3,10 @@
       url: "/community/add/" + fid,
       type: 'get',
       success: function(data) {
-        if (!data) {
+        if (data) {
           console.log("Value Added");
-        } 
+          window.location.reload();
+        }
         else {
           alert("Friend already exists");
         }
@@ -19,6 +20,7 @@
       type: 'get',
       success: function () {
         console.log("Value Removed");
+        window.location.reload();
       }
     });
   }
