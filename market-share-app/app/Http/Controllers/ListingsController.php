@@ -38,7 +38,7 @@ class ListingsController extends Controller
             $array = $asxdata[$name];
             $keys = array_keys($array);
             $newarr = $array[$keys[0]];
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $newarr[$name2] = 'Unable to retrieve current price';
         }
         
