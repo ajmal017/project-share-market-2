@@ -79,6 +79,12 @@
                     }
                     else {
                         echo "</form>";
+                        echo "<table class='friendList'>";
+                        echo "<tr id = 'tableHeader'>";
+                        echo "<th>Name</th>";
+                        echo "<th>Total Worth</th>";
+                        echo "<th>Friend</th>";
+                        echo "</tr>";
                         $uid=null;
                         $uname=null;
                         $ubalance=0.00;
@@ -86,19 +92,13 @@
                             $uid=($uline->id);
                             $uname=($uline->name);
                             $ubalance=($uline->account_balance);
-                            echo "<table class='friendList'>";
-                            echo "<tr id = 'tableHeader'>";
-                            echo "<th>Name</th>";
-                            echo "<th>Total Worth</th>";
-                            echo "<th>Friend</th>";
-                            echo "</tr>";
                             echo "<tr>";
                             echo "<td>".$uname."</td>";
                             echo "<td>".$ubalance."</td>";
                             echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
                             echo "</tr>";
-                            echo "</table>";
                         }
+                        echo "</table>";
                     }
                 ?>
             </div>
