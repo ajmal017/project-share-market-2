@@ -11,6 +11,12 @@
         }
     </script>
     <?php
+        use Http\Controllers\AdminController;
+        if (!isAdmin()) {
+            echo "You are not admin!!!";
+        } else {
+            echo "You are admin";
+        }
         // if user not admin, redirect to another page
         // if post 1
         // if post 2

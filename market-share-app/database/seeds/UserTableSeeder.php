@@ -149,6 +149,11 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('secret'),
             'account_balance' => 1000000
         ]);
-
+            DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin',
+            'password' => bcrypt('secret'),
+            'account_balance' => 0
+        ]);
     }
 }
