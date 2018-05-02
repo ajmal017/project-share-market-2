@@ -5,21 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 class AdminController extends Controller
 {
     public static function isAdmin() {
-        return (Auth::user()->email == 'admin');
+        return (Auth::user()->email == 'admin@gmail.com');
     }
     
 
     public static function resetPassword($userid) {
         // admin function to reset a password
-        if (!isAdmin()) {
+        if (!AdminController::isAdmin()) {
             return false;
         }
         $default = 'secret';
-        $password = Hash::make($data['password']);
+        //$password = Hash::make($data['password']);
+        $password = bcrypt($default);
         try {
             DB::table('users')
                 ->where('id',$userid)
@@ -32,7 +34,7 @@ class AdminController extends Controller
 
     public static function updateBalance($userid, $amount) {
         // admin function to update a user's account balance
-        if (!isAdmin()) {
+        if (!AdminController::isAdmin()) {
             return false;
         }
         try {
@@ -47,7 +49,7 @@ class AdminController extends Controller
 
     public static function deleteUser($userid) {
         // admin function to delete a user, their open transactions and friends
-        if (!isAdmin()) {
+        if (!AdminController::isAdmin()) {
             return false;
         }
         try {

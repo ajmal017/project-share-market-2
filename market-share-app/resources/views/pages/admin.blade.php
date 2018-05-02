@@ -11,16 +11,25 @@
         }
     </script>
     <?php
-        use Http\Controllers\AdminController;
-        if (!isAdmin()) {
-            echo "You are not admin!!!";
-        } else {
-            echo "You are admin";
+        use App\Http\Controllers\AdminController;
+        if (!AdminController::isAdmin()) {
+            // TO-DO redirect if not admin
+        } elseif(isset($_GET['reset'])) {
+            $uid = $_GET['reset'];
+            if (AdminController::resetPassword($uid)) {
+                echo "Success! Password has been reset!";
+            } else {
+                echo "Error! Password reset failed!";
+            }
+        } elseif(isset($_GET['delete'])) {
+            $uid = $_GET['delete'];
+            if (AdminController::deleteUser($uid)) {
+                echo "Success! User has been deleted!";
+            } else {
+                echo "Error! Unable to delete user!";
+            }
         }
-        // if user not admin, redirect to another page
-        // if post 1
-        // if post 2
-        // if post 3
+        
     ?>
     
     <div class = "sysoBox sysoBoxFlex" id="commBox">
@@ -40,7 +49,7 @@
                     
                 }
                 elseif (count($userdata) == 0){
-                    echo "<span>User name does not exist</span>";
+                    echo "<span>No users found.</span>";
                     
                 }
                 else {
@@ -69,11 +78,10 @@
                         echo "<td>$uname</td>";
                         echo "<td>$uemail</td>";
                         echo "<td>$ubalance</td>";
-                        echo "<td><form><input type='hidden' name='uid' value='$uid'><input type='button' onClick='confReset(this.form);' value='Reset Password' /></form></td>";
-                        echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Adjust Balance</button></td>";
-                        echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Delete</button></td>";
+                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input type='button' onClick='confReset(this.form);' value='Reset Password' /></form></td>";
+                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input type='button' onClick='confReset(this.form);' value='Adjust Balance' /></form></td>";
+                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input type='button' onClick='confReset(this.form);' value='Delete User' /></form></td>";
                         echo "</tr>";
-                        
                     }
                     echo "</table>";
                 }
