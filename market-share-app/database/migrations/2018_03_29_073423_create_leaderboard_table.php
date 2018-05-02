@@ -15,6 +15,7 @@ class CreateLeaderboardTable extends Migration
     {
         Schema::create('leaderboard', function (Blueprint $table) {
             $table->unsignedinteger('user_id');
+            $table->string('name');
             $table->decimal('equity',13,4);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

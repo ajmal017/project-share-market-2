@@ -39,15 +39,18 @@
 
                 <?php
                     //Top 10 Leaderboard
-                    $users = DB::table('users')->get();
+                    //$users = DB::table('users')->get();
+                    $users = DB::table('leaderboard')->get();
                     //SELECT * FROM users ORDER BY rating DESC LIMIT 10
-                    $data = $users->sortByDesc('account_balance')->take('10');
+                    //$data = $users->sortByDesc('account_balance')->take('10');
+                    $data = $users->sortByDesc('equity')->take('10');
                     $name=null;
                     $balance=0.00;
                     foreach ($data as $line) {
-                        $uid=($line->id);
+                        $uid=($line->user_id);
                         $name=($line->name);
-                        $balance=($line->account_balance);
+                        //$balance=($line->account_balance);
+                        $balance=($line->equity);
                         echo "<tr>";
                         echo "<td>".$name."</td>";
                         echo "<td>".$balance."</td>";
