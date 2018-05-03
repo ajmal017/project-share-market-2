@@ -22,8 +22,6 @@
 
 @section('content')
     <script type = "text/javascript" src = "{{ URL::to('/js/stockmarket.js') }}"></script>
-    {{--  <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>  --}}
-    {{--  <script src="https://code.highcharts.com/highcharts.js"></script>  --}}
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
 
@@ -109,10 +107,9 @@
 
         <div class = "sysoContent sysoContent50">
             <!-- EMBEDDED GRAPH GOES HERE -->
-            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-            <script src="https://code.highcharts.com/stock/highstock.js"></script>
-            <script src="https://code.highcharts.com/stock/modules/drag-panes.js"></script>
-            <script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+            <script src="{{ URL::to('/js/highcharts/highstock.js') }}"></script>
+            <script src="{{ URL::to('/js/highcharts/modules/drag-panes.js') }}"></script>
+            <script src="{{ URL::to('/js/highcharts/modules/exporting.js') }}"></script>
 
             <div id="container" style="height: 400px; min-width: 310px" class='{{$data[0]->company_code}}'></div>
         </div>

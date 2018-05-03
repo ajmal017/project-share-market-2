@@ -89,11 +89,11 @@ $(document).ready(function () {
                 data[i][1], // open
                 data[i][2], // high
                 data[i][3], // low
-                data[i][4] // close
+                data[i][4]  // close
             ]);
         }
 
-        // // create the chart
+        // create the chart
         Highcharts.stockChart('container', {
 
             rangeSelector: {

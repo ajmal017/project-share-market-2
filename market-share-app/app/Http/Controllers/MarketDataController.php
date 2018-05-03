@@ -171,7 +171,6 @@ class MarketDataController
 
     public function getmonthly($asx_code){
         $output = array();
-        $existingAddition = DB::select('SELECT ROUND(UNIX_TIMESTAMP(STR_TO_DATE(date, "%Y-%m-%d")) * 1000) as unix_date, open, high, low, close, volume FROM stocks_monthly WHERE DATE(last_refreshed) >= DATE(NOW() - INTERVAL 1 MONTH) AND asx_code = "'. $asx_code .'.ax" GROUP BY unix_date ORDER BY unix_date ASC');
 
         date_default_timezone_set('UTC');
         $url = "https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY&symbol=" . $asx_code . ".AX&apikey=PEQIWLTYB0GPLMB8";
@@ -191,7 +190,7 @@ class MarketDataController
             }
         }
 
-        foreach ($existingAddition as $value) {
+        foreach (array_reverse($data) as $value) {
             $current_array = array();
             foreach ($value as $value2) {
                 array_push($current_array,$value2);
