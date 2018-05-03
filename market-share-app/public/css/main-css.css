@@ -206,6 +206,10 @@ button:hover{
     background-color: #ec596e;
 }
 
+.adminButton{
+    width: 100%;
+}
+
 input{
     width: 20%;
     padding: 5px;

@@ -32,9 +32,9 @@ class AdminController extends Controller
         return true;
     }
 
-    public static function updateBalance($userid, $amount) {
+    public static function adjustBalance($userid, $amount) {
         // admin function to update a user's account balance
-        if (!AdminController::isAdmin()) {
+        if (!AdminController::isAdmin() || !is_numeric($amount)) {
             return false;
         }
         try {

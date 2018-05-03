@@ -9,11 +9,24 @@
                 form.submit();
             }
         }
+        function confDelete(form) {
+            if (confirm("Are you sure you want to delete this user and all associated records?")) {
+                form.submit();
+            }
+        }
+        function confAdjust(form) {
+            var amount = prompt("Please enter new account balance:");
+            if (amount != null) {
+                GEBI('amount').value = amount;
+                form.submit();
+            }
+        }
     </script>
     <?php
         use App\Http\Controllers\AdminController;
         if (!AdminController::isAdmin()) {
-            // TO-DO redirect if not admin
+            // Redirect back to account page
+            print "<script language='Javascript'>document.location.href='/account';</script>";
         } elseif(isset($_GET['reset'])) {
             $uid = $_GET['reset'];
             if (AdminController::resetPassword($uid)) {
@@ -27,6 +40,14 @@
                 echo "Success! User has been deleted!";
             } else {
                 echo "Error! Unable to delete user!";
+            }
+        } elseif(isset($_GET['adjust'])) {
+            $uid = $_GET['adjust'];
+            $amount = $_GET['amount'];
+            if (AdminController::adjustBalance($uid, $amount)) {
+                echo "Success! User balance has been updated!";
+            } else {
+                echo "Error! Unable to update balance!";
             }
         }
         
@@ -78,9 +99,9 @@
                         echo "<td>$uname</td>";
                         echo "<td>$uemail</td>";
                         echo "<td>$ubalance</td>";
-                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input type='button' onClick='confReset(this.form);' value='Reset Password' /></form></td>";
-                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input type='button' onClick='confReset(this.form);' value='Adjust Balance' /></form></td>";
-                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input type='button' onClick='confReset(this.form);' value='Delete User' /></form></td>";
+                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input class='adminButton' type='button' onClick='confReset(this.form);' value='Reset Password' /></form></td>";
+                        echo "<td><form><input type='hidden' name='adjust' value='$uid'><input  type='hidden' id='amount' name='amount' value=0><input type='button' class='adminButton' onClick='confAdjust(this.form);' value='Adjust Balance' /></form></td>";
+                        echo "<td><form><input type='hidden' name='delete' value='$uid'><input class='adminButton' type='button' onClick='confDelete(this.form);' value='Delete User' /></form></td>";
                         echo "</tr>";
                     }
                     echo "</table>";

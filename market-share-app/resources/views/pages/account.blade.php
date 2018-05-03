@@ -47,14 +47,19 @@
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
             <div class = "sysoContent sysoContent50">
                 <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
-                <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
+                <?php
+                    use App\Http\Controllers\AdminController;
+                    if(AdminController::isAdmin()) {
+                        echo "<p><a class = 'sysoLink' href='/admin'>Admin Page</a></p>";
+                    }
+                ?>
 
+                <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
                 <div class="shareDetails">
                 <?php
                     // sells shares once form has been submitted
                     use App\Http\Controllers\MarketDataController;
                     use App\Http\Controllers\ShareTransactionController;
-
                     if (isset($_GET['sell'])) {
                         if (!ShareTransactionController::sellShares($_GET['sell'])) {
                             echo "Error! Cannot sell shares in that listing. Please try again";
