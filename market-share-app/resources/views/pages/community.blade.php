@@ -22,7 +22,7 @@
 
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->  
 
-    <script type = "text/javascript" src = "{{ URL::to('/js/friend.js') }}"></script>  
+    <script type = "text/javascript" src = "{{ URL::to('/js/friend.js') }}"></script>
 
     <div class = "sysoBox sysoBoxFlex" id="commBox">
         <div class = "sysoContent sysoContent50">
@@ -33,32 +33,36 @@
                 <table class="friendList">
                 <tr id = "tableHeader">
                     <th>Name</th>
-                    <th>Total Worth</th>
+                    <th>Equity</th>
                     <th>Friend</th>
                 </tr>
 
                 <?php
                     //Top 10 Leaderboard
-                    //$users = DB::table('users')->get();
-                    $users = DB::table('leaderboard')->get();
+                    $users = DB::table('users')->get();
                     //SELECT * FROM users ORDER BY rating DESC LIMIT 10
-                    //$data = $users->sortByDesc('account_balance')->take('10');
-                    $data = $users->sortByDesc('equity')->take('10');
+                    $data = $users->sortByDesc('account_balance')->take('10');
+                    $user_id=Auth::id();
+                    $uid=null;
                     $name=null;
                     $balance=0.00;
                     foreach ($data as $line) {
-                        $uid=($line->user_id);
+                        $uid=($line->id);
                         $name=($line->name);
-                        //$balance=($line->account_balance);
-                        $balance=($line->equity);
+                        $balance=($line->account_balance);
+                        $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                         echo "<tr>";
                         echo "<td>".$name."</td>";
                         echo "<td>".$balance."</td>";
-                        echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
-                        echo "</tr>";
+                        if (count($friendid) == 0){
+                            echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
                         }
+                        else {
+                            echo "<td><button name='friend' disabled>Friend</button></td>";
+                        }
+                        echo "</tr>";
+                    }
                 ?>
-
                 </table>
                 <br/>
             </div>
@@ -88,17 +92,24 @@
                         echo "<th>Total Worth</th>";
                         echo "<th>Friend</th>";
                         echo "</tr>";
+                        $user_id=Auth::id();
                         $uid=null;
-                        $uname=null;
-                        $ubalance=0.00;
-                        foreach ($userdata as $uline) {
-                            $uid=($uline->id);
-                            $uname=($uline->name);
-                            $ubalance=($uline->account_balance);
+                        $name=null;
+                        $balance=0.00;
+                        foreach ($data as $line) {
+                            $uid=($line->id);
+                            $name=($line->name);
+                            $balance=($line->account_balance);
+                            $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                             echo "<tr>";
-                            echo "<td>".$uname."</td>";
-                            echo "<td>".$ubalance."</td>";
-                            echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
+                            echo "<td>".$name."</td>";
+                            echo "<td>".$balance."</td>";
+                            if (count($friendid) == 0){
+                                echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
+                            }
+                            else {
+                                echo "<td><button name='friend' disabled>Friend</button></td>";
+                            }
                             echo "</tr>";
                         }
                         echo "</table>";

@@ -202,8 +202,13 @@ button{
     border-style: solid;
 }
 
-button:hover{
+button:hover:enabled{
     background-color: #ec596e;
+}
+
+button:disabled{
+    opacity: 0.50; 
+    cursor: not-allowed;
 }
 
 .adminButton{
