@@ -1,3 +1,4 @@
+  
   function addAjax(fid){
     $.ajax({
       url: "/community/add/" + fid,
