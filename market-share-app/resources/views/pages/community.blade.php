@@ -96,7 +96,7 @@
                         $uid=null;
                         $name=null;
                         $balance=0.00;
-                        foreach ($data as $line) {
+                        foreach ($userdata as $line) {
                             $uid=($line->id);
                             $name=($line->name);
                             $balance=($line->account_balance);
