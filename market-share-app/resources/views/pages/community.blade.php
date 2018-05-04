@@ -41,7 +41,7 @@
                     //Top 10 Leaderboard
                     $users = DB::table('users')->get();
                     //SELECT * FROM users ORDER BY rating DESC LIMIT 10
-                    $data = $users->sortByDesc('account_balance')->take('10');
+                    $data = $users->sortByDesc('equity')->take('10');
                     $user_id=Auth::id();
                     $uid=null;
                     $name=null;
@@ -49,7 +49,7 @@
                     foreach ($data as $line) {
                         $uid=($line->id);
                         $name=($line->name);
-                        $balance=($line->account_balance);
+                        $balance=($line->equity);
                         $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                         echo "<tr>";
                         echo "<td>".$name."</td>";
