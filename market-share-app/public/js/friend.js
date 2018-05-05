@@ -1,4 +1,5 @@
   
+  //ajax to retrieve insertFriend() from FriendController
   function addAjax(fid){
     $.ajax({
       url: "/community/add/" + fid,
@@ -15,6 +16,7 @@
     });
   }
 
+  //ajax to retrieve deleteFriend() from FriendController
   function deleteAjax(fid) {
     $.ajax({
       url: "/community/delete/" + fid,

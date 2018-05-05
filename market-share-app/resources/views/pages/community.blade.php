@@ -29,7 +29,7 @@
             
             <div class="friends">
                 <br/>
-                <h1>Top 10</h1>
+                <h1>Top 10 Users</h1>
                 <table class="friendList">
                 <tr id = "tableHeader">
                     <th>Name</th>
@@ -39,10 +39,10 @@
 
                 <?php
                     //Top 10 Leaderboard
+                    $user_id=Auth::id();
                     $users = DB::table('users')->get();
                     //SELECT * FROM users ORDER BY rating DESC LIMIT 10
                     $data = $users->sortByDesc('account_balance')->take('10');
-                    $user_id=Auth::id();
                     $uid=null;
                     $name=null;
                     $balance=0.00;
@@ -122,7 +122,7 @@
             
             <div class="friends">
                 <br/>
-                <h1>Friends Top 15</h1>
+                <h1>Top 15 Friends</h1>
                 <table class="friendList">
                 <tr id = "tableHeader">
                     <th>Name</th>
@@ -146,7 +146,7 @@
                             $name=($line->name);
                             $balance=($line->account_balance);
                             echo "<tr>";
-                            echo "<td>".$name."</td>";
+                            echo "<td><a href='/account/'>".$name."</a></td>";
                             echo "<td>".$balance."</td>";
                             echo "<td><button name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
                             echo "</tr>";
