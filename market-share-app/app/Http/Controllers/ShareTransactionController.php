@@ -25,6 +25,27 @@ class ShareTransactionController extends Controller
         return view('/pages/testing/buy-shares')->with('balance', $balance);
     }*/
 
+    public static function updateEquity(){
+        /*Equity update routine*/
+        /*Set equity to account balance*/
+        db::table('users')->update(['equity' => db::raw('account_balance')]);
+        /*Loop over open_transactions table and update equity*/
+        $transactions = db::table('open_transactions')->get();
+        foreach ($transactions as $line) {
+            $currentId = ($line->user_id);
+            $currentPurchase = ($line->purchase_price);
+            $currentQuantity = ($line->quantity);
+            $currentEquity = $currentPurchase * $currentQuantity;
+            $currentBalance = db::table('users')
+            ->where('id', $currentId)
+            ->value('account_balance');
+            $newEquity = $currentBalance + $currentEquity;
+            db::table('users')
+            ->where('id', $currentId)
+            ->update(['equity' => $newEquity]);
+        }
+    }
+
     public static function buyShares($stockCode,$price, $quantity)
     {
         $error = null;
@@ -52,6 +73,7 @@ class ShareTransactionController extends Controller
             'quantity' => $quantity,
             'buying_commission' => $commission // need to add this in
         ]);
+        ShareTransactionController::updateEquity();
         return true;
         
 
