@@ -107,9 +107,9 @@
 
         <div class = "sysoContent sysoContent50">
             <!-- EMBEDDED GRAPH GOES HERE -->
-            <script src="{{ URL::to('/js/highcharts/highstock.js') }}"></script>
-            <script src="{{ URL::to('/js/highcharts/modules/drag-panes.js') }}"></script>
-            <script src="{{ URL::to('/js/highcharts/modules/exporting.js') }}"></script>
+            <script src="{{ URL::to('/js/highcharts/highstock.js') }}" integrity=""></script>
+            <script src="{{ URL::to('/js/highcharts/modules/drag-panes.js') }}" integrity=""></script>
+            <script src="{{ URL::to('/js/highcharts/modules/exporting.js') }}" integrity=""></script>
 
             <div id="container" style="height: 400px; min-width: 310px" class='{{$data[0]->company_code}}'></div>
         </div>
