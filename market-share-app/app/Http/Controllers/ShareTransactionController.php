@@ -29,7 +29,7 @@ class ShareTransactionController extends Controller
         /*Equity update routine*/
         /*Set equity to account balance*/
         db::table('users')->update(['equity' => db::raw('account_balance')]);
-        /*Loop over open_transactions table and update equity*/
+        /*Loop over open_transactions table and update equity in users table*/
         $transactions = db::table('open_transactions')->get();
         foreach ($transactions as $line) {
             $currentId = ($line->user_id);
@@ -75,8 +75,6 @@ class ShareTransactionController extends Controller
         ]);
         ShareTransactionController::updateEquity();
         return true;
-        
-
     }
 
     public static function sellShares($asxcode) {
@@ -108,6 +106,7 @@ class ShareTransactionController extends Controller
         
         # update account balance
         ShareTransactionController::adjustBalance($user->id, $sellprice);
+        ShareTransactionController::updateEquity();
         return true;
 
     }
@@ -124,11 +123,6 @@ class ShareTransactionController extends Controller
         $percentage = 0.0025; //0.25% commission on selling
         return ($fixed + ($percentage*$price*$quantity));
     }
-
-
-
-
-
 
     public static function adjustBalance($userid, $amount) {
         // must pass through a negative amount for a deduction (buying)
