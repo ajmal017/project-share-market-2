@@ -8,7 +8,7 @@
         <script src="/js/main-js.js"></script>
         <script
 			src="/js/jquery-3.3.1.min.js"
-			integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			integrity=""
 			crossorigin="anonymous"></script>
         <title>Stock Your Socks Off</title>
         <link href='https://fonts.googleapis.com/css?family=Crete Round' rel='stylesheet'>

@@ -38,7 +38,6 @@
                 echo "<h1>Success!</h1>";
                 echo "<p>You have purchased ".$quantity." shares in ".$companycode;
             }
-            
         ?>
         <a class = "sysoLink" href='#' onclick="goBack()">Back to Listing</a>
         <a class = "sysoLink" href='search'>Search for another Listing</a>

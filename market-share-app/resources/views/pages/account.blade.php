@@ -53,13 +53,13 @@
                         echo "<p><a class = 'sysoLink' href='/admin'>Admin Page</a></p>";
                     }
                 ?>
-
                 <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
                 <div class="shareDetails">
                 <?php
                     // sells shares once form has been submitted
                     use App\Http\Controllers\MarketDataController;
                     use App\Http\Controllers\ShareTransactionController;
+                    ShareTransactionController::updateEquity();
                     if (isset($_GET['sell'])) {
                         if (!ShareTransactionController::sellShares($_GET['sell'])) {
                             echo "Error! Cannot sell shares in that listing. Please try again";
