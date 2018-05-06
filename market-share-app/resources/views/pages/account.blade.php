@@ -172,30 +172,29 @@
                 <p><a class = "sysoLink" href='/community'>Community</a></p>
 
                 <div class="friends">
-                    <h1>Friends</h1>
+                    <h1>Top 10 Friends</h1>
                     <table class="friendList">
                         <tr id = "tableHeader">
                             <th>Name</th>
-                            <th>Total Worth</th>
+                            <th>Equity</th>
                         </tr>
 
                         <?php 
                             //List of Friends
-                            $user_id=Auth::id();
-                            $friends=DB::table('friends')->where('user_id', $user_id)->get();
+                            $userid=Auth::id();
+                            $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->where('friends.user_id', $userid)->get();
+                            $fdata=$friends->sortByDesc('equity')->take(10);
+
                             $name=null;
                             $balance=0.00;
-                            foreach ($friends as $f) {
-                                $fid=($f->friend_id);
-                                $data=DB::table('users')->where('id', $fid)->get();
-                                foreach ($data as $line) {
-                                    $name=($line->name);
-                                    $balance=($line->account_balance);
-                                    echo "<tr>";
-                                    echo "<td>".$name."</td>";
-                                    echo "<td>".$balance."</td>";
-                                    echo "</tr>";
-                                }
+                            foreach ($fdata as $fline) {
+                                $fid=($fline->friend_id);
+                                $name=($fline->name);
+                                $balance=($fline->equity);
+                                echo "<tr>";
+                                echo "<td><a href='/account/'>".$name."</a></td>";
+                                echo "<td>".$balance."</td>";
+                                echo "</tr>";
                             }
                         ?>
 
