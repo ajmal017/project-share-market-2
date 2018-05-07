@@ -34,6 +34,8 @@
                 <tr id = "tableHeader">
                     <th>Name</th>
                     <th>Equity</th>
+                    <th>Balance</th>
+                    <th>Updated</th>
                     <th>Friend</th>
                 </tr>
 
@@ -43,16 +45,17 @@
                     //SELECT * FROM users ORDER BY rating DESC LIMIT 10
                     $data = $users->sortByDesc('equity')->take('10');
                     $user_id=Auth::id();
-                    $uid=null;
-                    $name=null;
-                    $balance=0.00;
                     foreach ($data as $line) {
                         $uid=($line->id);
                         $name=($line->name);
-                        $balance=($line->equity);
+                        $equity=($line->equity);
+                        $balance=($line->account_balance);
+                        $updated=($line->updated_at);
                         echo "<tr>";
                         echo "<td>".$name."</td>";
+                        echo "<td>".$equity."</td>";
                         echo "<td>".$balance."</td>";
+                        echo "<td>".$updated."</td>";
                         $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                         if (count($friendid) == 0){
                             echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
@@ -90,19 +93,22 @@
                         echo "<tr id = 'tableHeader'>";
                         echo "<th>Name</th>";
                         echo "<th>Equity</th>";
+                        echo "<th>Balance</th>";
+                        echo "<th>Updated</th>";
                         echo "<th>Friend</th>";
                         echo "</tr>";
                         $user_id=Auth::id();
-                        $uid=null;
-                        $name=null;
-                        $balance=0.00;
                         foreach ($userdata as $line) {
                             $uid=($line->id);
                             $name=($line->name);
-                            $balance=($line->equity);
+                            $equity=($line->equity);
+                            $balance=($line->account_balance);
+                            $updated=($line->updated_at);
                             echo "<tr>";
                             echo "<td>".$name."</td>";
+                            echo "<td>".$equity."</td>";
                             echo "<td>".$balance."</td>";
+                            echo "<td>".$updated."</td>";
                             $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                             if (count($friendid) == 0){
                                 echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
@@ -127,24 +133,27 @@
                 <tr id = "tableHeader">
                     <th>Name</th>
                     <th>Equity</th>
+                    <th>Balance</th>
+                    <th>Updated</th>
                     <th>Unfriend</th>
                 </tr>
 
                 <?php 
                     //List of Friends
                     $userid=Auth::id();
-                    $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->where('friends.user_id', $userid)->get();
-                    $fdata=$friends->sortByDesc('equity')->take(15);
-
-                    $name=null;
-                    $balance=0.00;
-                    foreach ($fdata as $fline) {
-                        $fid=($fline->friend_id);
-                        $name=($fline->name);
-                        $balance=($fline->equity);
+                    $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
+                    $data=$friends->sortByDesc('equity')->take(15);
+                    foreach ($data as $line) {
+                        $fid=($line->friend_id);
+                        $name=($line->name);
+                        $equity=($line->equity);
+                        $balance=($line->account_balance);
+                        $updated=($line->updated_at);
                         echo "<tr>";
                         echo "<td><a href='/account/'>".$name."</a></td>";
+                        echo "<td>".$equity."</td>";
                         echo "<td>".$balance."</td>";
+                        echo "<td>".$updated."</td>";
                         echo "<td><button name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
                         echo "</tr>";
                     }

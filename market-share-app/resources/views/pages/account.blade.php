@@ -177,23 +177,26 @@
                         <tr id = "tableHeader">
                             <th>Name</th>
                             <th>Equity</th>
+                            <th>Balance</th>
+                            <th>Updated</th>
                         </tr>
 
                         <?php 
                             //List of Friends
                             $userid=Auth::id();
-                            $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->where('friends.user_id', $userid)->get();
-                            $fdata=$friends->sortByDesc('equity')->take(10);
-
-                            $name=null;
-                            $balance=0.00;
-                            foreach ($fdata as $fline) {
-                                $fid=($fline->friend_id);
-                                $name=($fline->name);
-                                $balance=($fline->equity);
+                            $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
+                            $data=$friends->sortByDesc('equity')->take(15);
+                            foreach ($data as $line) {
+                                $fid=($line->friend_id);
+                                $name=($line->name);
+                                $equity=($line->equity);
+                                $balance=($line->account_balance);
+                                $updated=($line->updated_at);
                                 echo "<tr>";
                                 echo "<td><a href='/account/'>".$name."</a></td>";
+                                echo "<td>".$equity."</td>";
                                 echo "<td>".$balance."</td>";
+                                echo "<td>".$updated."</td>";
                                 echo "</tr>";
                             }
                         ?>
