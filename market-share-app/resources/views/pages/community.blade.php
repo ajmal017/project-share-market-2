@@ -72,9 +72,9 @@
             
             <div class="friends">
                 <h1>Search for User</h1>
-                <form> 
-                    <input type='text' name='user_name' placeholder='Enter User Name'>
-                    <input type='submit' value='Search'>
+                <form id='searchForm'> 
+                    <input id='searchUser' type='text' name='user_name' placeholder='Enter User Name'>
+                    <input id='search' type='submit' value='Search'>
                 
                 <?php
                     //Search User
