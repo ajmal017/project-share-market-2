@@ -141,7 +141,8 @@
                 <?php 
                     //List of Friends
                     $userid=Auth::id();
-                    $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
+                    $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
+                        ->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
                     $data=$friends->sortByDesc('equity')->take(15);
                     foreach ($data as $line) {
                         $fid=($line->friend_id);
@@ -150,7 +151,8 @@
                         $balance=($line->account_balance);
                         $updated=($line->updated_at);
                         echo "<tr>";
-                        echo "<td><a href='/account/'>".$name."</a></td>";
+                        echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
+                        //echo "<td><a href='/account/".$fid."'>".$name."</a></td>";
                         echo "<td>".$equity."</td>";
                         echo "<td>".$balance."</td>";
                         echo "<td>".$updated."</td>";

@@ -27,3 +27,14 @@
       }
     });
   }
+
+  //ajax to retrieve deleteFriend() from FriendController
+  function retAccount(fid) {
+    $.ajax({
+      url: "/account/" + fid,
+      type: 'get',
+      success: function (data) {
+        return data;
+      }
+    });
+  }

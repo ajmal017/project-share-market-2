@@ -106,3 +106,5 @@ Route::get('/testing/buy-shares/', 'ShareTransactionController@balance');
 //Friend Controller
 Route::get('/community/add/{fid}', 'FriendController@insertFriend');
 Route::get('/community/delete/{fid}', 'FriendController@deleteFriend');
+
+Route::get('/account/{fid}', 'FriendController@retAccount');
