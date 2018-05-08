@@ -122,9 +122,9 @@
                                     echo "<td>".strtoupper($line->asx_code)."</td>";
                                     // might need to change this later to aggregate quantities
                                     echo "<td>".$line->quantity."</td>";
-                                    echo "<td>".$currentprice."</td>";
-                                    echo "<td>".round($diff,3)."</td>";
-                                    echo "<td>".round($newtotalprice-$origtotalcost,2) ."</td>";
+                                    echo "<td>"."$".number_format($currentprice,2,'.',',')."</td>";
+                                    echo "<td>$".number_format($diff,2,'.',',')."</td>";
+                                    echo "<td>$".number_format($newtotalprice-$origtotalcost,2,'.',',') ."</td>";
                                     echo "<td><div id='sell".$count."'><form action='/account' method='get'><button type='button' onclick='unhideButtons(".$count.")'>Sell</button></div>";
                                     echo "<div id='confirm".$count."' style='display: none;'><button type='submit' name='sell' value='".strtoupper($line->asx_code)."'>Confirm</button></form></div>";
                                     echo "<div id='cancel".$count."' style='display: none;'><button type='button' onclick='hideButtons(".$count.")'>Cancel</button></div></td>";
@@ -134,7 +134,7 @@
                                 }
                             
                                 echo "<tr></tr><tr id = 'tableHeader'><td colspan='5'>Total</td>";
-                                echo "<td>".round($overallvalue-$overallcost,2)."</td></tr>";
+                                echo "<td>$".number_format($overallvalue-$overallcost,2,'.',',')."</td></tr>";
                             }        
                         ?>
                     </table>
@@ -149,23 +149,25 @@
                     <table id = "userTable">
                         <tr>
                             <th id = "tableHeader">Account Balance</th>
-                            <td>{{ Auth::user()->account_balance }}</td>
+                            <td><?php echo "$".number_format(Auth::user()->account_balance,2,'.',','); ?></td>
+                            <!--<td>{{ Auth::user()->account_balance }}</td>-->
                         </tr>
                         <tr>
                             <th id = "tableHeader">Shares Held</th>
-                            <td><?php echo $totalshares?></td>
+                            <td><?php echo $totalshares;?></td>
                         </tr>
                         <tr>
                             <th id = "tableHeader">Share Value</th>
-                            <td><?php echo $overallvalue ?></td>
+                            <td><?php echo "$".number_format($overallvalue,2,'.',',');?></td>
                         </tr>
                         <tr>
                             <th id = "tableHeader">Total Profit/Loss</th>
-                            <td><?php echo round($overallvalue-$overallcost,2) ?></td>
+                            <td><?php echo "$".number_format($overallvalue-$overallcost,2) ?></td>
                         </tr>
                         <tr>
                             <th id = "tableHeader">Total Asset Value</th>
-                            <td>{{ Auth::user()->account_balance+$overallvalue }}</td>
+                            <td><?php echo "$".number_format(Auth::user()->account_balance+$overallvalue,2,'.',','); ?></td>
+                            
                     </table>
                 </div>
                 
@@ -194,8 +196,8 @@
                                 $updated=($line->updated_at);
                                 echo "<tr>";
                                 echo "<td><a href='/account/'>".$name."</a></td>";
-                                echo "<td>".$equity."</td>";
-                                echo "<td>".$balance."</td>";
+                                echo "<td>$".number_format($equity,2,'.',',')."</td>";
+                                echo "<td>$".number_format($balance,2,'.',',')."</td>";
                                 echo "<td>".$updated."</td>";
                                 echo "</tr>";
                             }
