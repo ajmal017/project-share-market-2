@@ -106,11 +106,22 @@
         </div>
 
         <div class = "sysoContent sysoContent50">
+            <label class="radio_container">Basic
+                <input type="radio" checked="checked" name="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="radio_container">Advanced
+                <input type="radio" name="radio">
+                <span class="checkmark"></span>
+            </label>
             <!-- EMBEDDED GRAPH GOES HERE -->
             <script src="{{ URL::to('/js/highcharts/highstock.js') }}" integrity=""></script>
             <script src="{{ URL::to('/js/highcharts/modules/drag-panes.js') }}" integrity=""></script>
             <script src="{{ URL::to('/js/highcharts/modules/exporting.js') }}" integrity=""></script>
 
+            <div class="loading_title">
+                Loading your chart, please wait.......
+            </div>
             <div id="container" style="height: 400px; min-width: 310px" class='{{$data[0]->company_code}}'></div>
         </div>
     </div>

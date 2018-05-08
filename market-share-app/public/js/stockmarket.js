@@ -65,7 +65,18 @@ $(document).ready(function () {
         });
     });
 
+    $('.radio_container').change(function () {
+        $('#container').html('');
+        $('.loading_title').removeAttr('hidden');
+        if ($(this).text().trim() =='Basic') {
+            basic_chart();
+        } else if ($(this).text().trim() == 'Advanced'){
+            advanced_chart();
+        }
+    });
+
     $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
+        $('.loading_title').attr('hidden', true);
         var title_text = '';
         if (data.length != 0) {
             title_text = $('#container').attr('class') + ' Stock Data';
@@ -78,7 +89,7 @@ $(document).ready(function () {
             // set the allowed units for data grouping
             groupingUnits = [[
                 'month',
-                [1, 2, 3, 4, 6]
+                [1, 2]
             ]],
 
             i = 0;
@@ -86,47 +97,142 @@ $(document).ready(function () {
         for (i; i < dataLength; i += 1) {
             ohlc.push([
                 data[i][0], // the date
-                data[i][1], // open
-                data[i][2], // high
-                data[i][3], // low
                 data[i][4]  // close
             ]);
         }
 
         // create the chart
         Highcharts.stockChart('container', {
-
             rangeSelector: {
-                selected: 4 // all
+                selected: 1
             },
 
             title: {
-                text: title_text
+                text: 'Stock Price'
             },
 
-            yAxis: [{
-                labels: {
-                    align: 'right',
-                    x: -3
-                },
-                title: {
-                    text: 'Stock Prices'
-                },
-                height: '60%',
-                lineWidth: 2,
-                resize: {
-                    enabled: true
-                }
-            }],
-
             series: [{
-                type: 'candlestick',
                 name: $('#container').attr('class'),
                 data: ohlc,
-                dataGrouping: {
-                    units: groupingUnits
+                tooltip: {
+                    valueDecimals: 2
                 }
             }]
         });
     });
+
+    var basic_chart = function(){
+        $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
+            $('.loading_title').attr('hidden', true);
+            var title_text = '';
+            if (data.length != 0) {
+                title_text = $('#container').attr('class') + ' Stock Data';
+            } else {
+                title_text = 'No stock data available for ' + $('#container').attr('class');
+            }
+            // split the data set into ohlc and volume
+            var ohlc = [],
+                dataLength = data.length,
+                // set the allowed units for data grouping
+                groupingUnits = [[
+                    'month',
+                    [1, 2]
+                ]],
+
+                i = 0;
+
+            for (i; i < dataLength; i += 1) {
+                ohlc.push([
+                    data[i][0], // the date
+                    data[i][4]  // close
+                ]);
+            }
+
+            // create the chart
+            Highcharts.stockChart('container', {
+                rangeSelector: {
+                    selected: 1
+                },
+
+                title: {
+                    text: 'Stock Price'
+                },
+
+                series: [{
+                    name: $('#container').attr('class'),
+                    data: ohlc,
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }]
+            });
+        });
+    }
+    var advanced_chart = function(){
+        $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
+            $('.loading_title').attr('hidden', true);
+            var title_text = '';
+            if (data.length != 0) {
+                title_text = $('#container').attr('class') + ' Stock Data';
+            } else {
+                title_text = 'No stock data available for ' + $('#container').attr('class');
+            }
+            // split the data set into ohlc and volume
+            var ohlc = [],
+                dataLength = data.length,
+                // set the allowed units for data grouping
+                groupingUnits = [[
+                    'month',
+                    [1, 2, 3, 4, 6]
+                ]],
+
+                i = 0;
+
+            for (i; i < dataLength; i += 1) {
+                ohlc.push([
+                    data[i][0], // the date
+                    data[i][1], // open
+                    data[i][2], // high
+                    data[i][3], // low
+                    data[i][4]  // close
+                ]);
+            }
+
+            // create the chart
+            Highcharts.stockChart('container', {
+
+                rangeSelector: {
+                    selected: 4 // all
+                },
+
+                title: {
+                    text: title_text
+                },
+
+                yAxis: [{
+                    labels: {
+                        align: 'right',
+                        x: -3
+                    },
+                    title: {
+                        text: 'Stock Prices'
+                    },
+                    height: '60%',
+                    lineWidth: 2,
+                    resize: {
+                        enabled: true
+                    }
+                }],
+
+                series: [{
+                    type: 'candlestick',
+                    name: $('#container').attr('class'),
+                    data: ohlc,
+                    dataGrouping: {
+                        units: groupingUnits
+                    }
+                }]
+            });
+        });
+    }
 });
