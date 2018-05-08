@@ -87,16 +87,13 @@ class ShareTransactionController extends Controller
             ->where('asx_code', '=', $asxcode)
             ->sum('quantity');
             
-        $data = json_decode($json);
-        if (empty($data)) {
+        $quantity = json_decode($json);
+        if (empty($quantity)) {
             return false;
         }
-
-        $quantity = $data['quantity'];
-        $trans_id = $data['id'];
         $commission = ShareTransactionController::sellingCommission($price, $quantity);
         $sellprice = ($price*$quantity)-$commission;
-        echo "quantity is $quantity";
+        
         # delete from open transactions
         DB::table('open_transactions')
             ->where('user_id', '=', $user->id)
@@ -104,14 +101,14 @@ class ShareTransactionController extends Controller
             ->delete();
         
         # add to closed transactions
-        /*DB::table('closed_transactions')->insert([
-            'open_transactions_id' => $user->id,
+        DB::table('closed_transactions')->insert([
+            'user_id' => $user->id,
+            'asx_code' => $asxcode,
             'date_closed' => Carbon::now(),
             'sold_price' => $sellprice,
             'quantity' => $quantity,
-            'selling_commission' => $commission,
-
-        ]);*/
+            'selling_commission' => $commission
+        ]);
         
         # update account balance
         ShareTransactionController::adjustBalance($user->id, $sellprice);

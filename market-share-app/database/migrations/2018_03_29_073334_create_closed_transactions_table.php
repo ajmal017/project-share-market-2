@@ -15,12 +15,14 @@ class CreateClosedTransactionsTable extends Migration
     {
         Schema::create('closed_transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('open_transactions_id');
+            $table->unsignedInteger('user_id');
+            $table->string('asx_code',10);
             $table->dateTime('date_closed');
             $table->decimal('sold_price',13,4);
             $table->integer('quantity');
             $table->double('selling_commission');           
-            $table->foreign('open_transactions_id')->references('id')->on('open_transactions');
+            /*$table->foreign('open_transactions_id')->references('id')->on('open_transactions');*/
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
