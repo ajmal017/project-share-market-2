@@ -4,17 +4,17 @@
     <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
     <!-- Active session links -->
     @if(Auth::check())
-        <a class = "sysoLink" href='account'>Home</a>
-        <a class = "sysoLink" href='search'>Search</a>
-        <a class = "sysoLink" href='community'>Community</a>
+        <a class = "sysoLink" href='/account/'>Home</a>
+        <a class = "sysoLink" href='/search/'>Search</a>
+        <a class = "sysoLink" href='/community/'>Community</a>
         <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
         </a>
     <!-- No session links -->
     @else
-        <a class = "sysoLink" href='landing'>Home</a>
-        <a class = "sysoLink" href='signin'>Login</a>
-        <a class = "sysoLink" href='signup'>Sign up</a>
+        <a class = "sysoLink" href='/landing/'>Home</a>
+        <a class = "sysoLink" href='/signin/'>Login</a>
+        <a class = "sysoLink" href='/signup/'>Sign up</a>
     @endif
     <!-- Generic links -->
     <a class = "sysoLink" href='about'>About/FAQ</a>
@@ -44,20 +44,32 @@
                 sell.style.display = "block";
             }
         </script>
+
+        <?php
+            if (isset($fid)){
+                $user = $fid;
+            }
+            else {
+                $user = Auth::user()->id;
+            }
+            $curruser = DB::table('users')->where('id', $user)->get();
+        ?>
         
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
             <div class = "sysoContent sysoContent50">
-                <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1>
+                <!-- <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1> -->
+                <h1 class = "sysoAuth" id="accHeader">Welcome {{$curruser[0]->name}}!</h1>
                 <?php
                     use App\Http\Controllers\AdminController;
                     if(AdminController::isAdmin()) {
                         echo "<p><a class = 'sysoLink' href='/admin'>Admin Page</a></p>";
                     }
+
+                    if (!isset($fid)){
+                        echo "<p><a class = 'sysoLink' href='/search'>Search Listings</a></p>";
+                    }
                 ?>
-
                 
-
-                <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
                 <div class="shareDetails">
                 <?php
                     // sells shares once form has been submitted
@@ -80,7 +92,7 @@
                             <th>Value</th> 
                             <th>Change</th>
                             <th>Total</th>
-                            <th/>
+                            <th></th>
                         </tr>
                         <?php                    
                             
@@ -88,7 +100,7 @@
                             $overallcost = 0.00;
                             $overallvalue = 0.00;
                             $totalshares = 0;
-                            $json = DB::table('open_transactions')->where('user_id', '=', Auth::user()->id)
+                            $json = DB::table('open_transactions')->where('user_id', '=', $user)
                                 ->get();
                             $data = json_decode($json);
                             if(empty($data)) {
@@ -128,9 +140,14 @@
                                     echo "<td>"."$".number_format($currentprice,2,'.',',')."</td>";
                                     echo "<td>$".number_format($diff,2,'.',',')."</td>";
                                     echo "<td>$".number_format($newtotalprice-$origtotalcost,2,'.',',') ."</td>";
-                                    echo "<td><div id='sell".$count."'><form action='/account' method='get'><button type='button' onclick='unhideButtons(".$count.")'>Sell</button></div>";
-                                    echo "<div id='confirm".$count."' style='display: none;'><button type='submit' name='sell' value='".strtoupper($line->asx_code)."'>Confirm</button></form></div>";
-                                    echo "<div id='cancel".$count."' style='display: none;'><button type='button' onclick='hideButtons(".$count.")'>Cancel</button></div></td>";
+                                    if (!isset($fid)){
+                                        echo "<td><div id='sell".$count."'><form action='/account' method='get'><button type='button' onclick='unhideButtons(".$count.")'>Sell</button></div>";
+                                        echo "<div id='confirm".$count."' style='display: none;'><button type='submit' name='sell' value='".strtoupper($line->asx_code)."'>Confirm</button></form></div>";
+                                        echo "<div id='cancel".$count."' style='display: none;'><button type='button' onclick='hideButtons(".$count.")'>Cancel</button></div></td>";
+                                    }
+                                    else{
+                                        echo "</td>";
+                                    }
                                     echo "</tr>";
                                     $count++;
 
@@ -155,7 +172,7 @@
                     <table id = "userTable">
                         <tr>
                             <th id = "tableHeader">Account Balance</th>
-                            <td><?php echo "$".number_format(Auth::user()->account_balance,2,'.',','); ?></td>
+                            <td><?php echo "$".number_format($curruser[0]->account_balance,2,'.',','); ?></td>
                             <!--<td>{{ Auth::user()->account_balance }}</td>-->
                         </tr>
                         <tr>
@@ -172,7 +189,7 @@
                         </tr>
                         <tr>
                             <th id = "tableHeader">Total Asset Value</th>
-                            <td><?php echo "$".number_format(Auth::user()->account_balance+$overallvalue,2,'.',','); ?></td>
+                            <td><?php echo "$".number_format($curruser[0]->account_balance+$overallvalue,2,'.',','); ?></td>
                             
                     </table>
                 </div>
@@ -191,8 +208,7 @@
 
                         <?php 
                             //List of last 5 Closed Transaactions
-                            $userid=Auth::id();
-                            $closed=DB::table('closed_transactions')->where('user_id', $userid)->get();
+                            $closed=DB::table('closed_transactions')->where('user_id', $user)->get();
                             $data=$closed->sortByDesc('date_closed')->take(5);
                             foreach ($data as $line) {
                                 $code=($line->asx_code);
@@ -229,9 +245,8 @@
 
                         <?php 
                             //List of Friends
-                            $userid=Auth::id();
                             $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
-                                ->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
+                                ->select('users.*', 'friends.friend_id')->where('friends.user_id', $user)->get();
                             $data=$friends->sortByDesc('equity')->take(5);
                             foreach ($data as $line) {
                                 $fid=($line->friend_id);

@@ -30,10 +30,7 @@ class FriendController extends Controller
   }
 
   public function retAccount($fid){
-        $json = DB::table('open_transactions')->where('user_id', '=', $fid)->get();    
-
-
-        return view('/pages/account')->with('fid', $fid)->with('data', $json);
+        return view('/pages/account')->with('fid', $fid);
   }
 
 }

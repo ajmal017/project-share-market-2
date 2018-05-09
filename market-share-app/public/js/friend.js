@@ -28,7 +28,7 @@
     });
   }
 
-  //ajax to retrieve deleteFriend() from FriendController
+  //ajax to retrieve retAccount() from FriendController
   function retAccount(fid) {
     $.ajax({
       url: "/account/" + fid,
