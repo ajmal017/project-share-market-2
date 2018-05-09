@@ -58,7 +58,7 @@
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
             <div class = "sysoContent sysoContent50">
                 <!-- <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1> -->
-                <h1 class = "sysoAuth" id="accHeader">Welcome {{$curruser[0]->name}}!</h1>
+                <h1 class = "sysoAuth" id="accHeader">{{$curruser[0]->name}}'s Account</h1>
                 <?php
                     use App\Http\Controllers\AdminController;
                     if(AdminController::isAdmin()) {
