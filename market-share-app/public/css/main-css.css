@@ -500,11 +500,11 @@ td[value^="-"]{
 }
 
 #searchUser{
-    width: 75%;
+    width: 45%;
 }
 
 #search{
-    float: right;
+    width: 20%;
     background-color: #f47588;
     text-decoration: none;
     text-align: center;
@@ -512,6 +512,12 @@ td[value^="-"]{
     font-family: 'Helvetica', sans-serif;
     border-color: #f47588;
     border-style: solid;
+}
+
+#searchErr{
+    width: 35%;
+    color: #f47588;
+    font-weight: bold;
 }
 
 #unfriend{

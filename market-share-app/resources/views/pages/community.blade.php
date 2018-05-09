@@ -87,7 +87,7 @@
                         echo "</form>";
                     }
                     elseif (count($userdata) == 0){
-                        echo "<span>User name does not exist</span>";
+                        echo "<span id='searchErr'>User name does not exist</span>";
                         echo "</form>";
                     }
                     else {
