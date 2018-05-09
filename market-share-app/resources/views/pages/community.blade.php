@@ -35,6 +35,7 @@
                     <th>Name</th>
                     <th>Equity</th>
                     <th>Balance</th>
+                    <th>Transactions</th>
                     <th>Updated</th>
                     <th>Friend</th>
                 </tr>
@@ -50,12 +51,14 @@
                         $name=($line->name);
                         $equity=($line->equity);
                         $balance=($line->account_balance);
+                        $trans = DB::table('closed_transactions')->where('user_id', $uid)->count('id');
                         $updated=($line->updated_at);
                         echo "<tr>";
                         echo "<td>".$name."</td>";
-                        echo "<td>".$equity."</td>";
-                        echo "<td>".$balance."</td>";
-                        echo "<td>".$updated."</td>";
+                        echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
+                        echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
+                        echo "<td>".$trans."</td>";
+                        echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
                         $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                         if (count($friendid) == 0){
                             echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
@@ -94,6 +97,7 @@
                         echo "<th>Name</th>";
                         echo "<th>Equity</th>";
                         echo "<th>Balance</th>";
+                        echo "<th>Transactions</th>";
                         echo "<th>Updated</th>";
                         echo "<th>Friend</th>";
                         echo "</tr>";
@@ -103,12 +107,14 @@
                             $name=($line->name);
                             $equity=($line->equity);
                             $balance=($line->account_balance);
+                            $trans = DB::table('closed_transactions')->where('user_id', $uid)->count('id');
                             $updated=($line->updated_at);
                             echo "<tr>";
                             echo "<td>".$name."</td>";
-                            echo "<td>".$equity."</td>";
-                            echo "<td>".$balance."</td>";
-                            echo "<td>".$updated."</td>";
+                            echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
+                            echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
+                            echo "<td>".$trans."</td>";
+                            echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
                             $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                             if (count($friendid) == 0){
                                 echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
@@ -134,6 +140,7 @@
                     <th>Name</th>
                     <th>Equity</th>
                     <th>Balance</th>
+                    <th>Transactions</th>
                     <th>Updated</th>
                     <th>Unfriend</th>
                 </tr>
@@ -149,14 +156,16 @@
                         $name=($line->name);
                         $equity=($line->equity);
                         $balance=($line->account_balance);
+                        $trans = DB::table('closed_transactions')->where('user_id', $fid)->count('id');
                         $updated=($line->updated_at);
                         echo "<tr>";
                         echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
                         //echo "<td><a href='/account/".$fid."'>".$name."</a></td>";
-                        echo "<td>".$equity."</td>";
-                        echo "<td>".$balance."</td>";
-                        echo "<td>".$updated."</td>";
-                        echo "<td><button name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
+                        echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
+                        echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
+                        echo "<td>".$trans."</td>";
+                        echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+                        echo "<td id='unfriend'><button name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
                         echo "</tr>";
                     }
                 ?>

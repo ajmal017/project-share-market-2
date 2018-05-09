@@ -493,16 +493,18 @@ td[value^="-"]{
 
 #search{
     float: right;
-    /* padding: 5px; */
     background-color: #f47588;
     text-decoration: none;
     text-align: center;
     color: #ffffff;
-    /* border-radius: 5px; */
     font-family: 'Helvetica', sans-serif;
-    /* font-size: small; */
     border-color: #f47588;
     border-style: solid;
+}
+
+#unfriend{
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 /* Generic page content */
