@@ -403,7 +403,7 @@ input[name=remember]{
     font-size: small;
 }
 
-#sysoAccount td, .friends td{
+#sysoAccount td{
     text-align: right;
     padding-left: 1em;
     padding-right: 1em;
@@ -444,6 +444,10 @@ td[value^="-"]{
     padding-left: 1em;
 }
 
+#coName{
+    font-size: xx-small;
+}
+
 .userDetails th{
     width: 30%;
 }
@@ -471,8 +475,16 @@ td[value^="-"]{
     font-size: small;
 }
 
-.friends td{
+.friendList{
+    table-layout: fixed;
+}
+
+.friends td, #shareTable td{
     text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #d6dfdf;
+    font-size: small;
 }
 
 .friends button{

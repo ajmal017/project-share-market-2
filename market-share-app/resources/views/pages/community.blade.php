@@ -37,7 +37,7 @@
                     <th>Balance</th>
                     <th>Transactions</th>
                     <th>Updated</th>
-                    <th>Friend</th>
+                    <th></th>
                 </tr>
 
                 <?php
@@ -99,7 +99,7 @@
                         echo "<th>Balance</th>";
                         echo "<th>Transactions</th>";
                         echo "<th>Updated</th>";
-                        echo "<th>Friend</th>";
+                        echo "<th></th>";
                         echo "</tr>";
                         $user_id=Auth::id();
                         foreach ($userdata as $line) {
@@ -142,7 +142,7 @@
                     <th>Balance</th>
                     <th>Transactions</th>
                     <th>Updated</th>
-                    <th>Unfriend</th>
+                    <th></th>
                 </tr>
 
                 <?php 
@@ -160,7 +160,6 @@
                         $updated=($line->updated_at);
                         echo "<tr>";
                         echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
-                        //echo "<td><a href='/account/".$fid."'>".$name."</a></td>";
                         echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
                         echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
                         echo "<td>".$trans."</td>";

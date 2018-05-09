@@ -6,6 +6,7 @@
     @if(Auth::check())
         <a class = "sysoLink" href='account'>Home</a>
         <a class = "sysoLink" href='search'>Search</a>
+        <a class = "sysoLink" href='community'>Community</a>
         <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
         </a>
@@ -53,6 +54,9 @@
                         echo "<p><a class = 'sysoLink' href='/admin'>Admin Page</a></p>";
                     }
                 ?>
+
+                
+
                 <p><a class = "sysoLink" href='/search'>Search Listings</a></p>
                 <div class="shareDetails">
                 <?php
@@ -78,8 +82,7 @@
                             <th>Total</th>
                             <th/>
                         </tr>
-                        <?php 
-                        
+                        <?php                    
                             
                             // query userid in open transactions table
                             $overallcost = 0.00;
@@ -118,7 +121,7 @@
 
                                     $diff = $currentprice-$origprice;
                                     echo "<tr>";
-                                    echo "<td><a href='/listing/".strtoupper($line->asx_code)."'>".$companydata[0]->company_name."</a></td>";
+                                    echo "<td><a id='coName' href='/listing/".strtoupper($line->asx_code)."'>".$companydata[0]->company_name."</a></td>";
                                     echo "<td>".strtoupper($line->asx_code)."</td>";
                                     // might need to change this later to aggregate quantities
                                     echo "<td>".$line->quantity."</td>";
@@ -140,10 +143,13 @@
                     </table>
                 </div>
 
+                
+
             </div>
 
             <div class = "sysoContent sysoContent50">
                 <br/>
+
                 <div class = "userDetails">
                     <h1>My Account</h1>
                     <table id = "userTable">
@@ -171,34 +177,75 @@
                     </table>
                 </div>
                 
-                <p><a class = "sysoLink" href='/community'>Community</a></p>
-
+                </br>
                 <div class="friends">
-                    <h1>Top 10 Friends</h1>
+                    <h1>Recent Transactions</h1>
+                    <table class="friendList">
+                        <tr id = "tableHeader">
+                            <th>Code</th>
+                            <th>Quantity</th>
+                            <th>Sold</th>
+                            <th>Commission</th>
+                            <th>Date</th>
+                        </tr>
+
+                        <?php 
+                            //List of last 5 Closed Transaactions
+                            $userid=Auth::id();
+                            $closed=DB::table('closed_transactions')->where('user_id', $userid)->get();
+                            $data=$closed->sortByDesc('date_closed')->take(5);
+                            foreach ($data as $line) {
+                                $code=($line->asx_code);
+                                $quantity=($line->quantity);
+                                $sold=($line->sold_price);
+                                $commission=($line->selling_commission);
+                                $date=($line->date_closed);
+                                echo "<tr>";
+                                echo "<td>".$code."</td>";
+                                echo "<td>".$quantity."</td>";
+                                echo "<td>"."$".number_format($sold,2,'.',',')."</td>";
+                                echo "<td>"."$".number_format($commission,2,'.',',')."</td>";
+                                echo "<td>".date('d-m-Y', strtotime($date))."</td>";
+                                echo "</tr>";
+                            }
+                        ?>
+
+                    </table>
+                </div>
+
+                <!-- <p><a class = "sysoLink" href='/community'>Community</a></p> -->
+
+                </br>
+                <div class="friends">
+                    <h1>Top 5 Friends</h1>
                     <table class="friendList">
                         <tr id = "tableHeader">
                             <th>Name</th>
                             <th>Equity</th>
                             <th>Balance</th>
+                            <th>Transactions</th>
                             <th>Updated</th>
                         </tr>
 
                         <?php 
                             //List of Friends
                             $userid=Auth::id();
-                            $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
-                            $data=$friends->sortByDesc('equity')->take(15);
+                            $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
+                                ->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
+                            $data=$friends->sortByDesc('equity')->take(5);
                             foreach ($data as $line) {
                                 $fid=($line->friend_id);
                                 $name=($line->name);
                                 $equity=($line->equity);
                                 $balance=($line->account_balance);
+                                $trans = DB::table('closed_transactions')->where('user_id', $fid)->count('id');
                                 $updated=($line->updated_at);
                                 echo "<tr>";
-                                echo "<td><a href='/account/'>".$name."</a></td>";
-                                echo "<td>$".number_format($equity,2,'.',',')."</td>";
-                                echo "<td>$".number_format($balance,2,'.',',')."</td>";
-                                echo "<td>".$updated."</td>";
+                                echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
+                                echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
+                                echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
+                                echo "<td>".$trans."</td>";
+                                echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
                                 echo "</tr>";
                             }
                         ?>
