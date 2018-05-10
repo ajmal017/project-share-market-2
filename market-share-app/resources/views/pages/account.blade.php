@@ -146,7 +146,7 @@
                                         echo "<div id='cancel".$count."' style='display: none;'><button type='button' onclick='hideButtons(".$count.")'>Cancel</button></div></td>";
                                     }
                                     else{
-                                        echo "</td>";
+                                        echo "<td></td>";
                                     }
                                     echo "</tr>";
                                     $count++;
