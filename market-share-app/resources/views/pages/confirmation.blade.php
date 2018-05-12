@@ -20,23 +20,20 @@
 @endsection
 
 @section('content')
-
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
-
     <div class = "sysoContent sysoContent100 sysoCenterText" id="listingContent">
         <?php
             use App\Http\Controllers\ShareTransactionController;
             use App\Http\Controllers\ListingsController;
             $quantity = $_GET['qty'];
             $companycode = $_GET['code'];
-            
             //add try and catch block
             $price = ListingsController::getCurrentPrice($companycode);
             if (!ShareTransactionController::buyShares($companycode,$price, $quantity)) {
-                echo "<h1>Error! Transaction failed. Please try again.</h1>";
+                echo "<h1 class = 'sysoHeader1'>Error! Transaction failed. Please try again.</h1>";
             } else {
-                echo "<h1>Success!</h1>";
-                echo "<p>You have purchased ".$quantity." shares in ".$companycode;
+                echo "<h1 class = 'sysoHeader1'>Success!</h1>";
+                echo "<p class = 'sysoPara'>You have purchased ".$quantity." shares in ".$companycode;
             }
         ?>
         <a class = "sysoLink" href='#' onclick="goBack()">Back to Listing</a>
@@ -44,5 +41,4 @@
         <a class = "sysoLink" href='account'>Return to Account</a>
     </div>
     <!-- END OF CONTENT -->
-
 @endsection
