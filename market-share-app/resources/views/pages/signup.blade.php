@@ -16,22 +16,21 @@
         <a class = "sysoLink" href='signup'>Sign up</a>
     @endif
     <!-- Generic links -->
-    <a class = "sysoLink" href='about'>About/FAQ</a>
+    <a class = "sysoLink" href='about'>About</a>
 @endsection
 
 @section('content')
-
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <div class = "sysoBox sysoBoxFlex">
         <div class = "sysoContent sysoContent100">
-            <h1 class = "sysoAuth" id = "rego">Stock Your Socks Off Registration</h1>
+            <h1 class = "sysoHeader1 sysoCenterText" id = "rego">Sign Up</h1>
             <div id = "signup">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div>
                         <label for="name">{{ __('Name') }}</label>
                         <div>
-                            <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Enter name" value="{{ old('name') }}" required autofocus>
+                            <input class = "sysoInput" id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" placeholder="Enter name" value="{{ old('name') }}" required autofocus>
                             @if ($errors->has('name'))
                                 <span id="loginError" class="invalid-feedback">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -42,7 +41,7 @@
                     <div>
                         <label for="email">{{ __('E-Mail Address') }}</label>
                         <div>
-                            <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Enter email address" value="{{ old('email') }}" required>
+                            <input class = "sysoInput" id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" placeholder="Enter email address" value="{{ old('email') }}" required>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -53,7 +52,7 @@
                     <div>
                         <label for="password">{{ __('Password') }}</label>
                         <div>
-                            <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Enter password" required>
+                            <input class = "sysoInput" id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="Enter password" required>
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -64,12 +63,12 @@
                     <div>
                         <label for="password-confirm">{{ __('Confirm Password') }}</label>
                         <div>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Re-enter password" required>
+                            <input class = "sysoInput" id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Re-enter password" required>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <button type="submit">
+                            <button class = "sysoButton" type="submit">
                                 {{ __('Register') }}
                             </button>
                         </div>
@@ -79,5 +78,4 @@
         </div>
     </div>
     <!-- END OF CONTENT -->
-
 @endsection

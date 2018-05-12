@@ -2,7 +2,7 @@
 
 /* Style reset - removes browser-based defaults */
 
-html, body, div, span, header, footer, img, h1, h2, p, ul, li{
+html, body, div, span, header, footer, img, table, tbody, th, tr, td, h1, h2, p, ul, li, a{
     margin: 0;
     padding: 0;
     border: 0;
@@ -15,12 +15,20 @@ html {
     width: 100%;
     height: 90%;
     font-family: 'Helvetica', sans-serif;
+    font-size: 16px;
     /* Keeps the scrollbar present on hamburger click */
     overflow-y: scroll;
 }
 body{
     width: inherit;
     height: inherit;
+}
+a{
+    text-decoration: none;
+    color: #333333;
+}
+a:visited{
+    color: #222222;
 }
 .sysoHeader{
     width: 100%;
@@ -47,7 +55,7 @@ body{
 }
 .sysoMenuMaster{
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 1;
     top: 10vh;
     right: 0;
@@ -77,8 +85,13 @@ body{
     float: right;
     background-image: url("../images/sysoHamburger.png");
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: 50% 50%;
+    background-position: center;
     cursor: pointer;
+}
+.sysoHamburger:hover{
+    background-color: #ff4f6a;
+    background-image: url("../images/sysoHamburger_hover.png");
 }
 .sysoBox{
     width: 100%;
@@ -88,7 +101,7 @@ body{
 }
 .sysoContent{
     vertical-align: top;
-    overflow: hidden;
+    /*overflow: hidden;*/
     float: left;
     height: 100%;
 }
@@ -102,8 +115,7 @@ body{
     width: 33.3%;
 }
 .sysoPortrait{
-    display: block;
-    height: 10vh;
+    display: none;
 }
 #sysoWelcomeImage{
     display: none;
@@ -113,9 +125,328 @@ body{
     padding-bottom: 1vh;
 }
 
+/* Titlebar (logo, hamburger menu items) */
+
+#sysoTitle{
+    height: 100%;
+}
+#sysoGreenBar{
+    width: 100%;
+    height: 15%;
+    background-color: #677474;
+}
+#sysoMenuMaster a{
+    display: block;
+    text-align: center;
+    margin-right: auto;
+}
+#sysoHomeLink{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Generic page styles (headings, paragraphs, links) */
+
+.sysoHeader1{
+    font-size: x-large;
+    color: #012e33;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+.sysoHeader2{
+    font-size: large;
+    color: #012e33;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+}
+.sysoPara{
+    padding-right: 5%;
+    padding-left: 5%;
+    font-weight: normal;
+    line-height: 1.6;
+}
+.sysoParaBig{
+    font-size: 120%;
+}
+
+/* Miscellaneous content control */
+
+.sysoCenterText{
+    text-align: center;
+}
+.sysoNoScroll{
+    overflow: hidden;
+}
+.sysoVerticalCenter{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Buttons, Links and Input styles*/
+
+button.sysoButton{
+    display: block;
+    width: 50%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    padding: 5px;
+    background-color: #f47588;
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 5px;
+    font-family: 'Helvetica', sans-serif;
+    font-size: medium;
+    border-color: #f47588;
+    border-style: solid;
+}
+button.sysoButton:hover:enabled{
+    background-color: #ec596e;
+}
+button.sysoButton:disabled{
+    opacity: 0.50; 
+    cursor: not-allowed;
+}
+.adminButton{
+    width: 100%;
+}
+input.sysoInput{
+    width: 20%;
+    padding: 5px;
+}
+input.sysoInput:focus{
+    outline-color: #012e33;
+}
+a.sysoLink{
+    display: block;
+    width: 50%;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    padding: 10px;
+    background-color: #f47588;
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 5px;
+}
+a.sysoLink:hover{
+    background-color: #ec596e;
+}
+
+/* Landing page content */
+
+#welcomeBox{
+    display: inline-block;
+    background-image: url(../images/stockText.jpg);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center;
+}
+
+/* About/FAQ */
+
+.sysoAboutBox{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Signin Signup page content */
+
+#signin, #signup{
+    position: relative;
+    width: 40%;
+    margin: auto;
+    text-align: center;
+    font-family: 'Helvetica', sans-serif;
+    color: #012e33;
+}
+#signup label{
+    float: left;
+    margin-bottom: 0;
+    margin-top: 2.5vh;
+    font-size: small;
+}
+#email, #password, #password-confirm, #name{
+    margin-top: 2.5vh;
+    width: 100%;
+}
+#signup input{
+    margin-top: 0;
+}
+#loginError{
+    font-size: x-small;
+    color: #ec596e;
+    text-align: left;
+}
+.checkbox{
+    width: 100%;
+    font-size: x-small;
+    text-align: left;
+    padding: 0;
+    margin-top: 1.5vh;
+    float: left;
+}
+input[name=remember]{
+    width: auto;
+    padding: 0;
+    float: left;
+    margin: 0;
+}
+#signup button{
+    margin-top: 5vh;
+}
+#signin button{
+    margin-top: 10vh;
+}
+#forgotten{
+    color: #012e33;
+    font-size: small;
+}
+
+/* Account page */
+
+#shareTable{
+    table-layout:fixed;
+    width: 100%;
+    border-collapse: collapse;
+}
+#tableHeader, #tableHeader td{
+    background-color: #b0bfbf;
+}
+#sysoAccount th{
+    text-align: left;
+    font-size: 1.3vw;
+}
+#sysoAccount td{
+    text-align: right;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #d6dfdf;
+    font-size: 1.3vw;
+}
+td[value^="-"]{
+    color: red;
+}
+#accHeader{
+    margin-top: 2%;
+}
+.shareDetails{
+    margin-top: 2%;
+    font-size: small;
+}
+.shareDetails button{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    width: 90%;
+}
+.shareDetails, .userDetails, .friends{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.shareDetails h1, .userDetails h1, .friends h1{
+    color: white;
+    background-color: #677474;
+    font-size: medium;
+    padding-left: 1em;
+}
+#coName{
+    font-size: xx-small;
+}
+.userDetails th{
+    width: 30%;
+}
+#friendName a{
+    float: left;
+}
+#userTable, .friendList{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Community page */
+
+#commBox{
+    font-size: small;
+}
+.friendList{
+    table-layout: fixed;
+}
+.friends td, #shareTable td{
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #d6dfdf;
+    font-size: 1.3vw;
+}
+.friends button{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+}
+#searchForm{
+    padding: 2px;
+    padding-top: 4px;
+}
+#searchUser{
+    width: 45%;
+}
+#search{
+    width: 20%;
+    background-color: #f47588;
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Helvetica', sans-serif;
+    border-color: #f47588;
+    border-style: solid;
+}
+#searchErr{
+    width: 35%;
+    color: #f47588;
+    font-weight: bold;
+}
+#unfriend{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
 /* Portrait mode detection and styles */
 
 @media all and (orientation: portrait){
+    #sysoAccount th{
+        font-size: 2vh;
+    }
+    #sysoAccount td{
+        font-size: 2vh;
+    }
+    .friends td, #shareTable td{
+        font-size: 2vh;
+    }
+    .sysoPortrait{
+        display: block;
+        height: 10vh;
+    }
+    #signin, #signup{
+        width: 90%;
+    }
+    .sysoAboutBox{
+        width: 90%;
+    }
+    .sysoVerticalCenter{
+        position: initial;
+        top: initial;
+        transform: initial;
+    }
     .sysoMenuMaster{
         display: none;
         width: 100%;
@@ -150,201 +481,18 @@ body{
     }
 }
 
-/* Miscellaneous content control */
+/* Minimises font-size for large, landscape screens */
 
-.sysoCenterText{
-    text-align: center;
-}
-
-.sysoNoScroll{
-    overflow: hidden;
-}
-#sysoHomeLink{
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-/* Titlebar (logo, hamburger menu items) */
-
-#sysoTitle{
-    height: 100%;
-}
-#sysoGreenBar{
-    width: 100%;
-    height: 15%;
-    background-color: #677474;
-}
-#sysoMenuMaster a{
-    display: block;
-    text-align: center;
-    margin-right: auto;
-}
-
-/* Constant styling */
-
-button{
-    display: block;
-    width: 50%;
-    margin-top: 20px;
-    margin-right: auto;
-    margin-bottom: 20px;
-    margin-left: auto;
-    padding: 5px;
-    background-color: #f47588;
-    text-decoration: none;
-    text-align: center;
-    color: #ffffff;
-    border-radius: 5px;
-    font-family: 'Helvetica', sans-serif;
-    font-size: medium;
-    border-color: #f47588;
-    border-style: solid;
-}
-
-button:hover:enabled{
-    background-color: #ec596e;
-}
-
-button:disabled{
-    opacity: 0.50; 
-    cursor: not-allowed;
-}
-
-.adminButton{
-    width: 100%;
-}
-
-input{
-    width: 20%;
-    padding: 5px;
-}
-
-input:focus{
-    outline-color: #012e33;
-}
-
-/* Landing page content */
-
-a.sysoLink{
-    display: block;
-    width: 50%;
-    margin-top: 20px;
-    margin-right: auto;
-    margin-bottom: 20px;
-    margin-left: auto;
-    padding: 10px;
-    background-color: #f47588;
-    text-decoration: none;
-    text-align: center;
-    color: #ffffff;
-    border-radius: 5px;
-}
-
-a.sysoLink:hover{
-    background-color: #ec596e;
-}
-
-#welcomeBox{
-    display: inline-block;
-    background-image: url(../images/stockText.jpg);
-    background-repeat: no-repeat;
-    background-size: 80%;
-    background-position: center;
-}
-
-#landing{
-    vertical-align: middle;
-    margin-top: 5%;
-    margin-bottom: auto;
-}
-
-#intro{
-    padding-top: 5vh;
-    color: #012e33;
-    font-family: 'Crete Round', serif;
-    font-size: large;
-    text-align: center;
-}
-
-#intro p{
-    margin-bottom: 5vh;
-}
-
-#intro a{
-    font-size: small;
-    font-family: 'Helvetica', sans-serif;
-}
-
-/* Signin Signup page content */
-
-h1.sysoAuth{
-    font-size: x-large;
-    color: #012e33;
-    margin: auto;
-    text-align: center;
-    margin-top: 15vh;
-    margin-bottom: auto;
-}
-
-#signin, #signup{
-    position: relative;
-    width: 40%;
-    margin: auto;
-    text-align: center;
-    font-family: 'Helvetica', sans-serif;
-    color: #012e33;
-}
-
-#signup label{
-    float: left;
-    margin-bottom: 0;
-    margin-top: 2.5vh;
-    font-size: small;
-}
-
-#email, #password, #password-confirm, #name{
-    margin-top: 2.5vh;
-    width: 100%;
-}
-
-#signup input{
-    margin-top: 0;
-}
-
-#loginError{
-    font-size: x-small;
-    color: #ec596e;
-    text-align: left;
-}
-
-.checkbox{
-    width: 100%;
-    font-size: x-small;
-    text-align: left;
-    padding: 0;
-    margin-top: 1.5vh;
-    float: left;
-}
-
-input[name=remember]{
-    width: auto;
-    padding: 0;
-    float: left;
-    margin: 0;
-}
-
-#signup button{
-    margin-top: 5vh;
-}
-
-#signin button{
-    margin-top: 10vh;
-}
-
-#forgotten{
-    color: #012e33;
-    font-size: small;
+@media all and (min-width: 1500px), all and (orientation: landscape){
+    #sysoAccount th{
+        font-size: 1.8vh;
+    }
+    #sysoAccount td{
+        font-size: 1.8vh;
+    }
+    .friends td, #shareTable td{
+        font-size: 1.8vh;
+    }
 }
 
 /* Listing page */
@@ -394,175 +542,6 @@ input[name=remember]{
 #listingTitle{
     text-align: center;
     margin-bottom: 0;
-}
-
-/* Account page */
-
-#sysoAccount th{
-    text-align: left;
-    font-size: small;
-}
-
-#sysoAccount td{
-    text-align: right;
-    padding-left: 1em;
-    padding-right: 1em;
-    background-color: #d6dfdf;
-    font-size: small;
-}
-
-td[value^="-"]{
-  color: red;
-}
-
-#accHeader{
-    margin-top: 2%;
-}
-
-.shareDetails{
-    margin-top: 2%;
-    font-size: small;
-}
-
-.shareDetails button{
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0;
-    width: 90%;
-}
-
-.shareDetails, .userDetails, .friends{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.shareDetails h1, .userDetails h1, .friends h1{
-    color: white;
-    background-color: #677474;
-    font-size: medium;
-    padding-left: 1em;
-}
-
-#coName{
-    font-size: xx-small;
-}
-
-.userDetails th{
-    width: 30%;
-}
-
-#friendName a{
-    float: left;
-}
-
-#tableHeader, #tableHeader td{
-    background-color: #b0bfbf;
-}
-
-#userTable, .friendList{
-    width: 100%;
-}
-
-#shareTable{
-    table-layout:fixed;
-    width: 100%;
-}
-
-/* Community page */
-
-#commBox{
-    font-size: small;
-}
-
-.friendList{
-    table-layout: fixed;
-}
-
-.friends td, #shareTable td{
-    text-align: center;
-    padding-left: 0;
-    padding-right: 0;
-    background-color: #d6dfdf;
-    font-size: small;
-}
-
-.friends button{
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0;
-    width: 100%;
-}
-
-#searchForm{
-    padding: 2px;
-    padding-top: 4px;
-}
-
-#searchUser{
-    width: 45%;
-}
-
-#search{
-    width: 20%;
-    background-color: #f47588;
-    text-decoration: none;
-    text-align: center;
-    color: #ffffff;
-    font-family: 'Helvetica', sans-serif;
-    border-color: #f47588;
-    border-style: solid;
-}
-
-#searchErr{
-    width: 35%;
-    color: #f47588;
-    font-weight: bold;
-}
-
-#unfriend{
-    padding-left: 2px;
-    padding-right: 2px;
-}
-
-/* Generic page content */
-
-.sysoCenterText{
-    text-align: center;
-}
-
-.sysoHeader1{
-    font-size: x-large;
-    color: #012e33;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-}
-
-.sysoHeader2{
-    font-size: large;
-    color: #012e33;
-    padding-top: 1.5vh;
-    padding-bottom: 1.5vh;
-}
-
-.sysoPara{
-    font-weight: normal;
-}
-
-/* About/FAQ */
-
-.sysoAboutBox{
-    padding: 4vw;
-    text-align: center;
-}
-
-/* Footer content */
-
-#sysoFooterText{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 /* CSS Grid styling */
@@ -658,4 +637,13 @@ td[value^="-"]{
   height: 8px;
   border-radius: 50%;
   background: white;
+}
+
+/* Footer content */
+
+#sysoFooterText{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

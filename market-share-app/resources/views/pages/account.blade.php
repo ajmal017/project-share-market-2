@@ -17,14 +17,11 @@
         <a class = "sysoLink" href='/signup/'>Sign up</a>
     @endif
     <!-- Generic links -->
-    <a class = "sysoLink" href='about'>About/FAQ</a>
+    <a class = "sysoLink" href='about'>About</a>
 @endsection
 
 @section('content')
-
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
-        
-
         <script type='text/javascript'>
             function unhideButtons(number) {
                 var confirm = GEBI("confirm" + number);
@@ -34,7 +31,6 @@
                 cancel.style.display = "block";
                 sell.style.display = "none";
             }
-
             function hideButtons(number) {
                 var confirm = GEBI("confirm" + number);
                 var cancel = GEBI("cancel" + number);
@@ -44,7 +40,6 @@
                 sell.style.display = "block";
             }
         </script>
-
         <?php
             if (isset($fid)){
                 $user = $fid;
@@ -54,36 +49,32 @@
             }
             $curruser = DB::table('users')->where('id', $user)->get();
         ?>
-        
         <div class = "sysoBox sysoBoxFlex" id = "sysoAccount">
             <div class = "sysoContent sysoContent50">
                 <!-- <h1 class = "sysoAuth" id="accHeader">Welcome {{ Auth::user()->name }}!</h1> -->
-                <h1 class = "sysoAuth" id="accHeader">{{$curruser[0]->name}}'s Account</h1>
+                <h1 class = "sysoHeader1 sysoCenterText" id="accHeader">{{$curruser[0]->name}}'s Account</h1>
                 <?php
                     use App\Http\Controllers\AdminController;
                     if(AdminController::isAdmin()) {
                         echo "<p><a class = 'sysoLink' href='/admin'>Admin Page</a></p>";
                     }
-
                     if (!isset($fid)){
                         echo "<p><a class = 'sysoLink' href='/search'>Search Listings</a></p>";
                     }
                 ?>
-                
                 <div class="shareDetails">
-                <?php
-                    // sells shares once form has been submitted
-                    use App\Http\Controllers\MarketDataController;
-                    use App\Http\Controllers\ShareTransactionController;
-                    ShareTransactionController::updateEquity();
-                    if (isset($_GET['sell'])) {
-                        if (!ShareTransactionController::sellShares($_GET['sell'])) {
-                            echo "Error! Cannot sell shares in that listing. Please try again";
+                    <?php
+                        // sells shares once form has been submitted
+                        use App\Http\Controllers\MarketDataController;
+                        use App\Http\Controllers\ShareTransactionController;
+                        ShareTransactionController::updateEquity();
+                        if (isset($_GET['sell'])) {
+                            if (!ShareTransactionController::sellShares($_GET['sell'])) {
+                                echo "Error! Cannot sell shares in that listing. Please try again";
+                            }
                         }
-                    }
-
-                ?>
-                    <h1>Share Portfolio</h1>
+                    ?>
+                    <h1 class = "sysoHeader2">Share Portfolio</h1>
                     <table id = "shareTable">
                         <tr id = "tableHeader">
                             <th>Name</th>
@@ -95,7 +86,6 @@
                             <th></th>
                         </tr>
                         <?php                    
-                            
                             // query userid in open transactions table
                             $overallcost = 0.00;
                             $overallvalue = 0.00;
@@ -130,7 +120,6 @@
                                     $newtotalprice = $currentprice*$line->quantity;
                                     $overallvalue += $newtotalprice;
                                     $totalshares += $line->quantity;
-
                                     $diff = $currentprice-$origprice;
                                     echo "<tr>";
                                     echo "<td><a id='coName' href='/listing/".strtoupper($line->asx_code)."'>".$companydata[0]->company_name."</a></td>";
@@ -150,28 +139,21 @@
                                     }
                                     echo "</tr>";
                                     $count++;
-
                                 }
-                            
                                 echo "<tr></tr><tr id = 'tableHeader'><td colspan='5'>Total</td>";
                                 echo "<td>$".number_format($overallvalue-$overallcost,2,'.',',')."</td></tr>";
                             }        
                         ?>
                     </table>
                 </div>
-
-                
-
             </div>
-
             <div class = "sysoContent sysoContent50">
                 <br/>
-
                 <div class = "userDetails">
-                    <h1>My Account</h1>
+                    <h1 class = "sysoHeader2">My Account</h1>
                     <table id = "userTable">
                         <tr>
-                            <th id = "tableHeader">Account Balance</th>
+                            <th id = "tableHeader">Balance</th>
                             <td><?php echo "$".number_format($curruser[0]->account_balance,2,'.',','); ?></td>
                             <!--<td>{{ Auth::user()->account_balance }}</td>-->
                         </tr>
@@ -180,32 +162,30 @@
                             <td><?php echo $totalshares;?></td>
                         </tr>
                         <tr>
-                            <th id = "tableHeader">Share Value</th>
+                            <th id = "tableHeader">Shares Value</th>
                             <td><?php echo "$".number_format($overallvalue,2,'.',',');?></td>
                         </tr>
                         <tr>
-                            <th id = "tableHeader">Total Profit/Loss</th>
+                            <th id = "tableHeader">Profit/Loss</th>
                             <td><?php echo "$".number_format($overallvalue-$overallcost,2) ?></td>
                         </tr>
                         <tr>
-                            <th id = "tableHeader">Total Asset Value</th>
+                            <th id = "tableHeader">Assets Value</th>
                             <td><?php echo "$".number_format($curruser[0]->account_balance+$overallvalue,2,'.',','); ?></td>
                             
                     </table>
                 </div>
-                
                 </br>
                 <div class="friends">
-                    <h1>Recent Transactions</h1>
+                    <h1 class = "sysoHeader2">Recent Transactions</h1>
                     <table class="friendList">
                         <tr id = "tableHeader">
                             <th>Code</th>
                             <th>Quantity</th>
                             <th>Sold</th>
-                            <th>Commission</th>
+                            <th>Fees</th>
                             <th>Date</th>
                         </tr>
-
                         <?php 
                             //List of last 5 Closed Transaactions
                             $closed=DB::table('closed_transactions')->where('user_id', $user)->get();
@@ -225,24 +205,20 @@
                                 echo "</tr>";
                             }
                         ?>
-
                     </table>
                 </div>
-
                 <!-- <p><a class = "sysoLink" href='/community'>Community</a></p> -->
-
                 </br>
                 <div class="friends">
-                    <h1>Top 5 Friends</h1>
+                    <h1 class = "sysoHeader2">Top 5 Friends</h1>
                     <table class="friendList">
                         <tr id = "tableHeader">
                             <th>Name</th>
                             <th>Equity</th>
                             <th>Balance</th>
-                            <th>Transactions</th>
+                            <th>Purchases</th>
                             <th>Updated</th>
                         </tr>
-
                         <?php 
                             //List of Friends
                             $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
@@ -264,14 +240,9 @@
                                 echo "</tr>";
                             }
                         ?>
-
                     </table>
                 </div>
-
             </div>
-
         </div>
-
     <!-- END OF CONTENT -->
-
 @endsection

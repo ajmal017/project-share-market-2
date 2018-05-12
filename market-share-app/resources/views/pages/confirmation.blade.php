@@ -16,7 +16,7 @@
         <a class = "sysoLink" href='signup'>Sign up</a>
     @endif
     <!-- Generic links -->
-    <a class = "sysoLink" href='about'>About/FAQ</a>
+    <a class = "sysoLink" href='about'>About</a>
 @endsection
 
 @section('content')

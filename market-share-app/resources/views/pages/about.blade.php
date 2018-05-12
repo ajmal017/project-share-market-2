@@ -16,20 +16,20 @@
         <a class = "sysoLink" href='signup'>Sign up</a>
     @endif
     <!-- Generic links -->
-    <a class = "sysoLink" href='about'>About/FAQ</a>
+    <a class = "sysoLink" href='about'>About</a>
 @endsection
 
 @section('content')
-
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <div class = "sysoBox">
-        <div class = "sysoAboutBox">
-            <h1 class = "sysoHeader1">About/FAQ</h1>
+        <div class = "sysoAboutBox sysoCenterText">
+            <h1 class = "sysoHeader1">About This Website</h1>
             <p class = "sysoPara">Welcome to Stock Your Socks Off; an online game designed to introduce 
             you to the Australian Securities Exchange (ASX). As a player, you'll be given one-million 
             shillings of fictitious capital to invest in any ASX listing. The game uses real, live ASX 
             data for trading. Stock Your Socks Off is a useful tool for investor training, trading 
             practice and learning share market trends. Sign up now to compete in the current game!</p>
+            <h1 class = "sysoHeader1">Frequently Asked Questions (FAQ)</h1>
             <h2 class = "sysoHeader2">How much play-money do I get?</h2>
             <p class = "sysoPara">One million Australian Dollars ($1,000,000 AUD).</p>
             <h2 class = "sysoHeader2">What do I win?</h2>
@@ -49,7 +49,5 @@
             to the search page.</p>
         </div>
     </div>
-
     <!-- END OF CONTENT -->
-
 @endsection

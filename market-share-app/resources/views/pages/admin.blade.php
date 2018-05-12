@@ -1,7 +1,25 @@
 @extends('layouts/main-template')
 
-@section('content')
+@section('link')
+    <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
+    <!-- Active session links -->
+    @if(Auth::check())
+        <a class = "sysoLink" href='account'>Home</a>
+        <a class = "sysoLink" href='search'>Search</a>
+        <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+    <!-- No session links -->
+    @else
+        <a class = "sysoLink" href='landing'>Home</a>
+        <a class = "sysoLink" href='signin'>Login</a>
+        <a class = "sysoLink" href='signup'>Sign up</a>
+    @endif
+    <!-- Generic links -->
+    <a class = "sysoLink" href='about'>About</a>
+@endsection
 
+@section('content')
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <script type='text/javascript'>
         function confReset(form) {
@@ -50,31 +68,24 @@
                 echo "Error! Unable to update balance!";
             }
         }
-        
     ?>
-    
     <div class = "sysoBox sysoBoxFlex" id="commBox">
         <div class = "sysoContent sysoContent50">
-    
-        
-            <h1>Search for User</h1>
+            <h1 class = "sysoHeader1 sysoCenterText">Search for User</h1>
             <form> 
-                <input type='text' name='user_name' placeholder='Enter User Name'>
-                <input type='submit' value='Search'>
-            
+                <input class = "sysoInput" type='text' name='user_name' placeholder='Enter User Name'>
+                <input class = "sysoInput" type='submit' value='Search'>
             <?php
                 //Search User
                 $username = Request::get('user_name');
                 $userdata = DB::table('users')->where('name', 'like', '%'.$username.'%')->get();
                 if (empty($username)){
-                    
+                    /*Empty username detected*/
                 }
                 elseif (count($userdata) == 0){
                     echo "<span>No users found.</span>";
-                    
                 }
                 else {
-                    
                     $uid=null;
                     $uname=null;
                     $ubalance=0.00;
@@ -88,7 +99,6 @@
                     echo "<th>Adjust Balance</th>";
                     echo "<th>Delete Account</th>";
                     echo "</tr>";
-                        
                     foreach ($userdata as $uline) {
                         $uid=($uline->id);
                         $uname=($uline->name);
@@ -109,7 +119,5 @@
             ?>
         </div>
     </div>
-
     <!-- END OF CONTENT -->
-
 @endsection
