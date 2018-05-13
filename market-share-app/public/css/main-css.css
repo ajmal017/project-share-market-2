@@ -322,14 +322,14 @@ input[name=remember]{
 }
 #sysoAccount th{
     text-align: left;
-    font-size: 1.3vw;
+    font-size: 1.1vw;
 }
 #sysoAccount td{
     text-align: right;
     padding-left: 1em;
     padding-right: 1em;
     background-color: #d6dfdf;
-    font-size: 1.3vw;
+    font-size: 1.1vw;
 }
 td[value^="-"]{
     color: red;
@@ -385,7 +385,7 @@ td[value^="-"]{
     padding-left: 0;
     padding-right: 0;
     background-color: #d6dfdf;
-    font-size: 1.3vw;
+    font-size: 1.1vw;
 }
 .friends button{
     margin-top: 0;
@@ -478,20 +478,6 @@ td[value^="-"]{
     }
     .sysoContent100{
         width: 100%;
-    }
-}
-
-/* Minimises font-size for large, landscape screens */
-
-@media all and (min-width: 1500px), all and (orientation: landscape){
-    #sysoAccount th{
-        font-size: 1.8vh;
-    }
-    #sysoAccount td{
-        font-size: 1.8vh;
-    }
-    .friends td, #shareTable td{
-        font-size: 1.8vh;
     }
 }
 
