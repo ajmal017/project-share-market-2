@@ -22,6 +22,7 @@
 
 @section('content')
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
+    <script type = "text/javascript" src = "{{ URL::to('/js/account.js') }}"></script>
         <script type='text/javascript'>
             function unhideButtons(number) {
                 var confirm = GEBI("confirm" + number);
@@ -211,35 +212,8 @@
                 </br>
                 <div class="friends">
                     <h1 class = "sysoHeader2">Top 5 Friends</h1>
-                    <table class="friendList">
-                        <tr id = "tableHeader">
-                            <th>Name</th>
-                            <th>Equity</th>
-                            <th>Balance</th>
-                            <th>Purchases</th>
-                            <th>Updated</th>
-                        </tr>
-                        <?php 
-                            //List of Friends
-                            $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
-                                ->select('users.*', 'friends.friend_id')->where('friends.user_id', $user)->get();
-                            $data=$friends->sortByDesc('equity')->take(5);
-                            foreach ($data as $line) {
-                                $fid=($line->friend_id);
-                                $name=($line->name);
-                                $equity=($line->equity);
-                                $balance=($line->account_balance);
-                                $trans = DB::table('closed_transactions')->where('user_id', $fid)->count('id');
-                                $updated=($line->updated_at);
-                                echo "<tr>";
-                                echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
-                                echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
-                                echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
-                                echo "<td>".$trans."</td>";
-                                echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
-                                echo "</tr>";
-                            }
-                        ?>
+                    <table class="friendList friendsTable" id='userid_{{$curruser[0]->id}}'>
+                        
                     </table>
                 </div>
             </div>
