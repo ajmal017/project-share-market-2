@@ -5,7 +5,7 @@
     <!-- Active session links -->
     @if(Auth::check())
         <a class = "sysoLink" href='account'>Home</a>
-        <a class = "sysoLink" href='search'>Search</a>
+        <a class = "sysoLink" href='community'>Community</a>
         <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
         </a>

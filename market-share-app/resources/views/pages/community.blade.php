@@ -110,10 +110,10 @@
                                 echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
                                 $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                                 if (count($friendid) == 0){
-                                    echo "<td><button name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
+                                    echo "<td><button class = 'sysoButton' name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
                                 }
                                 else {
-                                    echo "<td><button name='friend' disabled>Friend</button></td>";
+                                    echo "<td><button class = 'sysoButton' name='friend' disabled>Friend</button></td>";
                                 }
                                 echo "</tr>";
                             }
