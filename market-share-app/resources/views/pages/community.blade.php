@@ -90,7 +90,7 @@
                             echo "<th>Name</th>";
                             echo "<th>Equity</th>";
                             echo "<th>Balance</th>";
-                            echo "<th>Transactions</th>";
+                            echo "<th>Purchases</th>";
                             echo "<th>Updated</th>";
                             echo "<th></th>";
                             echo "</tr>";
@@ -131,7 +131,7 @@
                     <th>Name</th>
                     <th>Equity</th>
                     <th>Balance</th>
-                    <th>Transactions</th>
+                    <th>Purchases</th>
                     <th>Updated</th>
                     <th></th>
                 </tr>
