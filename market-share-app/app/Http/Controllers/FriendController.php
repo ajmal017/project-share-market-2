@@ -36,7 +36,6 @@ class FriendController extends Controller
   public function getfriends($id){
       //List of Friends
       $friends = DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->select('users.*', 'friends.friend_id')->where('friends.user_id', $id)->get()->sortByDesc('equity')->take(5);
-      // $data = $friends->sortByDesc('equity')->take(5);
       foreach($friends as $line) {
             $fid = ($line -> friend_id);
             $name = ($line -> name);
