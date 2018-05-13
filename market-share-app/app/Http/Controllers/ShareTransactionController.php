@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Users;
 use App\Models\OpenTransactions;
 use App\Models\ClosedTransactions;
-use App\Http\Requests ;
+use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
@@ -138,6 +138,25 @@ class ShareTransactionController extends Controller
         DB::table('users')
             ->where('id',$userid)
             ->update(['account_balance' => $newbalance]);
+    }
+
+    public function getrecenttransactions($id) {
+        //List of last 5 Closed Transaactions
+        $closed=DB::table('closed_transactions')->where('user_id', $id)->get()->sortByDesc('date_closed')->take(5);
+        foreach ($closed as $line) {
+            $code=($line->asx_code);
+            $quantity=($line->quantity);
+            $sold=($line->sold_price);
+            $commission=($line->selling_commission);
+            $date=($line->date_closed);
+            echo "<tr>";
+            echo "<td>".$code."</td>";
+            echo "<td>".$quantity."</td>";
+            echo "<td>"."$".number_format($sold,2,'.',',')."</td>";
+            echo "<td>"."$".number_format($commission,2,'.',',')."</td>";
+            echo "<td>".date('d-m-Y', strtotime($date))."</td>";
+            echo "</tr>";
+        }
     }
 
 }

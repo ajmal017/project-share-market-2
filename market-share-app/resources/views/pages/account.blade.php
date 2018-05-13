@@ -22,6 +22,7 @@
 
 @section('content')
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
+    <script type = "text/javascript" src = "{{ URL::to('/js/account.js') }}"></script>
         <script type='text/javascript'>
             function unhideButtons(number) {
                 var confirm = GEBI("confirm" + number);
@@ -106,13 +107,17 @@
                                         ->get();
                                     $companydata = json_decode($companyjson);
                                     $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $line->asx_code . ".ax&interval=60min&apikey=PEQIWLTYB0GPLMB8";
-                                    $call = MarketDataController::curlStocksStats($url);
-                                    $asxdata = json_decode($call, true);
-                                    $name = 'Time Series (60min)';
-                                    $name2 = '4. close';
-                                    $array = $asxdata[$name];
-                                    $keys = array_keys($array);
-                                    $newarr = $array[$keys[0]];
+                                    try {
+                                        $call = MarketDataController::curlStocksStats($url);
+                                        $asxdata = json_decode($call, true);
+                                        $name = 'Time Series (60min)';
+                                        $name2 = '4. close';
+                                        $array = $asxdata[$name];
+                                        $keys = array_keys($array);
+                                        $newarr = $array[$keys[0]];
+                                    } catch (\Exception $e) {
+                                        $newarr[$name2] = 'Unable to retrieve current price';
+                                    }
                                     $currentprice = floatval($newarr[$name2]);
                                     $origprice = floatval($line->purchase_price);
                                     $origtotalcost = $origprice*($line->quantity)+($line->buying_commission);
@@ -176,70 +181,16 @@
                     </table>
                 </div>
                 </br>
-                <div class="friends">
+                <div class="friends" id='userid_{{$curruser[0]->id}}'>
                     <h1 class = "sysoHeader2">Recent Transactions</h1>
-                    <table class="friendList">
-                        <tr id = "tableHeader">
-                            <th>Code</th>
-                            <th>Quantity</th>
-                            <th>Sold</th>
-                            <th>Fees</th>
-                            <th>Date</th>
-                        </tr>
-                        <?php 
-                            //List of last 5 Closed Transaactions
-                            $closed=DB::table('closed_transactions')->where('user_id', $user)->get();
-                            $data=$closed->sortByDesc('date_closed')->take(5);
-                            foreach ($data as $line) {
-                                $code=($line->asx_code);
-                                $quantity=($line->quantity);
-                                $sold=($line->sold_price);
-                                $commission=($line->selling_commission);
-                                $date=($line->date_closed);
-                                echo "<tr>";
-                                echo "<td>".$code."</td>";
-                                echo "<td>".$quantity."</td>";
-                                echo "<td>"."$".number_format($sold,2,'.',',')."</td>";
-                                echo "<td>"."$".number_format($commission,2,'.',',')."</td>";
-                                echo "<td>".date('d-m-Y', strtotime($date))."</td>";
-                                echo "</tr>";
-                            }
-                        ?>
+                    <table class="friendList transactionTable">
                     </table>
                 </div>
                 <!-- <p><a class = "sysoLink" href='/community'>Community</a></p> -->
                 </br>
                 <div class="friends">
                     <h1 class = "sysoHeader2">Top 5 Friends</h1>
-                    <table class="friendList">
-                        <tr id = "tableHeader">
-                            <th>Name</th>
-                            <th>Equity</th>
-                            <th>Balance</th>
-                            <th>Purchases</th>
-                            <th>Updated</th>
-                        </tr>
-                        <?php 
-                            //List of Friends
-                            $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
-                                ->select('users.*', 'friends.friend_id')->where('friends.user_id', $user)->get();
-                            $data=$friends->sortByDesc('equity')->take(5);
-                            foreach ($data as $line) {
-                                $fid=($line->friend_id);
-                                $name=($line->name);
-                                $equity=($line->equity);
-                                $balance=($line->account_balance);
-                                $trans = DB::table('closed_transactions')->where('user_id', $fid)->count('id');
-                                $updated=($line->updated_at);
-                                echo "<tr>";
-                                echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
-                                echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
-                                echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
-                                echo "<td>".$trans."</td>";
-                                echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
-                                echo "</tr>";
-                            }
-                        ?>
+                    <table class="friendList friendsTable">
                     </table>
                 </div>
             </div>
