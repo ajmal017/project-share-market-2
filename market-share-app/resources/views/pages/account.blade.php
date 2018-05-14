@@ -24,21 +24,10 @@
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->
     <script type = "text/javascript" src = "{{ URL::to('/js/account.js') }}"></script>
         <script type='text/javascript'>
-            function unhideButtons(number) {
-                var confirm = GEBI("confirm" + number);
-                var cancel = GEBI("cancel" + number);
-                var sell = GEBI("sell" + number);
-                confirm.style.display = "block";
-                cancel.style.display = "block";
-                sell.style.display = "none";
-            }
-            function hideButtons(number) {
-                var confirm = GEBI("confirm" + number);
-                var cancel = GEBI("cancel" + number);
-                var sell = GEBI("sell" + number);
-                confirm.style.display = "none";
-                cancel.style.display = "none";
-                sell.style.display = "block";
+            function confSell(form, code) {
+                if (confirm("Are you sure you want to sell these shares?")) {
+                    form.submit();
+                }
             }
         </script>
         <?php
@@ -129,15 +118,12 @@
                                     echo "<tr>";
                                     echo "<td><a id='coName' href='/listing/".strtoupper($line->asx_code)."'>".$companydata[0]->company_name."</a></td>";
                                     echo "<td>".strtoupper($line->asx_code)."</td>";
-                                    // might need to change this later to aggregate quantities
                                     echo "<td>".$line->quantity."</td>";
                                     echo "<td>"."$".number_format($currentprice,2,'.',',')."</td>";
                                     echo "<td>$".number_format($diff,2,'.',',')."</td>";
                                     echo "<td>$".number_format($newtotalprice-$origtotalcost,2,'.',',') ."</td>";
                                     if (!isset($fid)){
-                                        echo "<td><div id='sell".$count."'><form action='/account' method='get'><button type='button' onclick='unhideButtons(".$count.")'>Sell</button></div>";
-                                        echo "<div id='confirm".$count."' style='display: none;'><button type='submit' name='sell' value='".strtoupper($line->asx_code)."'>Confirm</button></form></div>";
-                                        echo "<div id='cancel".$count."' style='display: none;'><button type='button' onclick='hideButtons(".$count.")'>Cancel</button></div></td>";
+                                        echo "<td><form><input type='hidden' name='sell' value='".strtoupper($line->asx_code)."'><input class='adminButton' type='button' onClick='confSell(this.form);' value='Sell' /></form></td>";
                                     }
                                     else{
                                         echo "<td></td>";
