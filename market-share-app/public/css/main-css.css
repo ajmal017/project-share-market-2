@@ -212,7 +212,21 @@ button.sysoButton:disabled{
     cursor: not-allowed;
 }
 .adminButton{
+    display: block;
     width: 100%;
+    background-color: #f47588;
+    text-decoration: none;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 5px;
+    font-family: 'Helvetica', sans-serif;
+    font-size: medium;
+    border-color: #f47588;
+    border-style: solid;
+}
+.adminButton:hover:enabled{
+    background-color: #ec596e;
+    border-color: #ec596e;
 }
 input.sysoInput{
     width: 20%;
@@ -324,15 +338,21 @@ input[name=remember]{
     text-align: left;
     font-size: 1.1vw;
 }
+#tableHeader th{
+    text-align: center;
+}
 #sysoAccount td{
-    text-align: right;
+    text-align: center;
     padding-left: 1em;
     padding-right: 1em;
     background-color: #d6dfdf;
     font-size: 1.1vw;
 }
-td[value^="-"]{
+td.negative{
     color: red;
+}
+#userTable td{
+    text-align: right;
 }
 #accHeader{
     margin-top: 2%;
