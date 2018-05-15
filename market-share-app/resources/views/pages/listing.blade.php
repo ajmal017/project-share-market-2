@@ -27,8 +27,8 @@
     <!-- Extra scripts specific to this page -->
     <script type="text/javascript">
         function addPurchaseForm(price) {
-            var form = "<h3 class = 'sysoHeader1 sysoCenterText' id='listingTitle'>Stock Order</h3><br><br><input type='text' name='qty' id='shareQty' placeholder='Enter Qty' onchange='getTotal("+price+")'></input>";
-            var confirm = "<br><button id='buyButton' type='submit'>Confirm Purchase</button>";
+            var form = "<h3 class = 'sysoHeader1 sysoCenterText' id='listingTitle'>Stock Order</h3><br><input type='text' name='qty' id='shareQty' placeholder='Enter Qty' onchange='getTotal("+price+")'></input>";
+            var confirm = "<button class='sysoButton' id='buyButton' type='submit'>Confirm Purchase</button>";
             var shareprice = "<br><br><p class = 'sysoPara sysoCenterText' id='sharePrice'>Share Price: $0.00</p>";
             var commprice = "<p class = 'sysoPara sysoCenterText' id='commPrice'>Commission Price: $0.00</p>";
             var total = "<p class = 'sysoPara sysoCenterText' id='totPrice'>Total Price: $0.00</p>";
@@ -92,10 +92,17 @@
                 <div id="buyForm" class="grid-item"></div>
             </form>
             <button class = "sysoButton">
-                <a href="#" onClick="history.go(-1);return true;">Back</a>
+                <a id='back' href="#" onClick="history.go(-1);return true;">Back</a>
             </button>
         </div>
         <div class = "sysoContent sysoContent50">
+            <!-- EMBEDDED GRAPH GOES HERE -->
+            <script src="{{ URL::to('/js/highcharts/highstock.js') }}" integrity=""></script>
+            <script src="{{ URL::to('/js/highcharts/modules/drag-panes.js') }}" integrity=""></script>
+            <script src="{{ URL::to('/js/highcharts/modules/exporting.js') }}" integrity=""></script>
+            <div class="loading_title"> Loading your chart, please wait...</div>
+            
+            <div id="radio">
             <label class="radio_container">Basic
                 <input class = "sysoInput" type="radio" checked="checked" name="radio">
                 <span class="checkmark"></span>
@@ -104,13 +111,8 @@
                 <input class = "sysoInput" type="radio" name="radio">
                 <span class="checkmark"></span>
             </label>
-            <!-- EMBEDDED GRAPH GOES HERE -->
-            <script src="{{ URL::to('/js/highcharts/highstock.js') }}" integrity=""></script>
-            <script src="{{ URL::to('/js/highcharts/modules/drag-panes.js') }}" integrity=""></script>
-            <script src="{{ URL::to('/js/highcharts/modules/exporting.js') }}" integrity=""></script>
-            <div class="loading_title">
-                Loading your chart, please wait.......
             </div>
+            
             <div id="container" style="height: 400px; min-width: 310px" class='{{$data[0]->company_code}}'></div>
         </div>
     </div>
