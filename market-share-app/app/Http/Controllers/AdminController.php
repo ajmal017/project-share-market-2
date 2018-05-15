@@ -19,6 +19,14 @@ class AdminController extends Controller
         if (!AdminController::isAdmin()) {
             return false;
         }
+
+        // checks if user exists
+        $check = DB::select('select * from users where id = :id', ['id' => $userid]);
+        if (empty($check)) {
+            return false;
+        }
+        
+            
         $default = 'secret';
         //$password = Hash::make($data['password']);
         $password = bcrypt($default);

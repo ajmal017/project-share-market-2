@@ -74,7 +74,7 @@
             <h1 class = "sysoHeader1 sysoCenterText">Search for User</h1>
             <form> 
                 <input class = "sysoInput" type='text' name='user_name' placeholder='Enter User Name'>
-                <input class = "sysoInput" type='submit' value='Search'>
+                <input class = "sysoInput" type='submit' value='Search'></form>
             <?php
                 //Search User
                 $username = Request::get('user_name');
