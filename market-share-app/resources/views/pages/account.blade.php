@@ -119,11 +119,9 @@
                                     echo "<td><a id='coName' href='/listing/".strtoupper($line->asx_code)."'>".$companydata[0]->company_name."</a></td>";
                                     echo "<td>".strtoupper($line->asx_code)."</td>";
                                     echo "<td>".$line->quantity."</td>";
-
-                                    echo "<td class='if (".$currentprice." < 0) echo 'negative';'>"."$".number_format($currentprice,2,'.',',')."</td>";
+                                    echo "<td>$".number_format($currentprice,2,'.',',')."</td>";
                                     echo "<td>$".number_format($diff,2,'.',',')."</td>";
-                                    echo "<td class='if (".$newtotalprice-$origtotalcost." < 0) echo 'negative';'>$".number_format($newtotalprice-$origtotalcost,2,'.',',') ."</td>";
-
+                                    echo "<td>$".number_format($newtotalprice-$origtotalcost,2,'.',',') ."</td>";
                                     if (!isset($fid)){
                                         echo "<td><form><input type='hidden' name='sell' value='".strtoupper($line->asx_code)."'><input class='adminButton' type='button' onClick='confSell(this.form);' value='Sell' /></form></td>";
                                     } else{
