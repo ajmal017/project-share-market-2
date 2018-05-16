@@ -14,10 +14,10 @@ class AsxCompanySeeder extends Seeder
     public function run()
     {
         //this one for the live server
-        //$csv = Reader::createFromPath(getcwd()."/ASXListedCompanies.csv", 'r');
+        $csv = Reader::createFromPath(getcwd()."/ASXListedCompanies.csv", 'r');
 
         //this one for the local server
-        $csv = Reader::createFromPath(getcwd()."\public\ASXListedCompanies.csv", 'r');
+        //$csv = Reader::createFromPath(getcwd()."\public\ASXListedCompanies.csv", 'r');
         $csv->setHeaderOffset(1);
 
         $stmt = (new Statement())
