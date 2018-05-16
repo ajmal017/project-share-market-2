@@ -156,7 +156,7 @@
                     $userid=Auth::id();
                     $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
                         ->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
-                    $data=$friends->sortByDesc('equity')->take(15);
+                    $data=$friends->sortByDesc('equity')->where('equity', '!=', 1000000)->take(15);
                     foreach ($data as $line) {
                         $fid=($line->friend_id);
                         $name=($line->name);

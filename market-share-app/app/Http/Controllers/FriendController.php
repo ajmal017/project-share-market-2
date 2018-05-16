@@ -35,22 +35,33 @@ class FriendController extends Controller
 
   public function getfriends($id){
       //List of Friends
-      $friends = DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')->select('users.*', 'friends.friend_id')->where('friends.user_id', $id)->get()->sortByDesc('equity')->take(5);
-      foreach($friends as $line) {
-            $fid = ($line -> friend_id);
-            $name = ($line -> name);
-            $equity = ($line -> equity);
-            $balance = ($line -> account_balance);
-            $trans = DB:: table('closed_transactions') -> where('user_id', $fid) -> count('id');
-            $updated = ($line -> updated_at);
+      $userid=Auth::id();
+      $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
+            ->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
+      $data=$friends->sortByDesc('equity')->where('equity', '!=', 1000000)->take(5);
+      foreach ($data as $line) {
+            $fid=($line->friend_id);
+            $name=($line->name);
+            $equity=($line->equity);
+            $balance=($line->account_balance);
+            $profit=($equity-1000000);
+            $trans = DB::table('closed_transactions')->where('user_id', $fid)->count('id');
+            $updated=($line->updated_at);
             echo "<tr>";
             echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
-            echo "<td>"."$".number_format($equity, 2, '.', ',')."</td>";
-            echo "<td>"."$".number_format($balance, 2, '.', ',')."</td>";
+            echo "<td>"."$".number_format($profit,2,'.',',')."</td>";
+            echo "<td>"."$".number_format($equity,2,'.',',')."</td>";                        
             echo "<td>".$trans."</td>";
-            echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+
+            if (empty($updated)){
+                  echo "<td></td>";
+            } else{
+                  echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+            }
+
+            echo "<td id='unfriend'><button class = 'sysoButton' name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
             echo "</tr>";
-    }
+      }
   }
 
 }

@@ -15,10 +15,11 @@ $(document).ready(function () {
     $('.friendsTable').html('Loading friends list.....');
     var table_data =  '<tr id="tableHeader">' +
                         '<th>Name</th>' +
+                        '<th>Profit</th>' +
                         '<th>Equity</th>' +
-                        '<th>Balance</th>' +
                         '<th>Purchases</th>' +
                         '<th>Updated</th>' +
+                        '<th></th>' +
                       '</tr>';
 
     $.ajax({
