@@ -31,8 +31,8 @@
                 <table class="friendList">
                 <tr id = "tableHeader">
                     <th>Name</th>
+                    <th>Profit</th>
                     <th>Equity</th>
-                    <th>Balance</th>
                     <th>Purchases</th>
                     <th>Updated</th>
                     <th></th>
@@ -41,21 +41,28 @@
                     //Top 10 Leaderboard
                     $users = DB::table('users')->get();
                     //SELECT * FROM users ORDER BY rating DESC LIMIT 10
-                    $data = $users->sortByDesc('equity')->take('10');
+                    $data = $users->sortByDesc('equity')->where('equity', '!=', 1000000)->take('10');
                     $user_id=Auth::id();
                     foreach ($data as $line) {
                         $uid=($line->id);
                         $name=($line->name);
                         $equity=($line->equity);
                         $balance=($line->account_balance);
+                        $profit=($equity-1000000);
                         $trans = DB::table('closed_transactions')->where('user_id', $uid)->count('id');
                         $updated=($line->updated_at);
                         echo "<tr>";
                         echo "<td>".$name."</td>";
+                        echo "<td>"."$".number_format($profit,2,'.',',')."</td>";
                         echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
-                        echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
                         echo "<td>".$trans."</td>";
-                        echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+                        
+                        if (empty($updated)){
+                            echo "<td></td>";
+                        } else{
+                            echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+                        }
+
                         $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                         if (count($friendid) == 0){
                             echo "<td><button class = 'sysoButton' name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
@@ -90,8 +97,8 @@
                             echo "<table class='friendList'>";
                             echo "<tr id = 'tableHeader'>";
                             echo "<th>Name</th>";
+                            echo "<th>Profit</th>";
                             echo "<th>Equity</th>";
-                            echo "<th>Balance</th>";
                             echo "<th>Purchases</th>";
                             echo "<th>Updated</th>";
                             echo "<th></th>";
@@ -102,14 +109,21 @@
                                 $name=($line->name);
                                 $equity=($line->equity);
                                 $balance=($line->account_balance);
+                                $profit=($equity-1000000);
                                 $trans = DB::table('closed_transactions')->where('user_id', $uid)->count('id');
                                 $updated=($line->updated_at);
                                 echo "<tr>";
                                 echo "<td>".$name."</td>";
-                                echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
-                                echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
+                                echo "<td>"."$".number_format($profit,2,'.',',')."</td>";
+                                echo "<td>"."$".number_format($equity,2,'.',',')."</td>";                                
                                 echo "<td>".$trans."</td>";
-                                echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+
+                                if (empty($updated)){
+                                    echo "<td></td>";
+                                } else{
+                                    echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+                                }
+
                                 $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
                                 if (count($friendid) == 0){
                                     echo "<td><button class = 'sysoButton' name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
@@ -131,8 +145,8 @@
                 <table class="friendList">
                 <tr id = "tableHeader">
                     <th>Name</th>
+                    <th>Profit</th>
                     <th>Equity</th>
-                    <th>Balance</th>
                     <th>Purchases</th>
                     <th>Updated</th>
                     <th></th>
@@ -148,14 +162,21 @@
                         $name=($line->name);
                         $equity=($line->equity);
                         $balance=($line->account_balance);
+                        $profit=($equity-1000000);
                         $trans = DB::table('closed_transactions')->where('user_id', $fid)->count('id');
                         $updated=($line->updated_at);
                         echo "<tr>";
                         echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
-                        echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
-                        echo "<td>"."$".number_format($balance,2,'.',',')."</td>";
+                        echo "<td>"."$".number_format($profit,2,'.',',')."</td>";
+                        echo "<td>"."$".number_format($equity,2,'.',',')."</td>";                        
                         echo "<td>".$trans."</td>";
-                        echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+
+                        if (empty($updated)){
+                            echo "<td></td>";
+                        } else{
+                            echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
+                        }
+
                         echo "<td id='unfriend'><button class = 'sysoButton' name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
                         echo "</tr>";
                     }
