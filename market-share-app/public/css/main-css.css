@@ -235,6 +235,7 @@ button.sysoButton:disabled{
 .adminTable{
     width: 95%;
     border-collapse: collapse;
+    background-color: #d6dfdf;
 }
 input.sysoInput{
     width: 20%;
