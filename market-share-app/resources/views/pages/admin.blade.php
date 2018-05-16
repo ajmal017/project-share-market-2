@@ -4,19 +4,20 @@
     <!-- ADD LINKS DISPLAYED ON HEADER NAV BAR -->
     <!-- Active session links -->
     @if(Auth::check())
-        <a class = "sysoLink" href='account'>Home</a>
-        <a class = "sysoLink" href='search'>Search</a>
+        <a class = "sysoLink" href='/account'>Home</a>
+        <a class = "sysoLink" href='/search'>Search</a>
+        <a class = "sysoLink" href='/community'>Community</a>
         <a class = "sysoLink" id="logoutLink" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Logout') }}
         </a>
     <!-- No session links -->
     @else
-        <a class = "sysoLink" href='landing'>Home</a>
-        <a class = "sysoLink" href='signin'>Login</a>
-        <a class = "sysoLink" href='signup'>Sign up</a>
+        <a class = "sysoLink" href='/landing'>Home</a>
+        <a class = "sysoLink" href='/signin'>Login</a>
+        <a class = "sysoLink" href='/signup'>Sign up</a>
     @endif
     <!-- Generic links -->
-    <a class = "sysoLink" href='about'>About</a>
+    <a class = "sysoLink" href='/about'>About</a>
 @endsection
 
 @section('content')
@@ -70,11 +71,11 @@
         }
     ?>
     <div class = "sysoBox sysoBoxFlex" id="commBox">
-        <div class = "sysoContent sysoContent50">
+        <div class = "sysoContent sysoContent100 sysoCenterText">
             <h1 class = "sysoHeader1 sysoCenterText">Search for User</h1>
             <form> 
-                <input class = "sysoInput" type='text' name='user_name' placeholder='Enter User Name'>
-                <input class = "sysoInput" type='submit' value='Search'></form>
+                <input class = "sysoInputCenter" type='text' name='user_name' placeholder='Enter User Name'>
+                <input class = "sysoInputCenter" type='submit' value='Search'></form>
             <?php
                 //Search User
                 $username = Request::get('user_name');
@@ -89,15 +90,19 @@
                     $uid=null;
                     $uname=null;
                     $ubalance=0.00;
-                    echo "<table class='friendList'>";
+                    echo "<table class='adminTable sysoTableMargin'>";
                     echo "<tr id = 'tableHeader'>";
                     echo "<th>User ID</th>";
                     echo "<th>Name</th>";
-                    echo "<th>Email Address</th>";
-                    echo "<th>Account Balance</th>";
-                    echo "<th>Reset Password</th>";
-                    echo "<th>Adjust Balance</th>";
-                    echo "<th>Delete Account</th>";
+                    //echo "<th>Email Address</th>";
+                    //echo "<th>Account Balance</th>";
+                    echo "<th>Total</th>";
+                    //echo "<th>Reset Password</th>";
+                    echo "<th>Password</th>";
+                    //echo "<th>Adjust Balance</th>";
+                    echo "<th>Balance</th>";
+                    //echo "<th>Delete Account</th>";
+                    echo "<th>Account</th>";
                     echo "</tr>";
                     foreach ($userdata as $uline) {
                         $uid=($uline->id);
@@ -107,11 +112,14 @@
                         echo "<tr>";
                         echo "<td>$uid</td>";
                         echo "<td>$uname</td>";
-                        echo "<td>$uemail</td>";
+                        //echo "<td>$uemail</td>";
                         echo "<td>$ubalance</td>";
-                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input class='adminButton' type='button' onClick='confReset(this.form);' value='Reset Password' /></form></td>";
-                        echo "<td><form><input type='hidden' name='adjust' value='$uid'><input  type='hidden' id='amount' name='amount' value=0><input type='button' class='adminButton' onClick='confAdjust(this.form);' value='Adjust Balance' /></form></td>";
-                        echo "<td><form><input type='hidden' name='delete' value='$uid'><input class='adminButton' type='button' onClick='confDelete(this.form);' value='Delete User' /></form></td>";
+                        //echo "<td><form><input type='hidden' name='reset' value='$uid'><input class='adminButton' type='button' onClick='confReset(this.form);' value='Reset Password' /></form></td>";
+                        echo "<td><form><input type='hidden' name='reset' value='$uid'><input class='adminButton' type='button' onClick='confReset(this.form);' value='Reset' /></form></td>";
+                        //echo "<td><form><input type='hidden' name='adjust' value='$uid'><input  type='hidden' id='amount' name='amount' value=0><input type='button' class='adminButton' onClick='confAdjust(this.form);' value='Adjust Balance' /></form></td>";
+                        echo "<td><form><input type='hidden' name='adjust' value='$uid'><input  type='hidden' id='amount' name='amount' value=0><input type='button' class='adminButton' onClick='confAdjust(this.form);' value='Adjust' /></form></td>";
+                        //echo "<td><form><input type='hidden' name='delete' value='$uid'><input class='adminButton' type='button' onClick='confDelete(this.form);' value='Delete User' /></form></td>";
+                        echo "<td><form><input type='hidden' name='delete' value='$uid'><input class='adminButton' type='button' onClick='confDelete(this.form);' value='Delete' /></form></td>";
                         echo "</tr>";
                     }
                     echo "</table>";

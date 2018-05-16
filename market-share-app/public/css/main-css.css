@@ -183,6 +183,10 @@ a:visited{
     top: 50%;
     transform: translateY(-50%);
 }
+.sysoTableMargin{
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+}
 
 /* Buttons, Links and Input styles*/
 
@@ -228,11 +232,27 @@ button.sysoButton:disabled{
     background-color: #ec596e;
     border-color: #ec596e;
 }
+.adminTable{
+    width: 95%;
+    border-collapse: collapse;
+}
 input.sysoInput{
     width: 20%;
     padding: 5px;
 }
 input.sysoInput:focus{
+    outline-color: #012e33;
+}
+.sysoInputCenter{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 20%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+.sysoInputCenter:focus{
     outline-color: #012e33;
 }
 a.sysoLink{
@@ -401,7 +421,7 @@ td.negative{
     font-size: small;
 }
 .friendList{
-    table-layout: fixed;
+    table-layout: auto;
 }
 .friends td, #shareTable td{
     text-align: center;
@@ -446,6 +466,12 @@ td.negative{
 /* Portrait mode detection and styles */
 
 @media all and (orientation: portrait){
+    .friendList{
+        table-layout: fixed;
+    }
+    .sysoInputCenter{
+        width: 80%;
+    }
     #sysoAccount th{
         font-size: 2vh;
     }
