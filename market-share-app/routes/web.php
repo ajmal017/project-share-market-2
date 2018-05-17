@@ -81,6 +81,7 @@ Route::get('/listing/daily/{asx_code}', 'MarketDataController@dailyStats');
 Route::get('/listing/weekly/{asx_code}', 'MarketDataController@weeklyStats');
 Route::get('/listing/monthly/{asx_code}', 'MarketDataController@monthlyStats');
 Route::get('/listing/getmonthly/{asx_code}', 'MarketDataController@getmonthly');
+Route::get('/listing/getrealtime/{asx_code}', 'MarketDataController@getrealtime');
 Route::get('/listing/companycode/{asx_code}', 'MarketDataController@getCompanyDetails');
 Route::get('/listing/companyname/{asx_code}', 'MarketDataController@getCompanyName');
 Route::get('/listing/allcompanies/{limit}', 'MarketDataController@populateMonthlyStocks');
