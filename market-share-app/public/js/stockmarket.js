@@ -75,7 +75,7 @@ $(document).ready(function () {
         }
     });
 
-    $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
+    $.getJSON('/listing/getrealtime/' + $('#container').attr('class'), function (data) {
         $('.loading_title').attr('hidden', true);
         var title_text = '';
         if (data.length != 0) {
@@ -122,7 +122,7 @@ $(document).ready(function () {
     });
 
     var basic_chart = function(){
-        $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
+        $.getJSON('/listing/getrealtime/' + $('#container').attr('class'), function (data) {
             $('.loading_title').attr('hidden', true);
             var title_text = '';
             if (data.length != 0) {

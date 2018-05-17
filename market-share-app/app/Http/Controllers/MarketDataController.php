@@ -201,6 +201,38 @@ class MarketDataController
         return $output;
     }
 
+    public function getrealtime($asx_code){
+        $output = array();
+
+        date_default_timezone_set('UTC');
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . ".AX&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        $resp = $this->curlStocksStats($url);
+        $resp = json_decode($resp);
+
+        if (isset($resp->{'Meta Data'})) {
+            foreach ($resp->{'Time Series (1min)'} as $key => $record) {
+                $data[] = array(
+                    'unix_date' => Carbon::createFromFormat('Y-m-d H:i:s', $key)->timestamp * 1000,
+                    'open' => (float)$record->{'1. open'},
+                    'high' => (float)$record->{'2. high'},
+                    'low' => (float)$record->{'3. low'},
+                    'close' => (float)$record->{'4. close'},
+                    'volume' => (int)$record->{'5. volume'}
+                );
+            }
+        }
+
+        foreach (array_reverse($data) as $value) {
+            $current_array = array();
+            foreach ($value as $value2) {
+                array_push($current_array,$value2);
+            }
+            array_push($output, $current_array);
+        }
+
+        return $output;
+    }
+
     public function populateMonthlyStocks($limit){
         $output = array();
         $current = 0;
