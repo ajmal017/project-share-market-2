@@ -124,3 +124,5 @@ Route::get('/community/delete/{fid}', 'FriendController@deleteFriend');
 Route::get('/account/{fid}', 'FriendController@retAccount');
 Route::get('/getFriendsList/{id}', 'FriendController@getfriends');
 Route::get('/getRecentTransactions/{id}', 'ShareTransactionController@getrecenttransactions');
+Route::get('/getTopFriends', 'FriendController@getTopFriends');
+Route::get('/getLeaderboard', 'FriendController@getLeaderboard');

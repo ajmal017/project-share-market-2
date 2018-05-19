@@ -23,56 +23,16 @@
 @section('content')
     <!-- PAGE SPECIFIC CONTENT GOES HERE -->  
     <script type = "text/javascript" src = "{{ URL::to('/js/friend.js') }}"></script>
+    <script type = "text/javascript" src = "{{ URL::to('/js/community.js') }}"></script>
+    <?php
+        $curruser = DB::table('users')->where('id', Auth::id())->get();
+    ?>
     <div class = "sysoBox sysoBoxFlex" id="commBox">
         <div class = "sysoContent sysoContent50">
-            <div class="friends">
+            <div class="friends" id='userid_{{$curruser[0]->id}}'>
                 <br/>
                 <h1>Top 10 Users</h1>
-                <table class="friendList">
-                <tr id = "tableHeader">
-                    <th>Name</th>
-                    <th>Profit</th>
-                    <th>Equity</th>
-                    <th>Purchases</th>
-                    <th>Updated</th>
-                    <th></th>
-                </tr>
-                <?php
-                    //Top 10 Leaderboard
-                    $users = DB::table('users')->get();
-                    //SELECT * FROM users ORDER BY rating DESC LIMIT 10
-                    $data = $users->sortByDesc('equity')->where('equity', '!=', 1000000)->take('10');
-                    $user_id=Auth::id();
-                    foreach ($data as $line) {
-                        $uid=($line->id);
-                        $name=($line->name);
-                        $equity=($line->equity);
-                        $balance=($line->account_balance);
-                        $profit=($equity-1000000);
-                        $trans = DB::table('closed_transactions')->where('user_id', $uid)->count('id');
-                        $updated=($line->updated_at);
-                        echo "<tr>";
-                        echo "<td>".$name."</td>";
-                        echo "<td>"."$".number_format($profit,2,'.',',')."</td>";
-                        echo "<td>"."$".number_format($equity,2,'.',',')."</td>";
-                        echo "<td>".$trans."</td>";
-                        
-                        if (empty($updated)){
-                            echo "<td></td>";
-                        } else{
-                            echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
-                        }
-
-                        $friendid = DB::table('friends')->where('user_id', $user_id)->where('friend_id', $uid)->get();
-                        if (count($friendid) == 0){
-                            echo "<td><button class = 'sysoButton' name='friend' onclick='addAjax(".$uid.")'>Friend</button></td>";
-                        }
-                        else {
-                            echo "<td><button class = 'sysoButton' name='friend' disabled>Friend</button></td>";
-                        }
-                        echo "</tr>";
-                    }
-                ?>
+                <table class="friendList leaderboardListTable">
                 </table>
                 <br/>
             </div>
@@ -142,45 +102,7 @@
             <div class="friends">
                 <br/>
                 <h1>Top 15 Friends</h1>
-                <table class="friendList">
-                <tr id = "tableHeader">
-                    <th>Name</th>
-                    <th>Profit</th>
-                    <th>Equity</th>
-                    <th>Purchases</th>
-                    <th>Updated</th>
-                    <th></th>
-                </tr>
-                <?php 
-                    //List of Friends
-                    $userid=Auth::id();
-                    $friends=DB::table('users')->join('friends', 'users.id', '=', 'friends.friend_id')
-                        ->select('users.*', 'friends.friend_id')->where('friends.user_id', $userid)->get();
-                    $data=$friends->sortByDesc('equity')->where('equity', '!=', 1000000)->take(15);
-                    foreach ($data as $line) {
-                        $fid=($line->friend_id);
-                        $name=($line->name);
-                        $equity=($line->equity);
-                        $balance=($line->account_balance);
-                        $profit=($equity-1000000);
-                        $trans = DB::table('closed_transactions')->where('user_id', $fid)->count('id');
-                        $updated=($line->updated_at);
-                        echo "<tr>";
-                        echo "<td><a href='/account/".$fid."' onclick='retAccount(".$fid.")'>".$name."</a></td>";
-                        echo "<td>"."$".number_format($profit,2,'.',',')."</td>";
-                        echo "<td>"."$".number_format($equity,2,'.',',')."</td>";                        
-                        echo "<td>".$trans."</td>";
-
-                        if (empty($updated)){
-                            echo "<td></td>";
-                        } else{
-                            echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
-                        }
-
-                        echo "<td id='unfriend'><button class = 'sysoButton' name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
-                        echo "</tr>";
-                    }
-                ?>
+                <table class="friendList friendListTable">
                 </table>
             </div>
         </div>
