@@ -67,7 +67,6 @@
                     <h1 class = "sysoHeader2">Share Portfolio</h1>
                     <table id = "shareTable">
                         <tr id = "tableHeader">
-                            <th>Name</th>
                             <th>Code</th>
                             <th>Shares</th>
                             <th>Value</th> 
@@ -115,9 +114,9 @@
                                     $overallvalue += $newtotalprice;
                                     $totalshares += $line->quantity;
                                     $diff = $currentprice-$origprice;
+                                    $code=($line->asx_code);
                                     echo "<tr>";
-                                    echo "<td><a id='coName' href='/listing/".strtoupper($line->asx_code)."'>".$companydata[0]->company_name."</a></td>";
-                                    echo "<td>".strtoupper($line->asx_code)."</td>";
+                                    echo "<td><a href='/listing/".$code."' onclick='retListing(".$code.")'>".$code."</a></td>";
                                     echo "<td>".$line->quantity."</td>";
                                     echo "<td>$".number_format($currentprice,2,'.',',')."</td>";
                                     echo "<td>$".number_format($diff,2,'.',',')."</td>";
@@ -167,7 +166,7 @@
                 </div>
                 </br>
                 <div class="friends" id='userid_{{$curruser[0]->id}}'>
-                    <h1 class = "sysoHeader2">Recent Transactions</h1>
+                    <h1 class = "sysoHeader2">Last 5 Transactions</h1>
                     <table class="friendList transactionTable">
                     </table>
                 </div>

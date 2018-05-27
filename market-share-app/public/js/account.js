@@ -41,7 +41,7 @@ $(document).ready(function () {
                           '<th>Quantity</th>'+
                           '<th>Sold</th>'+
                           '<th>Fees</th>'+
-                          '<th>Date</th>'+
+                          '<th>Date Closed</th>'+
                       '</tr>';
     $.ajax({
       url: "/getRecentTransactions/" + $('.friends').attr('id').replace('userid_', ''),

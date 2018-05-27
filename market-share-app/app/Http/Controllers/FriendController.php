@@ -59,7 +59,6 @@ class FriendController extends Controller
                   echo "<td>".date('d-m-Y', strtotime($updated))."</td>";
             }
 
-            echo "<td id='unfriend'><button class = 'sysoButton' name='friend' onclick='deleteAjax(".$fid.")'>Unfriend</button></td>";
             echo "</tr>";
       }
   }

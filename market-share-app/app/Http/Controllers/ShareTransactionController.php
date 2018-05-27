@@ -140,6 +140,10 @@ class ShareTransactionController extends Controller
             ->update(['account_balance' => $newbalance]);
     }
 
+    public function retListing($fid){
+        return view('/pages/listing')->with('code', $code);
+    }
+
     public function getrecenttransactions($id) {
         //List of last 5 Closed Transaactions
         $closed=DB::table('closed_transactions')->where('user_id', $id)->get()->sortByDesc('date_closed')->take(5);
@@ -150,7 +154,7 @@ class ShareTransactionController extends Controller
             $commission=($line->selling_commission);
             $date=($line->date_closed);
             echo "<tr>";
-            echo "<td>".$code."</td>";
+            echo "<td><a href='/listing/".$code."' onclick='retListing(".$code.")'>".$code."</a></td>";
             echo "<td>".$quantity."</td>";
             echo "<td>"."$".number_format($sold,2,'.',',')."</td>";
             echo "<td>"."$".number_format($commission,2,'.',',')."</td>";
