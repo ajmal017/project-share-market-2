@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    'use strict';
+
     var asx_results;
 
     $("#search_companies").click(function (e) {
@@ -12,9 +14,9 @@ $(document).ready(function () {
                     asx_results = results;
                     if (results != '') {
                         //$("#company_details").html("<b>" + results[0]['company_name'] + "</b><br>" + results[0]['gics_industry']);
-                        $("#company_details").html("<div class = 'sysoListingResult'><a href='/listing/" + results[0].company_code + "'>" + results[0]['company_name'] + " " + results[0]['gics_industry'] + "</div>");
+                        $("#company_details").html("<div class = 'sysoListingResult'><a href='/listing/" + results[0].company_code + "'>" + results[0].company_name + " " + results[0].gics_industry + "</div>");
                         //$("#get_daily_data").html('<input type="button" value="Get Daily Data" id="query_daily_data">');
-                    } else{
+                    } else {
                         $("#company_details").html("<div class = 'sysoListingResult'>No companies found matching that ASX code</div>");
                     }
                 }
@@ -25,24 +27,17 @@ $(document).ready(function () {
     $("#company_name").on('input propertychange', function (e) {
         e.preventDefault();
         if ($('#company_name').val() == '') {
-            //$("#company_name_dropdown").html("<option disabled value=''>Start typing a company name</option>");
             $("#company_details").html("<div class = 'sysoListingResult'>Start typing a company name</div>");
         } else {
             $.ajax({
                 url: "/listing/companyname/" + $('#company_name').val(),
                 success: function (results) {
                     $("#company_details").html("");
-                    //$("#company_name_dropdown").html("<option value=''></option>");
                     if (results != '') {
-                        
-                        for (const key in results) {
-                            //$("#company_name_dropdown").append("<option value='" + results[key].company_code + "'>" + results[key].company_name + "</option>");
-                            
+                        for(const key in results) {
                             $("#company_details").append("<div class = 'sysoListingResult'><a href='/listing/" + results[key].company_code + "'>" + results[key].company_name + "</a></div>");
-                            //$("#company_details").append("<div class = 'sysoListingResult'>" + results[key].company_name + "</div>");
-                        }                       
+                        }
                     } else {
-                        //$("#company_name_dropdown").html("<option disabled value=''>No companies found, try again</option>");
                         $("#company_details").html("<div class = 'sysoListingResult'>No companies found - Please try again</div>");
                     }
                 }
@@ -68,9 +63,9 @@ $(document).ready(function () {
     $('.radio_container').change(function () {
         $('#container').html('');
         $('.loading_title').removeAttr('hidden');
-        if ($(this).text().trim() =='Basic') {
+        if ($(this).text().trim() == 'Basic') {
             basic_chart();
-        } else if ($(this).text().trim() == 'Advanced'){
+        } else if ($(this).text().trim() == 'Advanced') {
             advanced_chart();
         }
     });
@@ -111,6 +106,35 @@ $(document).ready(function () {
                 text: 'Stock Price'
             },
 
+            rangeSelector: {
+                buttons: [{
+                    type: 'hour',
+                    count: 3,
+                    text: '3h'
+                }, {
+                    type: 'hour',
+                    count: 6,
+                    text: '6h'
+                }, {
+                    type: 'day',
+                    count: 1,
+                    text: '1d'
+                }, {
+                    type: 'day',
+                    count: 3,
+                    text: '3d'
+                }, {
+                    type: 'day',
+                    count: 5,
+                    text: '5d'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }],
+                inputEnabled: false, // it supports only days
+                selected: 5 // all
+            },
+
             series: [{
                 name: $('#container').attr('class'),
                 data: ohlc,
@@ -121,7 +145,7 @@ $(document).ready(function () {
         });
     });
 
-    var basic_chart = function(){
+    var basic_chart = function () {
         $.getJSON('/listing/getrealtime/' + $('#container').attr('class'), function (data) {
             $('.loading_title').attr('hidden', true);
             var title_text = '';
@@ -158,6 +182,35 @@ $(document).ready(function () {
                     text: 'Stock Price'
                 },
 
+                rangeSelector: {
+                    buttons: [{
+                        type: 'hour',
+                        count: 3,
+                        text: '3h'
+                    }, {
+                        type: 'hour',
+                        count: 6,
+                        text: '6h'
+                    }, {
+                        type: 'day',
+                        count: 1,
+                        text: '1d'
+                    }, {
+                        type: 'day',
+                        count: 3,
+                        text: '3d'
+                    }, {
+                        type: 'day',
+                        count: 5,
+                        text: '5d'
+                    }, {
+                        type: 'all',
+                        text: 'All'
+                    }],
+                    inputEnabled: false, // it supports only days
+                    selected: 5 // all
+                },
+
                 series: [{
                     name: $('#container').attr('class'),
                     data: ohlc,
@@ -168,7 +221,7 @@ $(document).ready(function () {
             });
         });
     }
-    var advanced_chart = function(){
+    var advanced_chart = function () {
         $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
             $('.loading_title').attr('hidden', true);
             var title_text = '';
@@ -183,8 +236,9 @@ $(document).ready(function () {
                 // set the allowed units for data grouping
                 groupingUnits = [[
                     'month',
-                    [1, 2, 3, 4, 6]
+                    [1, 6]
                 ]],
+
 
                 i = 0;
 
@@ -202,7 +256,28 @@ $(document).ready(function () {
             Highcharts.stockChart('container', {
 
                 rangeSelector: {
-                    selected: 4 // all
+                    buttons: [{
+                        type: 'month',
+                        count: 6,
+                        text: '6m'
+                    }, {
+                        type: 'year',
+                        count: 1,
+                        text: '1y'
+                    }, {
+                        type: 'year',
+                        count: 2,
+                        text: '2y'
+                    }, {
+                        type: 'year',
+                        count: 3,
+                        text: '3y'
+                    }, {
+                        type: 'all',
+                        text: 'All'
+                    }],
+                    inputEnabled: false, // it supports only days
+                    selected: 5 // all
                 },
 
                 title: {

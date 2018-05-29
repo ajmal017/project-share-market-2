@@ -205,12 +205,13 @@ class MarketDataController
         $output = array();
 
         date_default_timezone_set('UTC');
-        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . ".AX&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        // $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . ".AX&interval=1min&apikey=PEQIWLTYB0GPLMB8";
+        $url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" . $asx_code . ".AX&interval=15min&outputsize=full&apikey=PEQIWLTYB0GPLMB8";
         $resp = $this->curlStocksStats($url);
         $resp = json_decode($resp);
 
         if (isset($resp->{'Meta Data'})) {
-            foreach ($resp->{'Time Series (1min)'} as $key => $record) {
+            foreach ($resp->{'Time Series (15min)'} as $key => $record) {
                 $data[] = array(
                     'unix_date' => Carbon::createFromFormat('Y-m-d H:i:s', $key)->timestamp * 1000,
                     'open' => (float)$record->{'1. open'},
