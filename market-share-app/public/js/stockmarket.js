@@ -83,10 +83,9 @@ $(document).ready(function () {
             dataLength = data.length,
             // set the allowed units for data grouping
             groupingUnits = [[
-                'month',
-                [1, 2]
+                'minute',
+                [1]
             ]],
-
             i = 0;
 
         for (i; i < dataLength; i += 1) {
@@ -98,40 +97,36 @@ $(document).ready(function () {
 
         // create the chart
         Highcharts.stockChart('container', {
-            rangeSelector: {
-                selected: 1
-            },
-
             title: {
                 text: 'Stock Price'
             },
 
             rangeSelector: {
+                allButtonsEnabled: true,
                 buttons: [{
-                    type: 'hour',
-                    count: 3,
-                    text: '3h'
+                    count: 15,
+                    type: 'minute',
+                    text: '15m'
                 }, {
-                    type: 'hour',
-                    count: 6,
-                    text: '6h'
+                    count: 30,
+                    type: 'minute',
+                    text: '30m'
                 }, {
-                    type: 'day',
+                    count: 60,
+                    type: 'minute',
+                    text: '1h'
+                }, {
                     count: 1,
+                    type: 'day',
                     text: '1d'
                 }, {
-                    type: 'day',
-                    count: 3,
-                    text: '3d'
-                }, {
-                    type: 'day',
-                    count: 5,
-                    text: '5d'
+                    count: 1,
+                    type: 'week',
+                    text: '1w'
                 }, {
                     type: 'all',
                     text: 'All'
                 }],
-                inputEnabled: false, // it supports only days
                 selected: 5 // all
             },
 
@@ -159,10 +154,9 @@ $(document).ready(function () {
                 dataLength = data.length,
                 // set the allowed units for data grouping
                 groupingUnits = [[
-                    'month',
-                    [1, 2]
+                    'minute',
+                    [1]
                 ]],
-
                 i = 0;
 
             for (i; i < dataLength; i += 1) {
@@ -174,40 +168,36 @@ $(document).ready(function () {
 
             // create the chart
             Highcharts.stockChart('container', {
-                rangeSelector: {
-                    selected: 1
-                },
-
                 title: {
                     text: 'Stock Price'
                 },
 
                 rangeSelector: {
+                    allButtonsEnabled: true,
                     buttons: [{
-                        type: 'hour',
-                        count: 3,
-                        text: '3h'
+                        count: 15,
+                        type: 'minute',
+                        text: '15m'
                     }, {
-                        type: 'hour',
-                        count: 6,
-                        text: '6h'
+                        count: 30,
+                        type: 'minute',
+                        text: '30m'
                     }, {
-                        type: 'day',
+                        count: 60,
+                        type: 'minute',
+                        text: '1h'
+                    }, {
                         count: 1,
+                        type: 'day',
                         text: '1d'
                     }, {
-                        type: 'day',
-                        count: 3,
-                        text: '3d'
-                    }, {
-                        type: 'day',
-                        count: 5,
-                        text: '5d'
+                        count: 1,
+                        type: 'week',
+                        text: '1w'
                     }, {
                         type: 'all',
                         text: 'All'
                     }],
-                    inputEnabled: false, // it supports only days
                     selected: 5 // all
                 },
 
@@ -222,7 +212,7 @@ $(document).ready(function () {
         });
     }
     var advanced_chart = function () {
-        $.getJSON('/listing/getmonthly/' + $('#container').attr('class'), function (data) {
+        $.getJSON('/listing/getrealtime/' + $('#container').attr('class'), function (data) {
             $('.loading_title').attr('hidden', true);
             var title_text = '';
             if (data.length != 0) {
@@ -235,11 +225,9 @@ $(document).ready(function () {
                 dataLength = data.length,
                 // set the allowed units for data grouping
                 groupingUnits = [[
-                    'month',
-                    [1, 6]
+                    'minute',
+                    [1]
                 ]],
-
-
                 i = 0;
 
             for (i; i < dataLength; i += 1) {
@@ -256,27 +244,31 @@ $(document).ready(function () {
             Highcharts.stockChart('container', {
 
                 rangeSelector: {
+                    allButtonsEnabled: true,
                     buttons: [{
-                        type: 'month',
-                        count: 6,
-                        text: '6m'
+                        count: 15,
+                        type: 'minute',
+                        text: '15m'
                     }, {
-                        type: 'year',
+                        count: 30,
+                        type: 'minute',
+                        text: '30m'
+                    }, {
+                        count: 60,
+                        type: 'minute',
+                        text: '1h'
+                    }, {
                         count: 1,
-                        text: '1y'
+                        type: 'day',
+                        text: '1d'
                     }, {
-                        type: 'year',
-                        count: 2,
-                        text: '2y'
-                    }, {
-                        type: 'year',
-                        count: 3,
-                        text: '3y'
+                        count: 1,
+                        type: 'week',
+                        text: '1w'
                     }, {
                         type: 'all',
                         text: 'All'
                     }],
-                    inputEnabled: false, // it supports only days
                     selected: 5 // all
                 },
 
